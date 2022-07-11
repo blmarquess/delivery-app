@@ -8,7 +8,7 @@ import renderWithRouter from './renderWithRouter';
 
 test('Login', () => {
   const { validEmail, validPassword } = validLogin;
-  const { invalidEmail, invalidPassword } = invalidLogin;
+  const { invalidEmail } = invalidLogin;
 
   test('1 - Verifica se é possível alterar o valor dos inputs e se o valor é guardado', () => {
     renderWithRouter(<App />);
@@ -29,6 +29,8 @@ test('Login', () => {
   })
 
   test('2 - Verifica se ao colocar um email inválido é exibido uma mensagem de erro', () => {
+    renderWithRouter(<App />);
+    
     const inputEmail = screen.getByTestId('common_login__input-email');
     userEvent.type(inputEmail, invalidEmail);
 
