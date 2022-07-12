@@ -297,3 +297,9 @@ back-end/.env
 **/reports/**/*
 **/coverage
 **/.nyc_output
+front-end/.env
+.idea/.gitignore
+.idea/modules.xml
+.idea/sd-016-b-project-delivery-app.iml
+.idea/vcs.xml
+.idea/inspectionProfiles/Project_Default.xml
