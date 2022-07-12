@@ -1,7 +1,8 @@
 import React from 'react';
+import ButtonSD from '../components/basis/ButtonSD';
 
 export default function Home() {
   return (
-    <div>home</div>
+    <ButtonSD> Click me </ButtonSD>
   );
 }

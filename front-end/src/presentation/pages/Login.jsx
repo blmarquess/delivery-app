@@ -1,62 +1,65 @@
-import React from 'react';
-import {
-  Checkbox,
-  Grid,
-  TextField,
-  FormControlLabel,
-  Paper,
-  Button,
-} from '@material-ui/core';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
-  const [checked, setChecked] = React.useState(true);
+import Input from '../components/basis/Input';
+import ButtonSD from '../components/basis/ButtonSD';
+import LayoutPage from '../layout/LayoutPage';
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
+const Login = () => {
+  const [loginState, setInfLogin] = useState({ user: '', psw: '', redirect: false });
+  const stateUpdate = (e) => setInfLogin({ ...loginState, [e.name]: e.value });
+
+  const PSW_MIN = 6;
+  const dotCom = /^[a-z0-9._-]+@[a-z0-9]+\.com$/;
+  const isValidForm = () => loginState.psw.length > PSW_MIN
+    && dotCom.test(loginState.user);
 
   return (
-    <div style={ { padding: 30 } }>
-      <Paper>
-        <Grid
-          container
-          spacing={ 3 }
-          direction="column"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item xs={ 12 }>
-            <TextField label="Username" />
-          </Grid>
-          <Grid item xs={ 12 }>
-            <TextField label="Password" type="password" />
-          </Grid>
-          <Grid item xs={ 12 }>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={ checked }
-                  onChange={ handleChange }
-                  label="Keep me logged in"
-                  inputProps={ { 'aria-label': 'primary checkbox' } }
-                />
-              }
-              label="Keep me logged in"
-            />
-          </Grid>
-          <Grid item xs={ 12 }>
-            <Button
-              fullWidth
-            >
-              {' '}
-              Login
-              {' '}
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
+    <LayoutPage>
+      <section>
+        <span>Email:</span>
+        <Input
+          type="email"
+          name="user"
+          data-testid="common_login__input-email"
+          wsize="100%"
+          value={ loginState.user }
+          onChange={ ({ target }) => stateUpdate(target) }
+        />
+        <span>Senha:</span>
+        <Input
+          value={ loginState.psw }
+          type="password"
+          name="psw"
+          data-testid="common_login__input-password"
+          wsize="100%"
+          onChange={ ({ target }) => stateUpdate(target) }
+        />
+        <Link to="./home">
+          <ButtonSD
+            wsize="100%"
+            msize="20px 0 0 0"
+            data-testid="common_login__button-login"
+            onClick={ () => console.log(setInfLogin) }
+            disabled={ !isValidForm() }
+          >
+            Entrar
+          </ButtonSD>
+        </Link>
+        <Link to="./home">
+          <ButtonSD
+            wsize="100%"
+            msize="20px 0 0 0"
+            data-testid="common_login__button-login"
+            onClick={ () => console.log(setInfLogin) }
+            disabled={ !isValidForm() }
+          >
+            Registrar-se
+          </ButtonSD>
+        </Link>
+      </section>
+    </LayoutPage>
   );
 };
 
-export default LoginPage;
+export default Login;

@@ -5,7 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 
-import App from '../../App';
+// import App from '../../App';
 import Home from '../../presentation/pages/Home';
 import Login from '../../presentation/pages/Login';
 
@@ -14,9 +14,9 @@ export default function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={ <Login /> }>
-          <Route path="/login" element={ <App /> } />
+          <Route path="/login" element={ <Login /> } />
           <Route index element={ <Home /> } />
-          <Route path="pedido" element={ <App /> }>
+          <Route path="/home" element={ <Home /> }>
             <Route path=":pedidoId" element="<Team />" />
             <Route path="novo-pedido" element="<NewTeamForm />" />
             <Route index element="<LeagueStandings />" />
