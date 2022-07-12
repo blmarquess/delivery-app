@@ -65,4 +65,4 @@ test('Register', () => {
     const customerNavbar = screen.getByTestId('customer_products__element-navbar-link-products');
     expect(customerNavbar).toBeInTheDocument();
   });
-})
+});
