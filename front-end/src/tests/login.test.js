@@ -8,7 +8,7 @@ import renderWithRouter from './renderWithRouter';
 
 test('Login', () => {
   const { validEmail, validPassword } = validLogin;
-  const { invalidEmail } = invalidLogin;
+  const { invalidEmail, invalidPassword } = invalidLogin;
 
   test('1 - Verifica se é possível alterar o valor dos inputs e se o valor é guardado', () => {
     renderWithRouter(<App />);
@@ -34,6 +34,9 @@ test('Login', () => {
     const inputEmail = screen.getByTestId('common_login__input-email');
     userEvent.type(inputEmail, invalidEmail);
 
+    const inputPassword = screen.getByTestId('common_login__input-password');
+    userEvent.type(inputPassword, validPassword);
+
     const loginButton = screen.getByTestId('common_login__button-login');
     expect(loginButton).toBeInTheDocument();
     userEvent.click(loginButton);
@@ -42,7 +45,24 @@ test('Login', () => {
     expect(errorMessage).toBeInTheDocument();
   })
 
-  test('3 - Verifica se ao clicar no botão de login,com os dados válidos, a página é redirecionada para a role em questão (customer)', async () => {
+  test('3 - Verifica se ao colocar uma senha inválida é exibido uma mensagem de erro', () => {
+    renderWithRouter(<App />);
+
+    const inputEmail = screen.getByTestId('common_login__input-email');
+    userEvent.type(inputEmail, validEmail);
+    
+    const inputPassword = screen.getByTestId('common_login__input-password');
+    userEvent.type(inputPassword, invalidPassword);
+
+    const loginButton = screen.getByTestId('common_login__button-login');
+    expect(loginButton).toBeInTheDocument();
+    userEvent.click(loginButton);
+
+    const errorMessage = screen.getByTestId('common_login__element-invalid-email');
+    expect(errorMessage).toBeInTheDocument();
+  })
+
+  test('4 - Verifica se ao clicar no botão de login,com os dados válidos, a página é redirecionada para a role em questão (customer)', async () => {
     renderWithRouter(<App />);
 
     const inputEmail = screen.getByTestId('common_login__input-email');
