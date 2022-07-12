@@ -1,10 +1,10 @@
-const loginService = require('../services/login.service');
+const loginService = require('../services/login/login.service');
 
 const LoginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const token = await loginService(email, password);
+    const token = await loginService({ email, password });
 
     return token.error
       ? res.json(token)
