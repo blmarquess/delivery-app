@@ -11,6 +11,7 @@
     "start": "react-scripts start",
     "start:build": "PORT=3000 ./node_modules/.bin/serve -s build",
     "build": "react-scripts build",
+    "cz": "cz",
     "test": "react-scripts test --runInBand --detectOpenHandles --verbose",
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "test:coverage:json": "react-scripts test --coverage --coverageReporters=\"json-summary\" --watchAll=false --testFailureExitCode=0 --detectOpenHandles --runInBand --forceExit",
@@ -72,5 +73,10 @@
       "./services/renderWithRouter",
       "./services/history"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+      }
   }
 }
