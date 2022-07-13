@@ -1,4 +1,4 @@
-const { randomUUID, createHash } = require('crypto');
+const { createHash } = require('crypto');
 const User = require('../../database/models/User');
 
 const CreateUserService = async ({ name, email, password, role }) => {
@@ -10,10 +10,7 @@ const CreateUserService = async ({ name, email, password, role }) => {
 
   const encryptedPassword = createHash('md5').update(password).digest('hex');
 
-  const id = randomUUID();
-
   const createdUser = await User.create({
-    id,
     name,
     email,
     password: encryptedPassword,
