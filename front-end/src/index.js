@@ -5,13 +5,16 @@ import GlobalStyle from './main/styles/global';
 import './index.css';
 import AppRouter from './main/router/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
+import AuthProvider from './infra/data/contexts/AuthProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <GlobalStyle />
-      <AppRouter />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <AppRouter />
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

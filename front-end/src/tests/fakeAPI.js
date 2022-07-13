@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const api = express();
 const RES_OK = 200;
@@ -17,6 +18,7 @@ const fakeLoginResponseSeller = {
 
 api.use(express.json());
 api.use(express.urlencoded({ extended: true }));
+api.use(cors());
 
 api.get('/', (_req, res) => res.status(RES_OK).json({ message: 'API is running' }));
 
