@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
 import LayoutPage from '../layout/LayoutPage';
+import AuthContext from '../../infra/data/contexts/AuthContext';
 
 const Login = () => {
-  const [loginState, setInfLogin] = useState({ user: '', psw: '', redirect: false });
+  const [loginState, setInfLogin] = useState({ user: '', psw: '' });
   const stateUpdate = (e) => setInfLogin({ ...loginState, [e.name]: e.value });
+  const setLogin = useContext(AuthContext).login;
 
   const PSW_MIN = 6;
   const dotCom = /^[a-z0-9._-]+@[a-z0-9]+\.com$/;
   const isValidForm = () => loginState.psw.length > PSW_MIN
     && dotCom.test(loginState.user);
+
+  const setUserLocalState = (userData) => {
+    localStorage.setItem('authToken', JSON.stringify(userData.token));
+    localStorage.setItem('authUser', JSON.stringify(userData));
+  };
+
+  const handleSubmit = () => {
+    setUserLocalState({ ...loginState, token: 'fakeTokenTEMP' });
+    if (isValidForm()) {
+      setLogin({ ...loginState, token: 'fakeTokenTEMP' });
+    }
+  };
 
   return (
     <LayoutPage>
@@ -39,8 +53,8 @@ const Login = () => {
           <ButtonSD
             wsize="100%"
             msize="20px 0 0 0"
+            onClick={ handleSubmit }
             data-testid="common_login__button-login"
-            onClick={ () => console.log(setInfLogin) }
             disabled={ !isValidForm() }
           >
             Entrar
