@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AuthContext from '../../infra/data/contexts/AuthContext';
 
 export default function PrivateRouter({ children }) {
-  const thisUserIsValid = false;
+  const thisUserIsValid = useContext(AuthContext).userState;
 
-  if (!thisUserIsValid) {
+  if (!thisUserIsValid.role) {
     return <Navigate to="/login" />;
   }
 
