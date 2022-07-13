@@ -6,11 +6,17 @@ import PrivateRouter from './PrivateRouter';
 import Home from '../../presentation/pages/Home';
 import Login from '../../presentation/pages/Login';
 import Register from '../../presentation/pages/Register';
+import CustomerProducts from '../../presentation/pages/customerProducts';
+import SellerOrder from '../../presentation/pages/sellerOrders';
+import AdminUsers from '../../presentation/pages/adminUsers';
 
 export default function AppRouter() {
   return (
     <Routes>
       <Route exact path="/" element={ <Navigate to="/login" /> } />
+      <Route path="/customer/products" element={ <CustomerProducts /> } />
+      <Route path="/seller/orders" element={ <SellerOrder /> } />
+      <Route path="/admin/users" element={ <AdminUsers /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="/login" element={ <Login /> } />
       <Route

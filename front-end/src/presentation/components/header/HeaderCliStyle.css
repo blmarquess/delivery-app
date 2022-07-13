@@ -1,0 +1,163 @@
+.div1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  width: 1500px;
+  height: 75px;
+  left: 0px;
+  top: 0px;
+  background-color: #036B52;
+}
+
+.btn-products {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: absolute;
+  height: 75px;
+  left: 0%;
+  right: 80.89%;
+  top: 0px;
+  background: #2FC18C;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+.btn-products a {
+  text-decoration: none;
+  color: #001813;
+  ;
+}
+
+.btn-orders {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: absolute;
+  height: 75px;
+  left: 19.06%;
+  right: 61.82%;
+  top: 0px;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+.btn-orders a {
+  color: #F2FFFC;
+  text-decoration: none;
+}
+
+.btn-user {
+  /* botão */
+  position: absolute;
+  left: 71.93%;
+  right: 0%;
+  top: 0%;
+  bottom: 0.48%;
+  /* tipografia */
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #F2FFFC;
+  text-decoration: none;
+  /* bg */
+  background: #421981;
+  height: 75px;
+  left: 71.93%;
+  right: 9.38%;
+  top: 0.01px;
+}
+
+.btn-exit {
+  /* botão */
+  position: absolute;
+  height: 75px;
+  left: 90.62%;
+  right: 0%;
+  top: 0px;
+  /* tipografia */
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #F2FFFC;
+  text-decoration: none;
+  /* Texto Light */
+    /* bg */
+  background: #056CF9;
+}
+
+.btn-exit a {
+  text-decoration: none;
+  color: #F2FFFC;
+}
+
+.btn-seller-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: absolute;
+  height: 75px;
+  left: 0%;
+  right: 80.89%;
+  top: 0px;
+  background: #2FC18C;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+.btn-seller-product a {
+  text-decoration: none;
+  color: #001813;
+  ;
+}
+
+.btn-admin-users {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: absolute;
+  height: 75px;
+  left: 0%;
+  right: 80.89%;
+  top: 0px;
+  background: #2FC18C;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+.btn-admin-users a {
+  text-decoration: none;
+  color: #001813;
+  ;
+}
