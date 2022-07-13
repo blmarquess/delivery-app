@@ -3,13 +3,13 @@ const userService = require('../services/user');
 module.exports = {
   create: async (req, res, next) => {
     try {
-      const { email, password } = req.body;
+      const { name, email, password } = req.body;
 
-      const user = await userService.create({ email, password });
+      const user = await userService.create({ name, email, password });
 
-      return !user.error
+      return !user.message
         ? res.json(user)
-        : res.status(404).json({ error: user.error });
+        : res.status(404).json({ message: user.message });
     } catch (error) {
       next(error);
     }
