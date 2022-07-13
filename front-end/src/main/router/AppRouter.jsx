@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
@@ -11,19 +10,17 @@ import Login from '../../presentation/pages/Login';
 
 export default function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={ <Login /> }>
-          <Route path="/login" element={ <Login /> } />
-          <Route index element={ <Home /> } />
-          <Route path="/home" element={ <Home /> }>
-            <Route path=":pedidoId" element="<Team />" />
-            <Route path="novo-pedido" element="<NewTeamForm />" />
-            <Route index element="<LeagueStandings />" />
-          </Route>
-          <Route path="*" element={ <h1>404 | Pagina não encontrada</h1> } />
+    <Routes>
+      <Route exact path="/" element={ <Login /> }>
+        <Route path="/login" element={ <Login /> } />
+        <Route index element={ <Home /> } />
+        <Route path="/home" element={ <Home /> }>
+          <Route path=":pedidoId" element="<Team />" />
+          <Route path="novo-pedido" element="<NewTeamForm />" />
+          <Route index element="<LeagueStandings />" />
         </Route>
-      </Routes>
-    </BrowserRouter>
+        <Route path="*" element={ <h1>404 | Pagina não encontrada</h1> } />
+      </Route>
+    </Routes>
   );
 }

@@ -4,6 +4,6 @@ export const validLogin = {
 };
 
 export const invalidLogin = {
-  invalidEmail: 'email@email.com',
+  invalidEmail: 'email.com',
   invalidPassword: '123',
 }

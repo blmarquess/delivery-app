@@ -50,8 +50,7 @@ const Login = () => {
           <ButtonSD
             wsize="100%"
             msize="20px 0 0 0"
-            data-testid="common_login__button-login"
-            onClick={ () => console.log(setInfLogin) }
+            data-testid="common_login__button-register"
             disabled={ !isValidForm() }
           >
             Registrar-se
