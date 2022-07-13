@@ -5,7 +5,7 @@ const LayoutPage = styled.section`align-items: center;
   background: rgb(243, 244, 246);
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
   max-width: 360;
   padding: 0 0.5rem;
@@ -15,7 +15,7 @@ const LayoutPage = styled.section`align-items: center;
     align-items: space-evenly;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
     justify-content: space-around;
     max-width: 360;
   }
