@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 const Attributes = {
   id: { primaryKey: true, type: DataTypes.INTEGER },
   name: DataTypes.STRING,
-  price: DataTypes.DECIMAL,
+  price: DataTypes.DECIMAL(10, 2),
   url_image: DataTypes.STRING,
 };
 

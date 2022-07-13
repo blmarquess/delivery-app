@@ -9,20 +9,21 @@ module.exports = {
         type: Sequelize.UUID
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: false
       },
       email: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: false
       },
       password: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: false
       },
       role: {
         type: Sequelize.STRING,
-        allowNull: false
+        require: false,
+        defaultValue: 'customer'
       },
     }, { timestamp: false });
   },

@@ -30,17 +30,17 @@ module.exports = {
       },
       total_price: {
         allowNull: false,
-        type: Sequelize.DECIMAL,
-        delivery_address: Sequelize.STRING,
-        delivery_number: Sequelize.STRING,
-        sale_date: Sequelize.DATE,
-        status: Sequelize.STRING,
+        type: Sequelize.DECIMAL(10, 2),
       },
       delivery_address: {
         allowNull: false,
         type: Sequelize.STRING
       },
       delivery_number: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      sale_date: {
         allowNull: false,
         type: Sequelize.STRING
       },
