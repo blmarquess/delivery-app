@@ -25,9 +25,9 @@ module.exports = {
         require: false,
         defaultValue: 'customer'
       },
-    }, { timestamp: false });
+    });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('users');
   }
 };
