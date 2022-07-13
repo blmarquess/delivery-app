@@ -1,9 +1,9 @@
 const md5 = require('md5');
 const { sign } = require('jsonwebtoken');
-const User = require('../../database/models/User');
+const { Users } = require('../../database/models');
 
 const LoginService = async ({ email, password }) => {
-  const user = await User.findOne({ where: { email } });
+  const user = await Users.findOne({ where: { email: email } });
 
   if (!user) {
     return { message: 'User not found' };
@@ -16,15 +16,17 @@ const LoginService = async ({ email, password }) => {
   }
 
   const token = sign(
-    {},
-    process.env.APP_SECRET,
     {
       id: user.id,
       name: user.name,
       email: user.email,
       role: user.role,
-      expiresIn: '1d',
     },
+    process.env.APP_SECRET || '123',
+    {
+      algorithm: 'HS256',
+      expiresIn: '1d',
+    }
   );
 
   return token;
