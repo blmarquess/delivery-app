@@ -35,7 +35,7 @@ const Login = () => {
           wsize="100%"
           onChange={ ({ target }) => stateUpdate(target) }
         />
-        <Link to="./home">
+        <Link to="/home">
           <ButtonSD
             wsize="100%"
             msize="20px 0 0 0"
@@ -46,13 +46,11 @@ const Login = () => {
             Entrar
           </ButtonSD>
         </Link>
-        <Link to="./home">
+        <Link to="/register">
           <ButtonSD
             wsize="100%"
             msize="20px 0 0 0"
-            data-testid="common_login__button-login"
-            onClick={ () => console.log(setInfLogin) }
-            disabled={ !isValidForm() }
+            data-testid="common_login__button-register"
           >
             Registrar-se
           </ButtonSD>

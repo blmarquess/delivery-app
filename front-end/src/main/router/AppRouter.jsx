@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
@@ -8,22 +7,18 @@ import {
 // import App from '../../App';
 import Home from '../../presentation/pages/Home';
 import Login from '../../presentation/pages/Login';
+import Register from '../../presentation/pages/Register';
 
 export default function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={ <Login /> }>
-          <Route path="/login" element={ <Login /> } />
-          <Route index element={ <Home /> } />
-          <Route path="/home" element={ <Home /> }>
-            <Route path=":pedidoId" element="<Team />" />
-            <Route path="novo-pedido" element="<NewTeamForm />" />
-            <Route index element="<LeagueStandings />" />
-          </Route>
-          <Route path="*" element={ <h1>404 | Pagina não encontrada</h1> } />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route exact path="/" element={ <Login /> } />
+      <Route path="/register" element={ <Register /> } />
+      <Route path="/login" element={ <Login /> } />
+      <Route path="/home" element={ <Home /> } />
+      <Route path=":pedidoId" element="<Team />" />
+      <Route path="novo-pedido" element="<NewTeamForm />" />
+      <Route path="*" element={ <h1>404 | Pagina não encontrada</h1> } />
+    </Routes>
   );
 }
