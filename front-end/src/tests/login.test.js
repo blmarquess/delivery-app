@@ -58,7 +58,7 @@ describe('Login', () => {
     expect(loginButton).toBeDisabled();
   })
 
-  test('4 - Verifica se ao clicar no botão de login,com os dados válidos, a página é redirecionada para a role em questão (customer)', async () => {
+  test('4 - Verifica se ao clicar no botão de login,com os dados válidos, a página é redirecionada para /home', async () => {
 
     const inputEmail = screen.getByTestId('common_login__input-email');
     userEvent.type(inputEmail, validEmail);
@@ -72,4 +72,12 @@ describe('Login', () => {
 
     expect(global.window.location.href).toContain('/home');
   });
+
+  test('5 - Verifica se ao clicar no botão de Registrar-se, a página é redirecionada para /register', () => {
+    const registerButton = screen.getByTestId('common_login__button-register');
+    expect(registerButton).toBeInTheDocument();
+    userEvent.click(registerButton);
+
+    expect(global.window.location.href).toContain('/register');
+  })
 })
