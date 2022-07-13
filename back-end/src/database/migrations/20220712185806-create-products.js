@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-    }, { timestamp: false });
+    });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('products');
