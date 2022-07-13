@@ -15,11 +15,9 @@ export default function AppRouter() {
       <Route exact path="/" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="/login" element={ <Login /> } />
-      <Route index element={ <Home /> } />
       <Route path="/home" element={ <Home /> } />
       <Route path=":pedidoId" element="<Team />" />
       <Route path="novo-pedido" element="<NewTeamForm />" />
-      <Route index element="<LeagueStandings />" />
       <Route path="*" element={ <h1>404 | Pagina não encontrada</h1> } />
     </Routes>
   );

@@ -31,7 +31,7 @@ const Register = () => {
         <span>Email</span>
         <Input
           type="email"
-          name="userEmail"
+          name="email"
           data-testid="common_register__input-email"
           wsize="100%"
           value={ registerState.user }
@@ -45,7 +45,7 @@ const Register = () => {
           wsize="100%"
           onChange={ ({ target }) => stateUpdate(target) }
         />
-        <Link to="/home">
+        <Link to="/customer/products">
           <ButtonSD
             wsize="100%"
             msize="20px 0 0 0"
