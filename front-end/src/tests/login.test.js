@@ -1,11 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AppRouter from '../main/router/AppRouter';
 import { invalidLogin, validLogin } from './mocks/loginMock';
 import '@testing-library/jest-dom';
 import renderWithRouter from './renderWithRouter';
-import '@testing-library/jest-dom';
 
 describe('Login', () => {
   const { validEmail, validPassword } = validLogin;
