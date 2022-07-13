@@ -1,23 +1,22 @@
-const { createHash } = require('crypto');
+const md5 = require('md5');
 const User = require('../../database/models/User');
 
-const CreateUserService = async ({ name, email, password, role }) => {
+const CreateUserService = async ({ name, email, password }) => {
   const userExists = await User.findOne({ where: { email } });
 
   if (userExists) {
-    return { error: 'User already exists' };
+    return { message: 'User already exists' };
   }
 
-  const encryptedPassword = createHash('md5').update(password).digest('hex');
+  const encryptedPassword = md5(password);
 
   const createdUser = await User.create({
     name,
     email,
     password: encryptedPassword,
-    role,
   });
 
-  return createdUser;
+  return { name: createdUser.name };
 };
 
 module.exports = CreateUserService;
