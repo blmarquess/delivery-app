@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(loginRouter);
+app.use('/login', loginRouter);
 
 app.use((err, _req, res, _next) => {
   console.log(err);
