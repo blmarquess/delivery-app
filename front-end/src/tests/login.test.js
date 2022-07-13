@@ -1,11 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AppRouter from '../main/router/AppRouter';
 import { invalidLogin, validLogin } from './mocks/loginMock';
 import '@testing-library/jest-dom';
 import renderWithRouter from './renderWithRouter';
-import '@testing-library/jest-dom';
 
 describe('Login', () => {
   const { validEmail, validPassword } = validLogin;
@@ -58,7 +57,7 @@ describe('Login', () => {
     expect(loginButton).toBeDisabled();
   })
 
-  it('4 - Verifica se ao clicar no botão de login,com os dados válidos, a página é redirecionada para /home', async () => {
+  it('4 - Verifica se ao clicar no botão de login, com os dados válidos, a página é redirecionada para /home', async () => {
 
     const inputEmail = screen.getByTestId('common_login__input-email');
     userEvent.type(inputEmail, validEmail);
@@ -80,4 +79,11 @@ describe('Login', () => {
 
     expect(global.window.location.href).toContain('/register');
   })
+
+  it('6 - Verifica se ao tentar acessar uma rota sem a devida permissão, é redirecionado para o login', () => {
+    renderWithRouter(<AppRouter/>, '/home');
+
+    expect(global.window.location.href).toContain('/login');
+  })
 })
+

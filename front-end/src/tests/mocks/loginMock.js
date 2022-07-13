@@ -6,4 +6,9 @@ export const validLogin = {
 export const invalidLogin = {
   invalidEmail: 'email.com',
   invalidPassword: '123',
-}
+};
+
+export const invalidLoginDB = {
+  email: 'zebirita@email.com',
+  password: 'md5("$#zebirita#$")',
+};
