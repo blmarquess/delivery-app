@@ -9,7 +9,7 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const Users = sequelize.define("User", Attributes, { modelName: 'Users' });
+  const Users = sequelize.define("Users", Attributes, { modelName: 'users', timestamp: false });
 
   return Users;
 };

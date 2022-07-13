@@ -12,18 +12,18 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const Sales = sequelize.define("Sale", Attributes, { modelName: 'sales' });
+  const Sales = sequelize.define("Sales", Attributes, { modelName: 'sales', timestamp: false });
 
-  Sale.associate = (models) => {
-    Sale.belongsToMany(models.User, { foreignKey: 'user_id', as: 'user' });
+  Sales.associate = (models) => {
+    Sales.belongsToMany(models.Users, { foreignKey: 'user_id', as: 'user' });
   };
 
-  Sale.associate = (models) => {
-    Sale.belongsToMany(models.User, { foreignKey: 'seller_id', as: 'user' });
+  Sales.associate = (models) => {
+    Sales.belongsToMany(models.Users, { foreignKey: 'seller_id', as: 'user' });
   };
 
-  Product.associate = (models) => {
-    Product.hasToMany(models.SalesProducts, { foreignKey: 'sale_id', as: 'sales_products' });
+  Sales.associate = (models) => {
+    Sales.hasToMany(models.SalesProducts, { foreignKey: 'sale_id', as: 'sales_products' });
   };
 
   return Sales;
