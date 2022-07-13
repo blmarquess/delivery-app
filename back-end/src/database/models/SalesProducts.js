@@ -8,14 +8,14 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const SalesProducts = sequelize.define("SalesProducts", Attributes, { modelName: 'salesProducts', timestamp: false });
+  const SalesProducts = sequelize.define("SalesProducts", Attributes, { modelName: 'salesProducts', timestamps: false });
 
   SalesProducts.associate = (models) => {
-    SalesProducts.belongsToMany(models.Sales, { foreignKey: 'sale_id', as: 'sale' });
+    SalesProducts.belongsToMany(models.Sales, { foreignKey: 'sale_id', as: 'sale', through: SalesProducts });
   };
 
   SalesProducts.associate = (models) => {
-    SalesProducts.belongsToMany(models.Products, { foreignKey: 'product_id', as: 'product' });
+    SalesProducts.belongsToMany(models.Products, { foreignKey: 'product_id', as: 'product', through: SalesProducts });
   };
 
   return SalesProducts;
