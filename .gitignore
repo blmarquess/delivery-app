@@ -303,3 +303,7 @@ front-end/.env
 .idea/sd-016-b-project-delivery-app.iml
 .idea/vcs.xml
 .idea/inspectionProfiles/Project_Default.xml
+front-end/thunder-tests/thunderActivity.json
+front-end/thunder-tests/thunderclient.json
+front-end/thunder-tests/thunderCollection.json
+front-end/thunder-tests/thunderEnvironment.json
