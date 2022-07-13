@@ -37,7 +37,7 @@ describe('Register', () => {
     expect(inputPassword).toHaveValue(validPassword);
   })
 
-  test('2 - Verifica se ao colocar um email inválido não é possível realizar o cadastro', () => {
+  it('2 - Verifica se ao colocar um email inválido não é possível realizar o cadastro', () => {
 
     const inputName = screen.getByTestId('common_register__input-name');
     expect(inputName).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe('Register', () => {
     expect(registerButton).toBeDisabled();
   })
 
-  test('3 - Verifica se ao colocar uma senha inválida não é possível realizar o cadastro', () => {
+  it('3 - Verifica se ao colocar uma senha inválida não é possível realizar o cadastro', () => {
     
     const inputName = screen.getByTestId('common_register__input-name');
     expect(inputName).toBeInTheDocument();
@@ -75,7 +75,7 @@ describe('Register', () => {
     expect(registerButton).toBeDisabled();
   })
 
-  test('4 - Verifica se ao colocar um nome inválido não é possível realizar o cadastro', () => {
+  it('4 - Verifica se ao colocar um nome inválido não é possível realizar o cadastro', () => {
     
     const inputName = screen.getByTestId('common_register__input-name');
     expect(inputName).toBeInTheDocument();
@@ -94,7 +94,7 @@ describe('Register', () => {
     expect(registerButton).toBeDisabled();
   })
 
-  test('5 - Verifica se ao clicar no botão de registrar, com os dados válidos, a página é redirecionada para a rota /customer/products', async () => {
+  it('5 - Verifica se ao clicar no botão de registrar, com os dados válidos, a página é redirecionada de volta para o login', async () => {
 
     const inputName = screen.getByTestId('common_register__input-name');
     expect(inputName).toBeInTheDocument();
@@ -110,6 +110,6 @@ describe('Register', () => {
     expect(loginButton).toBeInTheDocument();
     userEvent.click(loginButton);
 
-    expect(global.window.location.href).toContain('/customer/products');
+    expect(global.window.location.href).toContain('/login');
   });
 });

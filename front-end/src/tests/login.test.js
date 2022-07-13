@@ -58,7 +58,7 @@ describe('Login', () => {
     expect(loginButton).toBeDisabled();
   })
 
-  it('4 - Verifica se ao clicar no botão de login,com os dados válidos, a página é redirecionada para /home', async () => {
+  it('4 - Verifica se ao clicar no botão de login, com os dados válidos, a página é redirecionada para /home', async () => {
 
     const inputEmail = screen.getByTestId('common_login__input-email');
     userEvent.type(inputEmail, validEmail);
@@ -80,4 +80,11 @@ describe('Login', () => {
 
     expect(global.window.location.href).toContain('/register');
   })
+
+  it('6 - Verifica se ao tentar acessar uma rota sem a devida permissão, é redirecionado para o login', () => {
+    renderWithRouter(<AppRouter/>, '/home');
+
+    expect(global.window.location.href).toContain('/login');
+  })
 })
+

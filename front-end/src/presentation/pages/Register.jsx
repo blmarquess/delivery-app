@@ -45,7 +45,7 @@ const Register = () => {
           wsize="100%"
           onChange={ ({ target }) => stateUpdate(target) }
         />
-        <Link to="/customer/products">
+        <Link to="/login">
           <ButtonSD
             wsize="100%"
             msize="20px 0 0 0"
