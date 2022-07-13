@@ -4,15 +4,15 @@ module.exports = {
     await queryInterface.createTable('salesProducts', {
       id: {
         allowNull: false,
-        autoIncrement: false,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       sale_id: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
-          model: 'Sales',
+          model: 'sales',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -20,9 +20,9 @@ module.exports = {
       },
       product_id: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
-          model: 'Products',
+          model: 'products',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -31,15 +31,7 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+    }, { timestamp: false });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('salesProducts');
