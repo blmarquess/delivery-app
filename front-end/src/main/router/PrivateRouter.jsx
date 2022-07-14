@@ -1,16 +1,12 @@
-import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import AuthContext from '../../infra/data/contexts/AuthContext';
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
-export default function PrivateRouter({ children }) {
-  const thisUserIsValid = useContext(AuthContext).userState;
+export default function PrivateRouter() {
+  const token = localStorage.getItem('authToken');
 
-  if (!thisUserIsValid.role) {
-    return <Navigate to="/login" />;
+  if (!token) {
+    return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return <Outlet />;
 }
-
-PrivateRouter.propTypes = { children: PropTypes.node.isRequired };

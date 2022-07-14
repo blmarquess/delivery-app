@@ -18,11 +18,12 @@ const Login = () => {
 
   const setUserLocalState = (userData) => {
     localStorage.setItem('authToken', JSON.stringify(userData.token));
+    localStorage.setItem('userRole', JSON.stringify(userData.role));
     localStorage.setItem('authUser', JSON.stringify(userData));
   };
 
   const handleSubmit = () => {
-    setUserLocalState({ ...loginState, token: 'fakeTokenTEMP' });
+    setUserLocalState({ ...loginState, token: 'fakeTokenTEMP', role: 'customer' });
     if (isValidForm()) {
       setLogin({ ...loginState, token: 'fakeTokenTEMP' });
     }
