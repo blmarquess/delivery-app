@@ -8,8 +8,8 @@ module.exports = {
       const user = await userService.create({ name, email, password });
 
       return !user.message
-        ? res.json(user)
-        : res.status(404).json({ message: user.message });
+        ? res.status(201).json(user)
+        : res.status(409).json({ message: user.message });
     } catch (error) {
       next(error);
     }
@@ -58,7 +58,7 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      await userService.remove({ id });
+      const user = await userService.remove({ id });
 
       return !user.error
         ? res.end()
