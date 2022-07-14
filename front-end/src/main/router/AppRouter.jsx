@@ -6,9 +6,9 @@ import UserRouterAuth from './UserRouterAuth';
 
 import Login from '../../presentation/pages/Login';
 import Register from '../../presentation/pages/Register';
-import CustomerProducts from '../../presentation/pages/customerProducts';
-import SellerOrder from '../../presentation/pages/sellerOrders';
-import AdminUsers from '../../presentation/pages/adminUsers';
+import CustomerProducts from '../../presentation/pages/CustomerProducts';
+import SellerOrder from '../../presentation/pages/SellerOrders';
+import AdminUsers from '../../presentation/pages/AdminUsers';
 
 export default function AppRouter() {
   return (

@@ -1,11 +1,12 @@
 .card {
   background: #eaf1ef;
   border: 1px solid #b1c2be;
+  border-radius: 10px;
   bottom: 0%;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
-  height: 334px;
-  right: 0%;
+  height: fit-content;
+  margin: 50px;
   top: 158px;
   width: 257px;
 }
@@ -29,13 +30,14 @@
 
 .img {
   align-self: center;
-  border-radius: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   display: flex;
   height: 278px;
   justify-content: center;
   left: 1px;
   top: 2px;
-  width: 257px;
+  width: 100%;
 }
 
 .counter {
@@ -47,7 +49,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 70px;
+  justify-content: space-around;
 }
 
 .counter-number {
@@ -63,8 +66,9 @@
 .btn-minus {
   background: #036b52;
   border: none;
-  border-radius: 40px 5px 5px 40px;
+  border-radius: 10px 0 0 10px;
   color: white;
+  cursor: pointer;
   font-size: 20px;
   height: 30px;
   line-height: 100%;
@@ -74,8 +78,9 @@
 .btn-plus {
   background: #036b52;
   border: none;
-  border-radius: 5px 40px 40px 5px;
+  border-radius: 0 10px 10px 0;
   color: white;
+  cursor: pointer;
   font-size: 20px;
   height: 30px;
   line-height: 100%;
