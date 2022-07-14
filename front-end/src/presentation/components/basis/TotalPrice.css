@@ -1,0 +1,26 @@
+body {
+  background: rgb(243, 244, 246);
+}
+
+.total-price {
+  background: #036b52;
+  border: none;
+  border-radius: 0.3rem;
+  bottom: 5%;
+  box-shadow: 0 0 0.3rem black;
+  color: white;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 600;
+  height: 70px;
+  left: 80%;
+  line-height: 70px;
+  margin: 0;
+  outline: none;
+  padding: 0 1rem;
+  position: fixed;
+  right: none;
+  text-align: center;
+  top: none;
+  width: 300px;
+}
