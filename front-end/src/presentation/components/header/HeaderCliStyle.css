@@ -7,7 +7,7 @@
   left: 0;
   position: absolute;
   top: 0;
-  width: 1500px;
+  width: 100%;
 }
 
 .btn-products {
@@ -73,6 +73,7 @@
   right: 0%;
   text-decoration: none;
   top: 0%;
+  width: 20%;
 }
 
 .btn-exit {
