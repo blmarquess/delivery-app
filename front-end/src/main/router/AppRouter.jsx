@@ -9,6 +9,7 @@ import Register from '../../presentation/pages/Register';
 import CustomerProducts from '../../presentation/pages/customerProducts';
 import SellerOrder from '../../presentation/pages/sellerOrders';
 import AdminUsers from '../../presentation/pages/adminUsers';
+import Products from '../../presentation/pages/products';
 
 export default function AppRouter() {
   return (
@@ -19,6 +20,7 @@ export default function AppRouter() {
       <Route path="/admin/users" element={ <AdminUsers /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="/login" element={ <Login /> } />
+      <Route path="/products" element={ <Products /> } />
       <Route
         path="/home"
         element={
