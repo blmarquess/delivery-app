@@ -1,5 +1,5 @@
 const md5 = require('md5');
-const { sign } = require('jsonwebtoken');
+const { sign, verify } = require('jsonwebtoken');
 const { Users } = require('../../database/models');
 
 const LoginService = async ({ email, password }) => {
@@ -22,7 +22,7 @@ const LoginService = async ({ email, password }) => {
       email: user.email,
       role: user.role,
     },
-    process.env.APP_SECRET || '123',
+    process.env.APP_SECRET,
     {
       algorithm: 'HS256',
       expiresIn: '1d',
