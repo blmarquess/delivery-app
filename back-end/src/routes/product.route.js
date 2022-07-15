@@ -11,4 +11,4 @@ productRouter.route('/:id')
 
 module.exports = {
   productRouter,
-}
+};

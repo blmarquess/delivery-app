@@ -8,7 +8,7 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const Products = sequelize.define("Products", Attributes, { modelName: 'products', timestamps: false });
+  const Products = sequelize.define("Products", Attributes, { tableName: 'products', timestamps: false });
 
   Products.associate = (models) => {
     Products.hasMany(models.SalesProducts, { foreignKey: 'product_id', as: 'sales_products' });

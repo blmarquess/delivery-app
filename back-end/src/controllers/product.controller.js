@@ -5,7 +5,7 @@ module.exports = {
     try {
       const products = await productService.list();
 
-      return products;
+      return res.json(products);
     } catch (error) {
       next(error);
     }
@@ -24,5 +24,4 @@ module.exports = {
       next(error);
     }
   },
-
 };

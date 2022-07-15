@@ -4,7 +4,7 @@ const ShowProductService = async ({ id }) => {
   const product = await Product.findByPk(id);
 
   if (!product) {
-    return { error: 'Product not found' };
+    return { message: 'Product not found' };
   }
 
   return product;

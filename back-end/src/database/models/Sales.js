@@ -12,10 +12,10 @@ const Attributes = {
 };
 
 module.exports = (sequelize) => {
-  const Sales = sequelize.define("Sales", Attributes, { modelName: 'sales', timestamps: false });
+  const Sales = sequelize.define("Sales", Attributes, { tableName: 'sales', timestamps: false });
 
   Sales.associate = (models) => {
-    Sales.belongsToMany(models.Users, { foreignKey: 'user_id', as: 'user'});
+    Sales.belongsToMany(models.Users, { foreignKey: 'user_id', as: 'user' });
   };
 
   Sales.associate = (models) => {
