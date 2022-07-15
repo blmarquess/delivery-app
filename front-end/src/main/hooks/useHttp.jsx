@@ -1,4 +1,5 @@
 import axios from 'axios';
+import productsMock from '../../tests/mocks/productsMock';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost';
 const BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT || '3000';
@@ -14,6 +15,6 @@ export function useHttpGet(url) {
   return http.get(url);
 }
 
-export const getProductsDB = () => fetch('http://localhost:3000/products')
-  .then((response) => response.json())
-  .then((jsondata) => jsondata);
+export function getProductsDB() {
+  return productsMock;
+}
