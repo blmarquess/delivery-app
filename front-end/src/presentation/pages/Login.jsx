@@ -24,7 +24,7 @@ export default function Login() {
     saveUserDataInLocalStorage(dataLogin.data);
     if (dataLogin.status === statusOK) {
       const rotaUserByRole = dataLogin.data.role;
-      return redirectToPath(`/${rotaUserByRole}`, { replace: true });
+      return redirectToPath(`/${rotaUserByRole}`);
     }
   };
 

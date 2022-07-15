@@ -22,10 +22,9 @@ export default function Register() {
     const { name, email, password } = registerState;
     const statusOK = 201;
     const dataRegister = await registerNewUser(email, password, name);
-    console.log('🚀 -> dataRegister', dataRegister);
     if (dataRegister.status === statusOK) {
-      return redirectToPath('/login', { replace: true });
-    } return redirectToPath('/register', { replace: true });
+      return redirectToPath('/login');
+    } return redirectToPath('/register');
   };
 
   return (

@@ -1,10 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-
-const redirect = useNavigate();
+import redirectToPath from './redirectToPath';
 
 export default function logoffExecute() {
   localStorage.removeItem('authToken');
   localStorage.removeItem('userRole');
   localStorage.removeItem('userData');
-  return redirect('/login');
+  return redirectToPath('/login');
 }
