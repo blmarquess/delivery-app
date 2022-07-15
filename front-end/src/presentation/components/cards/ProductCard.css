@@ -56,8 +56,8 @@
 .counter-number {
   align-items: center;
   background: white;
-  border: 1px solid #001813;
   border-radius: 0;
+  box-shadow: 0 0 0.2rem black;
   display: flex;
   justify-content: center;
   width: 30px;
@@ -73,6 +73,10 @@
   height: 30px;
   line-height: 100%;
   width: 30px;
+}
+
+.btn-minus:disabled {
+  opacity: 50%;
 }
 
 .btn-plus {

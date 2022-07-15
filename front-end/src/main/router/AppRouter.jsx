@@ -9,6 +9,7 @@ import Register from '../../presentation/pages/Register';
 import CustomerProducts from '../../presentation/pages/CustomerProducts';
 import SellerOrder from '../../presentation/pages/SellerOrders';
 import AdminUsers from '../../presentation/pages/AdminUsers';
+import CustomerCheckout from '../../presentation/pages/CustomerCheckout';
 
 export default function AppRouter() {
   return (
@@ -16,6 +17,7 @@ export default function AppRouter() {
       <Route path="/register" element={ <Register /> } />
       <Route path="/login" element={ <Login /> } />
       <Route exact path="/" element={ <PrivateRouter /> }>
+        <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
 
         <Route path="/customer" element={ <UserRouterAuth roleUser="customer" /> }>
           <Route index path="products" element={ <CustomerProducts /> } />

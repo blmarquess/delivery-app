@@ -6,15 +6,18 @@ import './index.css';
 import AppRouter from './main/router/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from './infra/data/contexts/AuthProvider';
+import ContextProvider from './main/context/ContextProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
-        <GlobalStyle />
-        <AppRouter />
-      </BrowserRouter>
-    </AuthProvider>
+    <ContextProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <GlobalStyle />
+          <AppRouter />
+        </BrowserRouter>
+      </AuthProvider>
+    </ContextProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
