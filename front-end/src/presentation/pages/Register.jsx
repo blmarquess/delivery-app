@@ -1,20 +1,33 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import LayoutPage from '../layout/LayoutPage';
 import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
+import registerNewUser from '../../main/useCases/registerNewUser';
 
 const Register = () => {
-  const [registerState, setInfRegister] = useState({
-    userName: '', email: '', psw: '', redirect: false });
+  const [registerState, setInfRegister] = useState({ name: '', email: '', password: '' });
   const stateUpdate = (e) => setInfRegister({ ...registerState, [e.name]: e.value });
+
+  const redirect = useNavigate();
 
   const PSW_MIN = 6;
   const FULL_NAME = 12;
   const regex = /^[a-z0-9._-]+@[a-z0-9]+\.com$/;
-  const isValidForm = () => registerState.psw.length > PSW_MIN
-    && regex.test(registerState.email) && registerState.userName.length > FULL_NAME;
+
+  const isValidForm = () => registerState.password.length > PSW_MIN
+    && regex.test(registerState.email) && registerState.name.length <= FULL_NAME;
+
+  const sendRegister = async () => {
+    const { name, email, password } = registerState;
+    const statusOK = 201;
+    const dataRegister = await registerNewUser(email, password, name);
+    console.log('🚀 -> dataRegister', dataRegister);
+    if (dataRegister.status === statusOK) {
+      return redirect('/login', { replace: true });
+    } return redirect('/register', { replace: true });
+  };
 
   return (
     <LayoutPage>
@@ -23,7 +36,7 @@ const Register = () => {
         <span>Nome</span>
         <Input
           type="name"
-          name="userName"
+          name="name"
           data-testid="common_register__input-name"
           wsize="100%"
           onChange={ ({ target }) => stateUpdate(target) }
@@ -40,21 +53,21 @@ const Register = () => {
         <span>Senha</span>
         <Input
           type="password"
-          name="psw"
+          name="password"
           data-testid="common_register__input-password"
           wsize="100%"
           onChange={ ({ target }) => stateUpdate(target) }
         />
-        <Link to="/login">
-          <ButtonSD
-            wsize="100%"
-            msize="20px 0 0 0"
-            data-testid="common_register__button-register"
-            disabled={ !isValidForm() }
-          >
-            Cadastrar
-          </ButtonSD>
-        </Link>
+
+        <ButtonSD
+          wsize="100%"
+          msize="20px 0 0 0"
+          data-testid="common_register__button-register"
+          disabled={ !isValidForm() }
+          onClick={ sendRegister }
+        >
+          Cadastrar
+        </ButtonSD>
       </section>
     </LayoutPage>
   );

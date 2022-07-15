@@ -1,6 +1,6 @@
 import useHttp from '../hooks/useHttp';
 
-export default async function logarUser(username, password) {
-  const execLogin = await useHttp.post('/login', { username, password });
+export default async function logarUser(email, password) {
+  const execLogin = await useHttp.post('/login', { email, password });
   return execLogin;
 }

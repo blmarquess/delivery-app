@@ -13,12 +13,11 @@ import AdminUsers from '../../presentation/pages/AdminUsers';
 export default function AppRouter() {
   return (
     <Routes>
+      <Route index path="/" element={ <Navigate to="/login" /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="/login" element={ <Login /> } />
-      <Route path="/" element={ <Navigate to="/login" /> } />
 
       <Route exact path="/" element={ <PrivateRouter /> }>
-
         <Route path="/customer" element={ <UserRouterAuth roleUser="customer" /> }>
           <Route index element={ <CustomerProducts /> } />
           <Route path="products" element={ <CustomerProducts /> } />
@@ -34,7 +33,6 @@ export default function AppRouter() {
           <Route index element={ <AdminUsers /> } />
           <Route path="users" element={ <AdminUsers /> } />
         </Route>
-
       </Route>
 
       <Route path="*" element={ <h1>404 | Pagina não encontrada</h1> } />
