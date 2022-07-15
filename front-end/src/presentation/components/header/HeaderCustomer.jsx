@@ -9,7 +9,7 @@ const navbar = () => (
         <Link to="/customer/products">Produtos</Link>
       </li>
       <li className="btn-orders">
-        <Link to="/Pedidos-Cliente">Meus Pedidos</Link>
+        <Link to="/customer/checkout">Meus Pedidos</Link>
       </li>
     </div>
     <div>

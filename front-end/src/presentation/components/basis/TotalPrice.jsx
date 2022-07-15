@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import Context from '../../../infra/data/contexts/Context';
 import './TotalPrice.css';
 
 export default function TotalPrice() {
-  return <TotalPriceButton>TotalPrice</TotalPriceButton>;
+  const { totalCarPrice } = useContext(Context);
+  return (
+    <TotalPriceButton>{ `R$ ${totalCarPrice.toFixed(2)} `}</TotalPriceButton>
+  );
 }
 
 export const TotalPriceButton = styled.button`align-self: center;
