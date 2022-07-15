@@ -12,7 +12,6 @@
 
 .btn-products {
   align-items: center;
-  background: rgb(47, 193, 140);
   display: flex;
   font-family: Roboto , sans-serif;
   font-size: 28px;
@@ -28,8 +27,13 @@
   top: 0;
 }
 
-.btn-products a {
+.active-page {
+  background: rgb(47, 193, 140);
   color: #001813;
+}
+
+.btn-products a {
+  color: white;
   text-decoration: none;
 }
 
