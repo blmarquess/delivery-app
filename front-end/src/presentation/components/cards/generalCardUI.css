@@ -1,0 +1,10 @@
+.UI {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: space-around;
+  left: 80px;
+  position: absolute;
+  top: 120px;
+  width: 90%;
+}
