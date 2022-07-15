@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import PrivateRouter from './PrivateRouter';
 import UserRouterAuth from './UserRouterAuth';
@@ -15,19 +15,24 @@ export default function AppRouter() {
     <Routes>
       <Route path="/register" element={ <Register /> } />
       <Route path="/login" element={ <Login /> } />
+      <Route path="/" element={ <Navigate to="/login" /> } />
+
       <Route exact path="/" element={ <PrivateRouter /> }>
 
         <Route path="/customer" element={ <UserRouterAuth roleUser="customer" /> }>
-          <Route index path="products" element={ <CustomerProducts /> } />
+          <Route index element={ <CustomerProducts /> } />
+          <Route path="products" element={ <CustomerProducts /> } />
           <Route path="orders" element={ <h1>orders</h1> } />
         </Route>
 
         <Route path="/seller" element={ <UserRouterAuth roleUser="seller" /> }>
-          <Route index path="orders" element={ <SellerOrder /> } />
+          <Route index element={ <SellerOrder /> } />
+          <Route path="orders" element={ <SellerOrder /> } />
         </Route>
 
         <Route path="/admin" element={ <UserRouterAuth roleUser="admin" /> }>
-          <Route index path="users" element={ <AdminUsers /> } />
+          <Route index element={ <AdminUsers /> } />
+          <Route path="users" element={ <AdminUsers /> } />
         </Route>
 
       </Route>
