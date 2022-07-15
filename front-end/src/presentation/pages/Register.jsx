@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import validateEmail from '../../main/useCases/validateEmail';
 import validatePassword from '../../main/useCases/validatePassword';
 import registerNewUser from '../../main/useCases/registerNewUser';
-import redirectToPath from '../../main/useCases/redirectToPath';
+import RedirectToPath from '../../main/useCases/redirectToPath';
 
 import LayoutPage from '../layout/LayoutPage';
 import Input from '../components/basis/Input';
@@ -23,8 +23,8 @@ export default function Register() {
     const statusOK = 201;
     const dataRegister = await registerNewUser(email, password, name);
     if (dataRegister.status === statusOK) {
-      return redirectToPath('/login');
-    } return redirectToPath('/register');
+      return RedirectToPath('/login');
+    } return RedirectToPath('/register');
   };
 
   return (
