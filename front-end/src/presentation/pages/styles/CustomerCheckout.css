@@ -1,7 +1,74 @@
 .checkout-page {
+  display: flex;
+  flex-direction: column;
   height: 1000px;
   margin-top: 100px;
   padding: 100px;
+}
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 0.2rem black;
+}
+
+.list-titles {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  font-size: 15px;
+}
+
+.list-titles h2 {
+  text-align: center;
+}
+
+.title-item {
+  width: 5%;
+}
+
+.title-description {
+  width: 80%;
+}
+
+.title-quantity {
+  width: 20%;
+}
+
+.title-unit-value {
+  width: 15%;
+}
+
+.title-sub-total {
+  width: 10%;
+}
+
+.title-remove {
+  width: 10%;
+}
+
+.products-list {
+  list-style: none;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  font-size: 30px;
+}
+
+.products-list li {
+  height: 70px;
+  line-height: 50px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 0.2rem black;
 }
 
 .checkout-table {
@@ -10,56 +77,37 @@
   width: 100%;
 }
 
-.checkout-table th {
-  font-size: 20px;
-  font-weight: 300;
-  padding-bottom: 20px;
-}
-
-.checkout-product {
-  margin: 40px;
-}
-
-.checkout-product td {
-  font-size: 30px;
-  font-weight: 400;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 100px;
-  padding: 10px;
-}
-
-.checkout-product tr {
-  margin-bottom: 10px;
-}
-
 .item {
   background-color: rgb(47, 193, 140);
   border-radius: 10px 0 0 10px;
   text-align: center;
+  width: 10%;
 }
 
 .description {
   background-color: rgb(228, 228, 228);
-  width: 50%;
+  width: 85%;
 }
 
 .quantity {
   background-color: rgb(3, 107, 82);
   color: white;
   text-align: center;
+  width: 20%;
 }
 
 .unit-value {
   background-color: rgb(66, 25, 129);
   color: white;
   text-align: center;
+  width: 15%;
 }
 
 .sub-total {
   background-color: rgb(5, 108, 249);
   color: white;
   text-align: center;
+  width: 10%;
 }
 
 .remove-item {
@@ -75,4 +123,47 @@
   color: white;
   font-size: 30px;
   font-weight: 300;
+  cursor: pointer;
 }
+
+.address-details {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 30px;
+  box-shadow: 0 0 0.2rem black;
+}
+
+.seller-select {
+  padding: 10px;
+  font-size: 20px;
+  margin-top: 10px;
+  width: 300px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.address-input {
+  padding: 10px;
+  font-size: 20px;
+  margin-top: 10px;
+  width: 600px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.input-number {
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 20px;
+  width: 300px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.seller {
+  margin-top: 10px;
+}
+
+
