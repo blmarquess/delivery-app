@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`* {
   body {
     height: 100%;
     width: 100%;
+    font-family: Roboto, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', sans-serif;
   }
 
   .footer {
