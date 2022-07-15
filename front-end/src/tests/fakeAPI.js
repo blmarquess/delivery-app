@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const DB_USERS = require('./mock/login');
 
 const api = express();
 const RES_OK = 200;
@@ -46,4 +47,13 @@ api.post('/validate', (req, res) => {
   }
 });
 
-api.listen(PORT_API, () => console.log('Fake API running on port 3009'));
+api.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const hasUserInDB = DB_USERS
+    .find((user) => user.username === username && user.password === password);
+  if (hasUserInDB) {
+    return res.status(RES_OK).json(hasUserInDB);
+  } return res.status(RES_BAD).json({ message: 'Invalid email or password' });
+});
+
+api.listen(PORT_API, () => console.log('Fake API running on port ', PORT_API));
