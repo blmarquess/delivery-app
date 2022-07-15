@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Context from '../../main/context/Context';
+import Context from '../../infra/data/contexts/Context';
 import TotalPrice from '../components/basis/TotalPrice';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';

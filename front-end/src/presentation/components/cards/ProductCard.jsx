@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Context from '../../../main/context/Context';
+import Context from '../../../infra/data/contexts/Context';
 import { getProductsDB } from '../../../main/hooks/useHttp';
 import './ProductCard.css';
 
