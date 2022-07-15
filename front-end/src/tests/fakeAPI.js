@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const DB_USERS = require('./mock/login');
+const DB_PRODUCTS = require('./mock/products');
 
 const api = express();
 const RES_OK = 200;
@@ -55,5 +56,7 @@ api.post('/login', (req, res) => {
     return res.status(RES_OK).json(hasUserInDB);
   } return res.status(RES_BAD).json({ message: 'Invalid email or password' });
 });
+
+api.get('/products', (_req, res) => res.status(RES_OK).json(DB_PRODUCTS));
 
 api.listen(PORT_API, () => console.log('Fake API running on port ', PORT_API));
