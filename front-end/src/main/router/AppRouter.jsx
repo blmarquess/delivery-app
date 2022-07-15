@@ -10,6 +10,7 @@ import CustomerProducts from '../../presentation/pages/CustomerProducts';
 import SellerOrder from '../../presentation/pages/SellerOrders';
 import AdminUsers from '../../presentation/pages/AdminUsers';
 import CustomerCheckout from '../../presentation/pages/CustomerCheckout';
+import CustomerOrders from '../../presentation/pages/CustomerOrder';
 
 export default function AppRouter() {
   return (
@@ -23,7 +24,7 @@ export default function AppRouter() {
           <Route index element={ <CustomerProducts /> } />
           <Route path="checkout" element={ <CustomerCheckout /> } />
           <Route path="products" element={ <CustomerProducts /> } />
-          <Route path="orders" element={ <h1>orders</h1> } />
+          <Route path="orders" element={ <CustomerOrders /> } />
         </Route>
 
         <Route path="/seller" element={ <UserRouterAuth roleUser="seller" /> }>
