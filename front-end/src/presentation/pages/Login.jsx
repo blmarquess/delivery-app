@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import validateEmail from '../../main/useCases/validateEmail';
 import validatePassword from '../../main/useCases/validatePassword';
 import saveUserDataInLocalStorage from '../../main/useCases/saveUserDataInLocalStorage';
+import redirectToPath from '../../main/useCases/redirectToPath';
 
 import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
@@ -14,8 +15,6 @@ export default function Login() {
   const [loginState, setInfLogin] = useState({ user: '', psw: '' });
   const stateUpdate = (e) => setInfLogin({ ...loginState, [e.name]: e.value });
 
-  const redirect = useNavigate();
-
   const isValidForm = () => validatePassword(loginState.psw)
     && validateEmail(loginState.user);
 
@@ -25,7 +24,7 @@ export default function Login() {
     saveUserDataInLocalStorage(dataLogin.data);
     if (dataLogin.status === statusOK) {
       const rotaUserByRole = dataLogin.data.role;
-      return redirect(`/${rotaUserByRole}`, { replace: true });
+      return redirectToPath(`/${rotaUserByRole}`, { replace: true });
     }
   };
 

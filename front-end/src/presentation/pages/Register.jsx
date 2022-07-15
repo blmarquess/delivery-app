@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import validateEmail from '../../main/useCases/validateEmail';
 import validatePassword from '../../main/useCases/validatePassword';
 import registerNewUser from '../../main/useCases/registerNewUser';
+import redirectToPath from '../../main/useCases/redirectToPath';
 
 import LayoutPage from '../layout/LayoutPage';
 import Input from '../components/basis/Input';
@@ -12,8 +12,6 @@ import ButtonSD from '../components/basis/ButtonSD';
 export default function Register() {
   const [registerState, setInfRegister] = useState({ name: '', email: '', password: '' });
   const stateUpdate = (e) => setInfRegister({ ...registerState, [e.name]: e.value });
-
-  const redirect = useNavigate();
 
   const FULL_NAME = 12;
 
@@ -26,8 +24,8 @@ export default function Register() {
     const dataRegister = await registerNewUser(email, password, name);
     console.log('🚀 -> dataRegister', dataRegister);
     if (dataRegister.status === statusOK) {
-      return redirect('/login', { replace: true });
-    } return redirect('/register', { replace: true });
+      return redirectToPath('/login', { replace: true });
+    } return redirectToPath('/register', { replace: true });
   };
 
   return (
