@@ -51,4 +51,6 @@ api.post('/register', (req, res) => {
   }
 });
 
+api.use(express.static('public'));
+
 api.listen(PORT_API, () => console.log('Fake API running on port ', PORT_API));
