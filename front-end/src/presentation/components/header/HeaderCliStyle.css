@@ -1,0 +1,147 @@
+.div1 {
+  background-color: rgb(3, 107, 82);
+  display: flex;
+  flex-direction: row;
+  height: 75px;
+  justify-content: space-between;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.btn-products {
+  align-items: center;
+  background: rgb(47, 193, 140);
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  height: 75px;
+  justify-content: center;
+  left: 0%;
+  line-height: 33px;
+  position: absolute;
+  right: 80.89%;
+  text-decoration: none;
+  top: 0;
+}
+
+.btn-products a {
+  color: #001813;
+  text-decoration: none;
+}
+
+.btn-orders {
+  align-items: center;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  height: 75px;
+  justify-content: center;
+  left: 19.06%;
+  line-height: 33px;
+  position: absolute;
+  right: 61.82%;
+  text-decoration: none;
+  top: 0;
+}
+
+.btn-orders a {
+  color: white;
+  text-decoration: none;
+}
+
+.btn-user {
+  align-items: center;
+  background: #421981;
+  bottom: 0.48%;
+  color: white;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  height: 75px;
+  justify-content: center;
+  left: 71.93%;
+  line-height: 33px;
+  position: absolute;
+  right: 0%;
+  text-decoration: none;
+  top: 0%;
+  width: 20%;
+}
+
+.btn-exit {
+  align-items: center;
+  background: rgb(5, 108, 249);
+  color: white;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  height: 75px;
+  justify-content: center;
+  left: 90.62%;
+  line-height: 33px;
+  position: absolute;
+  right: 0%;
+  text-decoration: none;
+  top: 0;
+}
+
+.btn-exit a {
+  color: white;
+  text-decoration: none;
+}
+
+.btn-seller-product {
+  align-items: center;
+  background: rgb(47, 193, 140);
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  height: 75px;
+  justify-content: center;
+  left: 0%;
+  line-height: 33px;
+  position: absolute;
+  right: 80.89%;
+  text-decoration: none;
+  top: 0;
+}
+
+.btn-seller-product a {
+  color: black;
+  text-decoration: none;
+}
+
+.btn-admin-users {
+  align-items: center;
+  background: rgb(47, 193, 140);
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  height: 75px;
+  justify-content: center;
+  left: 0%;
+  line-height: 33px;
+  position: absolute;
+  right: 80.89%;
+  text-decoration: none;
+  top: 0;
+}
+
+.btn-admin-users a {
+  color: #001813;
+  text-decoration: none;
+}
