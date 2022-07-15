@@ -6,7 +6,7 @@ import ButtonSD from '../components/basis/ButtonSD';
 import LayoutPage from '../layout/LayoutPage';
 import logarUser from '../../main/useCases/logarUser';
 
-const Login = () => {
+export default function Login() {
   const [loginState, setInfLogin] = useState({ user: '', psw: '' });
   const stateUpdate = (e) => setInfLogin({ ...loginState, [e.name]: e.value });
 
@@ -76,6 +76,4 @@ const Login = () => {
       </section>
     </LayoutPage>
   );
-};
-
-export default Login;
+}

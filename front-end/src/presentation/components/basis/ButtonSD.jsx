@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const ButtonSD = styled.button`align-self: center;
-  background: ${({ bgcolor }) => bgcolor || '#036B52'};
+  background: ${(props) => props.bgcolor || '#036B52'};
   border: solid 1px rgb(211, 219, 213);
   border-radius: 0.3rem;
   bottom: ${(props) => props.bottom || '0'};
-  color: ${({ textcolor }) => textcolor || '#fafaf9'};
+  color: ${(props) => props.textcolor || '#fafaf9'};
   cursor: pointer;
-  font-size: ${({ fontesize }) => fontesize || '22px'};
+  font-size: ${(props) => props.fontesize || '22px'};
   font-weight: 600;
   height: 40px;
   left: ${(props) => props.left || 'none'};

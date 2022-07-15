@@ -6,7 +6,7 @@ import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
 import registerNewUser from '../../main/useCases/registerNewUser';
 
-const Register = () => {
+export default function Register() {
   const [registerState, setInfRegister] = useState({ name: '', email: '', password: '' });
   const stateUpdate = (e) => setInfRegister({ ...registerState, [e.name]: e.value });
 
@@ -71,6 +71,4 @@ const Register = () => {
       </section>
     </LayoutPage>
   );
-};
-
-export default Register;
+}
