@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import validateEmail from '../../main/useCases/validateEmail';
+import validatePassword from '../../main/useCases/validatePassword';
+import saveUserDataInLocalStorage from '../../main/useCases/saveUserDataInLocalStorage';
+
 import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
 import LayoutPage from '../layout/LayoutPage';
@@ -11,21 +15,14 @@ export default function Login() {
   const stateUpdate = (e) => setInfLogin({ ...loginState, [e.name]: e.value });
 
   const redirect = useNavigate();
-  const PSW_MIN = 6;
-  const dotCom = /^[a-z0-9._-]+@[a-z0-9]+\.com$/;
-  const isValidForm = () => loginState.psw.length > PSW_MIN
-    && dotCom.test(loginState.user);
 
-  const setUserLocalState = (userData) => {
-    localStorage.setItem('authToken', JSON.stringify(userData.token));
-    localStorage.setItem('userRole', JSON.stringify(userData.role));
-    localStorage.setItem('userData', JSON.stringify(userData));
-  };
+  const isValidForm = () => validatePassword(loginState.psw)
+    && validateEmail(loginState.user);
 
   const handleSubmit = async () => {
     const statusOK = 200;
     const dataLogin = await logarUser(loginState.user, loginState.psw);
-    setUserLocalState(dataLogin.data);
+    saveUserDataInLocalStorage(dataLogin.data);
     if (dataLogin.status === statusOK) {
       const rotaUserByRole = dataLogin.data.role;
       return redirect(`/${rotaUserByRole}`, { replace: true });
