@@ -13,7 +13,7 @@ const userSeller = {
 };
 
 const userCustomer = {
-  username: 'customer@customer.mail',
+  username: 'customer@customer.com',
   password: 'customer1234',
   role: 'customer',
   token: 'jwt-customer-token',
