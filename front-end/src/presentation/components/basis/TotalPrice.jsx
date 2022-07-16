@@ -4,9 +4,9 @@ import Context from '../../../infra/data/contexts/Context';
 import './TotalPrice.css';
 
 export default function TotalPrice() {
-  const { totalCarPrice } = useContext(Context);
+  const { cart } = useContext(Context);
   return (
-    <TotalPriceButton>{ `R$ ${totalCarPrice.toFixed(2)} `}</TotalPriceButton>
+    <TotalPriceButton>{ `R$ ${cart.totalCarPrice.toFixed(2)} `}</TotalPriceButton>
   );
 }
 
