@@ -6,15 +6,6 @@ import './styles/CustomerCheckout.css';
 
 export default function CustomerCheckout() {
   const { productsInCar } = useContext(Context);
-  const quantity = [];
-  productsInCar.forEach((product) => {
-    for (let i = 0; i < productsInCar.length; +1) {
-      if (product.name === productsInCar[i].name) {
-        quantity.push(product);
-      }
-    }
-  });
-  console.log(quantity);
 
   return (
     <div className="checkout-page">
