@@ -8,6 +8,7 @@ const DB_USERS = JSON
     .readFileSync(path
       .resolve(__dirname, './mock/login.json'), 'utf8'));
 const DB_PRODUCTS = require('./mock/products');
+const DB_SELLERS = require('./mock/sellers');
 
 const api = express();
 const RES_OK = 200;
@@ -32,6 +33,8 @@ api.post('/login', (req, res) => {
 
 api.get('/products', (_req, res) => res.status(RES_OK).json(DB_PRODUCTS));
 
+api.get('/customer/checkout', (_req, res) => res.status(RES_OK).json(DB_SELLERS));
+
 api.post('/register', (req, res) => {
   const { email, password, name } = req.body;
   try {
@@ -50,5 +53,7 @@ api.post('/register', (req, res) => {
     return res.status(RES_BAD).json({ message: 'Error on register' });
   }
 });
+
+api.use(express.static('public'));
 
 api.listen(PORT_API, () => console.log('Fake API running on port ', PORT_API));

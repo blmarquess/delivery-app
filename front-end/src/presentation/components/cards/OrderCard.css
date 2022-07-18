@@ -1,0 +1,96 @@
+.orders {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 50px;
+}
+
+.card-order {
+  background: #eaf1ef;
+  border: 1px solid #b1c2be;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  height: 120px;
+  margin: 20px;
+  width: 550px;
+}
+
+.card-order-box {
+  display: flex;
+  flex-direction: row;
+  height: 70%;
+  justify-content: space-between;
+}
+
+.order-id-box {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 118px;
+  justify-content: center;
+  left: 1px;
+  top: 1px;
+  width: 150px;
+}
+
+.address {
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.CEP {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.status {
+  align-items: center;
+  border-radius: 10px;
+  color: #001813;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 700;
+  justify-content: center;
+  text-align: center;
+  width: 250px;
+}
+
+.entregue {
+  background: rgba(0, 204, 155, 0.75);
+}
+
+.pendente {
+  background: rgba(204, 184, 0, 0.75);
+}
+
+.preparando {
+  background: rgba(102, 204, 0, 0.75);
+}
+
+.data-n-price {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 130px;
+}
+
+.data {
+  align-items: center;
+  background: rgba(242, 255, 252, 0.75);
+  border-radius: 10px;
+  color: #001813;
+  display: flex;
+  font-family: Roboto , sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  height: 30%;
+  justify-content: center;
+  text-align: center;
+  width: 90%;
+}

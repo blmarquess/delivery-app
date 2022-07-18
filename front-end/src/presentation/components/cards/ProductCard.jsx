@@ -3,13 +3,9 @@ import Context from '../../../infra/data/contexts/Context';
 import { getProductsDB } from '../../../main/hooks/useHttp';
 import './ProductCard.css';
 
-const Products = () => {
+export default function Products() {
   const [products, setProducts] = useState([]);
-  const {
-    totalCarPrice,
-    setTotalCarPrice,
-    setProductsInCar,
-  } = useContext(Context);
+  const { addCartItem, removeCartItem, Cart } = useContext(Context);
 
   useEffect(() => {
     async function getAllProducts() {
@@ -19,19 +15,12 @@ const Products = () => {
     getAllProducts();
   }, []);
 
-  useEffect(() => {
-    if (totalCarPrice < 0) {
-      setTotalCarPrice(0);
-    }
-  }, [setTotalCarPrice, totalCarPrice]);
-
   function removeFromCar(product) {
-    setTotalCarPrice((prev) => prev - parseFloat(product.price));
+    return removeCartItem(product.id);
   }
 
   function addToCar(product) {
-    setTotalCarPrice((prev) => prev + parseFloat(product.price));
-    setProductsInCar((prev) => [...prev, product]);
+    return addCartItem(product);
   }
 
   return (
@@ -53,7 +42,7 @@ const Products = () => {
                 <button
                   className="btn-minus"
                   type="button"
-                  disabled={ totalCarPrice <= 0 }
+                  disabled={ !Cart?.productsInCar.length < 1 }
                   onClick={ () => removeFromCar(product) }
                 >
                   -
@@ -73,6 +62,4 @@ const Products = () => {
       }
     </div>
   );
-};
-
-export default Products;
+}
