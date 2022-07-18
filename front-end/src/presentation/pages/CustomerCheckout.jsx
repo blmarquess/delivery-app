@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../infra/data/contexts/Context';
+import { getSellersNameDB } from '../../main/hooks/useHttp';
 import TotalPrice from '../components/basis/TotalPrice';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';
@@ -7,15 +8,15 @@ import './styles/CustomerCheckout.css';
 export default function CustomerCheckout() {
   const { cart, removeCartItem } = useContext(Context);
   const [carProducts, setCarProducts] = useState([]);
-  // const [sellersNames, setSellersNames] = useState([]);
+  const [sellersNames, setSellersNames] = useState([]);
 
-  // useEffect(() => {
-  //   async function getSellersName() {
-  //     const sellers = await getSellersName();
-  //     setSellersNames(sellers);
-  //   }
-  //   getSellersName();
-  // }, []);
+  useEffect(() => {
+    async function getSellersName() {
+      const sellers = await getSellersNameDB();
+      setSellersNames(sellers);
+    }
+    getSellersName();
+  }, []);
 
   useEffect(() => {
     setCarProducts(cart.productsInCar);
@@ -62,11 +63,11 @@ export default function CustomerCheckout() {
         <label htmlFor="seller">
           <h3>P. Vendedora Responsável</h3>
           <select className="seller-select" name="" id="seller">
-            {/* {
-              sellersNames.map((name) => (
-                <option key={ name } value={ name }>{name}</option>
+            {
+              sellersNames.map((seller) => (
+                <option key={ seller.name } value={ seller.name }>{seller.name}</option>
               ))
-            } */}
+            }
           </select>
         </label>
         <label htmlFor="address">
