@@ -28,6 +28,13 @@ export default function Login() {
     }
   };
 
+  React.useEffect(() => {
+    const userIsLogged = localStorage.getItem('userRole');
+    if (userIsLogged) {
+      return RedirectToPath(`/${JSON.parse(userIsLogged)}`);
+    }
+  }, [RedirectToPath]);
+
   return (
     <LayoutPage>
       <section>

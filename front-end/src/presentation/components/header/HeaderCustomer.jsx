@@ -1,8 +1,15 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './HeaderCliStyle.css';
+import logoffExecute from '../../../main/useCases/logoffExecute';
 
 export default function Navbar() {
+  const RedirectToPath = useNavigate();
+  function logout() {
+    logoffExecute();
+    return RedirectToPath('/login');
+  }
   return (
     <div className="div1">
       <div>
@@ -18,7 +25,9 @@ export default function Navbar() {
           <p> Ciclano da Silva</p>
         </li>
         <li className="btn-exit">
-          <Link to="/Login">Sair</Link>
+          <button type="button" onClick={ logout }>
+            Sair
+          </button>
         </li>
       </div>
     </div>
