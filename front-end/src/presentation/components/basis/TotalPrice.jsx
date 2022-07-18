@@ -1,15 +1,12 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Context from '../../../infra/data/contexts/Context';
 import './TotalPrice.css';
 
 export default function TotalPrice() {
-  const { totalCarPrice } = useContext(Context);
+  const { cart } = useContext(Context);
   return (
-    <Link to="/customer/checkout">
-      <TotalPriceButton>{ `R$ ${totalCarPrice.toFixed(2)} `}</TotalPriceButton>
-    </Link>
+    <TotalPriceButton>{ `R$ ${cart.totalCarPrice.toFixed(2)} `}</TotalPriceButton>
   );
 }
 
