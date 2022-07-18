@@ -18,3 +18,8 @@ export async function getProductsDB() {
   const products = await useHttp.get('/products');
   return products.data;
 }
+
+export async function getSellersName() {
+  const sellers = await useHttp.get('/costumer/checkout');
+  return sellers.data;
+}
