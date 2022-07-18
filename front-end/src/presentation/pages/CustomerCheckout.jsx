@@ -1,12 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../infra/data/contexts/Context';
 import TotalPrice from '../components/basis/TotalPrice';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';
 
 export default function CustomerCheckout() {
-  const { productsInCar } = useContext(Context);
+  const { cart, removeCartItem } = useContext(Context);
+  const [carProducts, setCarProducts] = useState([]);
+  // const [sellersNames, setSellersNames] = useState([]);
 
+  // useEffect(() => {
+  //   async function getSellersName() {
+  //     const sellers = await getSellersName();
+  //     setSellersNames(sellers);
+  //   }
+  //   getSellersName();
+  // }, []);
+
+  useEffect(() => {
+    setCarProducts(cart.productsInCar);
+  }, [cart]);
+
+  function removeFromCar(id) {
+    return removeCartItem(id);
+  }
   return (
     <div className="checkout-page">
       <HeaderCustomer />
@@ -21,7 +38,7 @@ export default function CustomerCheckout() {
           <h2 className="title-remove">Remover</h2>
         </div>
         {
-          productsInCar.map((product) => (
+          carProducts.map((product) => (
             <ul key={ product.name } className="products-list">
               <li className="item">1</li>
               <li className="description">{ product.name }</li>
@@ -29,7 +46,12 @@ export default function CustomerCheckout() {
               <li className="unit-value">{ `R$ ${product.price}` }</li>
               <li className="sub-total">asdddd</li>
               <li className="remove-item">
-                <button type="button">Remover</button>
+                <button
+                  type="button"
+                  onClick={ () => removeFromCar(product.id) }
+                >
+                  Remover
+                </button>
               </li>
             </ul>
           ))
@@ -40,8 +62,11 @@ export default function CustomerCheckout() {
         <label htmlFor="seller">
           <h3>P. Vendedora Responsável</h3>
           <select className="seller-select" name="" id="seller">
-            <option value="">Zé Pequeno</option>
-            <option value="">Homer Simpson</option>
+            {/* {
+              sellersNames.map((name) => (
+                <option key={ name } value={ name }>{name}</option>
+              ))
+            } */}
           </select>
         </label>
         <label htmlFor="address">
