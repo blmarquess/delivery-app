@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import validateEmail from '../../main/useCases/validateEmail';
 import validatePassword from '../../main/useCases/validatePassword';
 import saveUserDataInLocalStorage from '../../main/useCases/saveUserDataInLocalStorage';
-import redirectToPath from '../../main/useCases/redirectToPath';
 
 import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
@@ -14,6 +13,7 @@ import logarUser from '../../main/useCases/logarUser';
 export default function Login() {
   const [loginState, setInfLogin] = useState({ user: '', psw: '' });
   const stateUpdate = (e) => setInfLogin({ ...loginState, [e.name]: e.value });
+  const RedirectToPath = useNavigate();
 
   const isValidForm = () => validatePassword(loginState.psw)
     && validateEmail(loginState.user);
@@ -24,9 +24,17 @@ export default function Login() {
     saveUserDataInLocalStorage(dataLogin.data);
     if (dataLogin.status === statusOK) {
       const rotaUserByRole = dataLogin.data.role;
-      return redirectToPath(`/${rotaUserByRole}`);
+      return RedirectToPath(`/${rotaUserByRole}`);
     }
   };
+
+  React.useEffect(() => {
+    const userIsLogged = localStorage.getItem('userData');
+    if (userIsLogged) {
+      const userData = JSON.parse(userIsLogged);
+      return RedirectToPath(`/${userData.role}`);
+    }
+  }, [RedirectToPath]);
 
   return (
     <LayoutPage>
@@ -60,15 +68,14 @@ export default function Login() {
           Entrar
         </ButtonSD>
 
-        <Link to="/register">
-          <ButtonSD
-            wsize="100%"
-            msize="20px 0 0 0"
-            data-testid="common_login__button-register"
-          >
-            Registrar-se
-          </ButtonSD>
-        </Link>
+        <ButtonSD
+          wsize="100%"
+          msize="20px 0 0 0"
+          onClick={ () => RedirectToPath('/register') }
+          data-testid="common_login__button-register"
+        >
+          Registrar-se
+        </ButtonSD>
       </section>
     </LayoutPage>
   );

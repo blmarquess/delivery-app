@@ -1,43 +1,26 @@
-import React, { useEffect, useState, useContext } from 'react';
-import Context from '../../../infra/data/contexts/Context';
+import React, { useEffect, useContext } from 'react';
+import ProductsContext from '../../../infra/data/contexts/Context';
 import { getProductsDB } from '../../../main/hooks/useHttp';
 import './ProductCard.css';
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
-  const {
-    totalCarPrice,
-    setTotalCarPrice,
-    setProductsInCar,
-  } = useContext(Context);
+export default function Products() {
+  const { cart, addProducts, handleChangeInputQtd,
+    addOneItemOnCart, removeOneItemOnCart } = useContext(ProductsContext);
 
   useEffect(() => {
     async function getAllProducts() {
       const productsDB = await getProductsDB();
-      setProducts(productsDB);
+      if (!cart.productsInCar || cart.productsInCar.length === 0) {
+        await addProducts(productsDB);
+      }
     }
     getAllProducts();
-  }, []);
-
-  useEffect(() => {
-    if (totalCarPrice < 0) {
-      setTotalCarPrice(0);
-    }
-  }, [setTotalCarPrice, totalCarPrice]);
-
-  function removeFromCar(product) {
-    setTotalCarPrice((prev) => prev - parseFloat(product.price));
-  }
-
-  function addToCar(product) {
-    setTotalCarPrice((prev) => prev + parseFloat(product.price));
-    setProductsInCar((prev) => [...prev, product]);
-  }
+  }, [cart, addProducts]);
 
   return (
     <div className="UI">
       {
-        products.map((product) => (
+        cart?.productsInCar.map((product) => (
           <div key={ product.id } className="card">
             <div className="img-price">
               <p className="price">{ product.price }</p>
@@ -53,16 +36,25 @@ const Products = () => {
                 <button
                   className="btn-minus"
                   type="button"
-                  disabled={ totalCarPrice <= 0 }
-                  onClick={ () => removeFromCar(product) }
+                  disabled={ product.qtd < 1 }
+                  onClick={ () => removeOneItemOnCart(product.id) }
                 >
                   -
                 </button>
-                <p className="counter-number">0</p>
+                <input
+                  type="text"
+                  name={ product.id }
+                  className="counter-number"
+                  onChange={ async ({ target: { value, name } }) => {
+                    await handleChangeInputQtd(name, value);
+                    console.log(value, name);
+                  } }
+                  value={ product.qtd }
+                />
                 <button
                   className="btn-plus"
                   type="button"
-                  onClick={ () => addToCar(product) }
+                  onClick={ () => addOneItemOnCart(product.id) }
                 >
                   +
                 </button>
@@ -73,6 +65,4 @@ const Products = () => {
       }
     </div>
   );
-};
-
-export default Products;
+}

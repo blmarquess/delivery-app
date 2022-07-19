@@ -22,7 +22,7 @@ export default function AppRouter() {
 
       <Route exact path="/" element={ <PrivateRouter /> }>
         <Route path="/customer" element={ <UserRouterAuth roleUser="customer" /> }>
-          <Route index element={ <CustomerProducts /> } />
+          <Route index element={ <Navigate to="products" /> } />
           <Route path="checkout" element={ <CustomerCheckout /> } />
           <Route path="products" element={ <CustomerProducts /> } />
           <Route path="orders" element={ <CustomerOrders /> } />
@@ -30,12 +30,12 @@ export default function AppRouter() {
         </Route>
 
         <Route path="/seller" element={ <UserRouterAuth roleUser="seller" /> }>
-          <Route index element={ <SellerOrder /> } />
+          <Route index element={ <Navigate to="orders" /> } />
           <Route path="orders" element={ <SellerOrder /> } />
         </Route>
 
         <Route path="/admin" element={ <UserRouterAuth roleUser="admin" /> }>
-          <Route index element={ <AdminUsers /> } />
+          <Route index element={ <Navigate to="users" /> } />
           <Route path="users" element={ <AdminUsers /> } />
         </Route>
       </Route>
