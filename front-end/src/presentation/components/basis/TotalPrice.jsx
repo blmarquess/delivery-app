@@ -8,7 +8,13 @@ export default function TotalPrice() {
   const { cart } = useContext(Context);
   return (
     <Link to="/customer/checkout">
-      <TotalPriceButton>{ `R$ ${cart.totalCarPrice.toFixed(2)} `}</TotalPriceButton>
+      <TotalPriceButton
+        data-testid={ window.location.pathname.includes('/customer/checkout')
+          ? 'customer_checkout__element-order-total-price'
+          : 'customer_products__button-cart' }
+      >
+        { `R$ ${cart.totalCarPrice.toFixed(2)} `}
+      </TotalPriceButton>
     </Link>
   );
 }
@@ -18,7 +24,7 @@ export const TotalPriceButton = styled.button`align-self: center;
   border: none;
   box-shadow: 0 0 0.3rem black;
   border-radius: 0.3rem;
-  position: fixed;
+  position: ${(props) => (props.position ? 'relative' : 'fixed')};
   bottom: ${(props) => props.bottom || '5%'};
   color: ${({ textcolor }) => textcolor || 'white'};
   cursor: pointer;
@@ -29,7 +35,6 @@ export const TotalPriceButton = styled.button`align-self: center;
   margin: ${(props) => props.msize || '0'};
   outline: none;
   padding: 0 1rem;
-  position: ${(props) => props.position || 'fixed'};
   right: ${(props) => props.right || 'none'};
   text-align: center;
   top: ${(props) => props.top || 'none'};
