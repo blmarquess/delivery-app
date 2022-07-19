@@ -127,12 +127,20 @@
 }
 
 .address-details {
+  align-items: center;
   border-radius: 10px;
   box-shadow: 0 0 0.2rem black;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin-top: 30px;
   padding: 20px;
+}
+
+.info-inputs {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .seller-select {
@@ -164,5 +172,18 @@
 
 .seller {
   margin-top: 10px;
+}
+
+.finish-order {
+  background-color: rgb(3, 107, 82);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  height: 70px;
+  margin-top: 40px;
+  width: 50%;
 }
 

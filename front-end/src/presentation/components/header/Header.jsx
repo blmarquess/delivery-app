@@ -1,5 +1,4 @@
 import React from 'react';
-import RedirectToPath from '../../../main/useCases/redirectToPath';
 
 export default function Header() {
   return (
