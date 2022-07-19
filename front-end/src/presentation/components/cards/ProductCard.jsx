@@ -18,13 +18,29 @@ export default function Products() {
   }, [cart, addProducts]);
 
   return (
-    <div className="UI">
+    <div
+      className="UI"
+      role="button"
+      tabIndex={ 0 }
+      onKeyDown={ () => {} }
+      onClick={ ({ target }) => console.log(target) }
+    >
       {
         cart?.productsInCar.map((product) => (
           <div key={ product.id } className="card">
             <div className="img-price">
-              <p className="price">{ product.price }</p>
-              <img className="img" src={ product.url_image } alt="cerva" />
+              <p
+                className="price"
+                data-testid={ `customer_products__element-card-price-${product.id}` }
+              >
+                { `RS ${ product.price }` }
+              </p>
+              <img
+                className="img"
+                src={ product.url_image }
+                alt={ product.name }
+                data-testid={ `customer_products__img-card-bg-image-${product.id}` }
+              />
             </div>
             <div className="box-counter">
               <div className="product-name">
@@ -35,6 +51,7 @@ export default function Products() {
               <div className="counter">
                 <button
                   className="btn-minus"
+                  data-testid={ `customer_products__button-card-rm-item-${product.id}` }
                   type="button"
                   disabled={ product.qtd < 1 }
                   onClick={ () => removeOneItemOnCart(product.id) }
@@ -45,15 +62,16 @@ export default function Products() {
                   type="text"
                   name={ product.id }
                   className="counter-number"
-                  onChange={ async ({ target: { value, name } }) => {
-                    await handleChangeInputQtd(name, value);
-                    console.log(value, name);
+                  data-testid={ `customer_products__input-card-quantity-${product.id}` }
+                  onChange={ ({ target: { value, name } }) => {
+                    handleChangeInputQtd(name, value);
                   } }
                   value={ product.qtd }
                 />
                 <button
                   className="btn-plus"
                   type="button"
+                  data-testid={ `customer_products__button-card-add-item-${product.id}` }
                   onClick={ () => addOneItemOnCart(product.id) }
                 >
                   +
