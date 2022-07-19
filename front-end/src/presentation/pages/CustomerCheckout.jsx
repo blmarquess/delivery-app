@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../infra/data/contexts/Context';
 import { getSellersNameDB } from '../../main/hooks/useHttp';
-import TotalPrice from '../components/basis/TotalPrice';
+import ButtonSD from '../components/basis/ButtonSD';
+// import TotalPrice from '../components/basis/TotalPrice';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';
 
 export default function CustomerCheckout() {
-  const { cart, removeCartItem } = useContext(Context);
+  const { cart, removeOneItemOnCart } = useContext(Context);
   const [carProducts, setCarProducts] = useState([]);
   const [sellersNames, setSellersNames] = useState([]);
 
@@ -19,11 +20,12 @@ export default function CustomerCheckout() {
   }, []);
 
   useEffect(() => {
-    setCarProducts(cart.productsInCar);
+    const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
+    setCarProducts(filteredProducts);
   }, [cart]);
 
   function removeFromCar(id) {
-    return removeCartItem(id);
+    return removeOneItemOnCart(id);
   }
   return (
     <div className="checkout-page">
@@ -44,40 +46,40 @@ export default function CustomerCheckout() {
               <li
                 className="item"
                 data-testid={
-                  `customer_checkout__element-order-table-item-number-<${i}>`
+                  `customer_checkout__element-order-table-item-number-${i}`
                 }
               >
                 1
               </li>
               <li
                 className="description"
-                data-testid={ `customer_checkout__element-order-table-name-<${i}>` }
+                data-testid={ `customer_checkout__element-order-table-name-${i}` }
               >
                 { product.name }
               </li>
               <li
                 className="quantity"
-                data-testid={ `customer_checkout__element-order-table-quantity-<${i}>` }
+                data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
               >
-                asdasd
+                {product.qtd}
               </li>
               <li
                 className="unit-value"
-                data-testid={ `customer_checkout__element-order-table-unit-price-<${i}>` }
+                data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
               >
                 { `R$ ${product.price}` }
               </li>
               <li
                 className="sub-total"
-                data-testid={ `customer_checkout__element-order-table-sub-total-<${i}>` }
+                data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
               >
-                asdddd
+                { `R$ ${product.subTotal}` }
               </li>
               <li className="remove-item">
                 <button
                   type="button"
                   onClick={ () => removeFromCar(product.id) }
-                  data-testid={ `customer_checkout__element-order-table-remove-<${i}>` }
+                  data-testid={ `customer_checkout__element-order-table-remove-${i}` }
                 >
                   Remover
                 </button>
@@ -85,6 +87,15 @@ export default function CustomerCheckout() {
             </ul>
           ))
         }
+        <div>
+          <ButtonSD
+            psize="1.5rem 2rem"
+            radius="10px"
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            {`Total: R$ ${cart.totalCarPrice.toFixed(2)}`}
+          </ButtonSD>
+        </div>
       </div>
       <h1>Detalhes e Endereço para Entrega</h1>
       <div className="address-details">
@@ -131,7 +142,7 @@ export default function CustomerCheckout() {
           FINALIZAR PEDIDO
         </button>
       </div>
-      <TotalPrice />
+      {/* <TotalPrice /> */}
     </div>
   );
 }
