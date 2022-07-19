@@ -99,6 +99,8 @@
 .unit-value {
   background-color: rgb(66, 25, 129);
   color: white;
+  font-size: 55%;
+  font-weight: 600;
   text-align: center;
   width: 15%;
 }
@@ -106,6 +108,8 @@
 .sub-total {
   background-color: rgb(5, 108, 249);
   color: white;
+  font-size: 55%;
+  font-weight: 600;
   text-align: center;
   width: 10%;
 }
@@ -139,6 +143,7 @@
 
 .info-inputs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
 }

@@ -73,7 +73,7 @@ export default function CustomerCheckout() {
                 className="sub-total"
                 data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
               >
-                { `R$ ${product.subTotal}` }
+                { `R$ ${product.subTotal.toFixed(2)}` }
               </li>
               <li className="remove-item">
                 <button
