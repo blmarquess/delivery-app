@@ -1,15 +1,15 @@
 const { Router } = require('express');
-const loginController = require('../controllers/login.controller');
+const userController = require('../controllers/user.controller');
 
 const userRouter = Router();
 
 userRouter.route('/')
-  .get(loginController.list)
-  .post(loginController.create);
+  .get(userController.list)
+  .post(userController.create);
 
 userRouter.route('/:id')
-  .get(loginController.show)
-  .put(loginController.update)
-  .delete(loginController.remove);
+  .get(userController.show)
+  .put(userController.update)
+  .delete(userController.remove);
 
 export default userRouter;
