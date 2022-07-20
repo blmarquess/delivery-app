@@ -1,29 +1,60 @@
 const { DataTypes } = require('sequelize');
 
 const Attributes = {
-  id: { primaryKey: true, type: DataTypes.INTEGER },
-  user_id: { type: DataTypes.INTEGER, foreignKey: true },
-  seller_id: { type: DataTypes.INTEGER, foreignKey: true },
-  total_price: DataTypes.DECIMAL(10, 2),
-  delivery_address: DataTypes.STRING,
-  delivery_number: DataTypes.STRING,
-  sale_date: DataTypes.STRING,
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    foreignKey: true,
+    onDelete: "CASCADE",
+    references: {
+      model: "users",
+      key: "id",
+    },
+  },
+  sellerId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    foreignKey: true,
+    onDelete: "CASCADE",
+    references: {
+      model: "users",
+      key: "id",
+    },
+  },
+  totalPrice: DataTypes.DECIMAL(9, 2),
+  deliveryAddress: DataTypes.STRING,
+  deliveryNumber: DataTypes.STRING,
+  saleDate: {
+    type: DataTypes.DATE,
+    defaultValue: new Date(),
+  },
   status: DataTypes.STRING,
 };
 
 module.exports = (sequelize) => {
-  const Sales = sequelize.define("Sales", Attributes, { tableName: 'sales', timestamps: false });
+  const Sales = sequelize.define(
+    "Sales",
+    Attributes,
+    { tableName: 'sales', timestamps: false, underscore: true },
+  );
 
   Sales.associate = (models) => {
-    Sales.belongsToMany(models.Users, { foreignKey: 'user_id', as: 'user' });
+    Sales.belongsToMany(
+      models.Users,
+      { foreignKey: 'userId', otherKey: 'id', as: 'costumer' },
+    );
   };
 
   Sales.associate = (models) => {
-    Sales.belongsToMany(models.Users, { foreignKey: 'seller_id', as: 'user' });
-  };
-
-  Sales.associate = (models) => {
-    Sales.hasMany(models.SalesProducts, { foreignKey: 'sale_id', as: 'sales_products' });
+    Sales.belongsToMany(
+      models.Users,
+      { foreignKey: 'sellerId', otherKey: 'id', as: 'seller' },
+    );
   };
 
   return Sales;
