@@ -29,6 +29,7 @@
   height: 118px;
   justify-content: center;
   left: 1px;
+  text-decoration: none;
   top: 1px;
   width: 150px;
 }
@@ -54,20 +55,21 @@
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
+  height: 100%;
   justify-content: center;
   text-align: center;
   width: 250px;
 }
 
-.entregue {
+.entregue-card {
   background: rgba(0, 204, 155, 0.75);
 }
 
-.pendente {
+.pendente--card {
   background: rgba(204, 184, 0, 0.75);
 }
 
-.preparando {
+.preparando--card {
   background: rgba(102, 204, 0, 0.75);
 }
 
@@ -93,4 +95,8 @@
   justify-content: center;
   text-align: center;
   width: 90%;
+}
+
+.order-link {
+  text-decoration: none;
 }
