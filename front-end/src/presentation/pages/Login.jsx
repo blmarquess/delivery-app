@@ -61,6 +61,8 @@ export default function Login() {
         <ButtonSD
           wsize="100%"
           msize="20px 0 0 0"
+          psize=" 0.5rem 2rem"
+          radius="0.4rem"
           onClick={ handleSubmit }
           data-testid="common_login__button-login"
           disabled={ !isValidForm() }
@@ -71,6 +73,8 @@ export default function Login() {
         <ButtonSD
           wsize="100%"
           msize="20px 0 0 0"
+          psize=" 0.5rem 2rem"
+          radius="0.4rem"
           onClick={ () => RedirectToPath('/register') }
           data-testid="common_login__button-register"
         >

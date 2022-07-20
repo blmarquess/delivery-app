@@ -15,8 +15,8 @@ export default function Register() {
   const RedirectToPath = useNavigate();
   const FULL_NAME = 12;
 
-  const isValidForm = () => validatePassword(loginState.psw)
-    && validateEmail(loginState.user) && registerState.name.length >= FULL_NAME;
+  const isValidForm = () => validatePassword(registerState.psw)
+    && validateEmail(registerState.user) && registerState.name.length >= FULL_NAME;
 
   const sendRegister = async () => {
     const { name, email, password } = registerState;
@@ -60,6 +60,8 @@ export default function Register() {
         <ButtonSD
           wsize="100%"
           msize="20px 0 0 0"
+          psize=" 0.5rem 2rem"
+          radius="0.4rem"
           data-testid="common_register__button-register"
           disabled={ !isValidForm() }
           onClick={ sendRegister }
