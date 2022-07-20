@@ -26,14 +26,14 @@ export default function Products() {
       onClick={ ({ target }) => console.log(target) }
     >
       {
-        cart?.productsInCar.map((product) => (
+        cart && cart.productsInCar.length > 0 && cart.productsInCar.map((product) => (
           <div key={ product.id } className="card">
             <div className="img-price">
               <p
                 className="price"
                 data-testid={ `customer_products__element-card-price-${product.id}` }
               >
-                { `RS ${ product.price }` }
+                { `RS ${product.price}` }
               </p>
               <img
                 className="img"

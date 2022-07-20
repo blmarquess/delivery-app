@@ -19,7 +19,7 @@ export async function getProductsDB() {
   return products.data;
 }
 
-export async function getSellersName() {
-  const sellers = await useHttp.get('/costumer/checkout');
+export async function getSellersNameDB() {
+  const sellers = await useHttp.get('/customer/checkout');
   return sellers.data;
 }

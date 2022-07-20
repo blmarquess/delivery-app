@@ -1,28 +1,31 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../infra/data/contexts/Context';
-import TotalPrice from '../components/basis/TotalPrice';
+import { getSellersNameDB } from '../../main/hooks/useHttp';
+import ButtonSD from '../components/basis/ButtonSD';
+// import TotalPrice from '../components/basis/TotalPrice';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';
 
 export default function CustomerCheckout() {
-  const { cart, removeCartItem } = useContext(Context);
+  const { cart, removeOneItemOnCart } = useContext(Context);
   const [carProducts, setCarProducts] = useState([]);
-  // const [sellersNames, setSellersNames] = useState([]);
-
-  // useEffect(() => {
-  //   async function getSellersName() {
-  //     const sellers = await getSellersName();
-  //     setSellersNames(sellers);
-  //   }
-  //   getSellersName();
-  // }, []);
+  const [sellersNames, setSellersNames] = useState([]);
 
   useEffect(() => {
-    setCarProducts(cart.productsInCar);
+    async function getSellersName() {
+      const sellers = await getSellersNameDB();
+      setSellersNames(sellers);
+    }
+    getSellersName();
+  }, []);
+
+  useEffect(() => {
+    const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
+    setCarProducts(filteredProducts);
   }, [cart]);
 
   function removeFromCar(id) {
-    return removeCartItem(id);
+    return removeOneItemOnCart(id);
   }
   return (
     <div className="checkout-page">
@@ -38,17 +41,45 @@ export default function CustomerCheckout() {
           <h2 className="title-remove">Remover</h2>
         </div>
         {
-          carProducts.map((product) => (
+          carProducts.map((product, i) => (
             <ul key={ product.name } className="products-list">
-              <li className="item">1</li>
-              <li className="description">{ product.name }</li>
-              <li className="quantity">asdasd</li>
-              <li className="unit-value">{ `R$ ${product.price}` }</li>
-              <li className="sub-total">asdddd</li>
+              <li
+                className="item"
+                data-testid={
+                  `customer_checkout__element-order-table-item-number-${i}`
+                }
+              >
+                1
+              </li>
+              <li
+                className="description"
+                data-testid={ `customer_checkout__element-order-table-name-${i}` }
+              >
+                { product.name }
+              </li>
+              <li
+                className="quantity"
+                data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
+              >
+                {product.qtd}
+              </li>
+              <li
+                className="unit-value"
+                data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
+              >
+                { `R$ ${product.price}` }
+              </li>
+              <li
+                className="sub-total"
+                data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
+              >
+                { `R$ ${product.subTotal.toFixed(2)}` }
+              </li>
               <li className="remove-item">
                 <button
                   type="button"
                   onClick={ () => removeFromCar(product.id) }
+                  data-testid={ `customer_checkout__element-order-table-remove-${i}` }
                 >
                   Remover
                 </button>
@@ -56,34 +87,62 @@ export default function CustomerCheckout() {
             </ul>
           ))
         }
+        <div>
+          <ButtonSD
+            psize="1.5rem 2rem"
+            radius="10px"
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            {`Total: R$ ${cart.totalCarPrice.toFixed(2)}`}
+          </ButtonSD>
+        </div>
       </div>
       <h1>Detalhes e Endereço para Entrega</h1>
       <div className="address-details">
-        <label htmlFor="seller">
-          <h3>P. Vendedora Responsável</h3>
-          <select className="seller-select" name="" id="seller">
-            {/* {
-              sellersNames.map((name) => (
-                <option key={ name } value={ name }>{name}</option>
-              ))
-            } */}
-          </select>
-        </label>
-        <label htmlFor="address">
-          <h3>Endereço</h3>
-          <input
-            className="address-input"
-            type="text"
-            id="address"
-            placeholder="Rua Churosbangos Churosbagos"
-          />
-        </label>
-        <label htmlFor="number">
-          <h3>Número</h3>
-          <input className="input-number" type="text" id="number" />
-        </label>
+        <div className="info-inputs">
+          <label htmlFor="seller">
+            <h3>P. Vendedora Responsável</h3>
+            <select
+              className="seller-select"
+              id="seller"
+              data-testid="customer_checkout__select-seller"
+            >
+              {
+                sellersNames.map((seller) => (
+                  <option key={ seller.name } value={ seller.name }>{seller.name}</option>
+                ))
+              }
+            </select>
+          </label>
+          <label htmlFor="address">
+            <h3>Endereço</h3>
+            <input
+              className="address-input"
+              type="text"
+              id="address"
+              placeholder="Rua Churosbangos Churosbagos"
+              data-testid="customer_checkout__input-address"
+            />
+          </label>
+          <label htmlFor="number">
+            <h3>Número</h3>
+            <input
+              className="input-number"
+              type="text"
+              id="number"
+              data-testid="customer_checkout__input-addressNumber"
+            />
+          </label>
+        </div>
+        <button
+          type="button"
+          className="finish-order"
+          data-testid="customer_checkout__button-submit-order"
+        >
+          FINALIZAR PEDIDO
+        </button>
       </div>
-      <TotalPrice />
+      {/* <TotalPrice /> */}
     </div>
   );
 }

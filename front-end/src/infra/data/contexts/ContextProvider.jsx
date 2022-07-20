@@ -9,13 +9,17 @@ export default function ProductsContextProvider({ children }) {
     productsInCar: [],
   });
 
-  const updateProductsState = (key, data) => {
+  const updateTotalPrices = () => {
     setCart((state) => ({
       ...state,
-      [key]: data,
       totalCarPrice: state.productsInCar
         .reduce((acc, crv) => acc + (Number(crv.price) * Number(crv.qtd)), 0),
     }));
+  };
+
+  const updateProductsState = (key, data) => {
+    setCart((state) => ({ ...state, [key]: data }));
+    updateTotalPrices();
   };
 
   const handleChangeInputQtd = (id, _qtd) => {
