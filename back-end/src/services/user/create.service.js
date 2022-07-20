@@ -1,5 +1,6 @@
 const md5 = require('md5');
 const User = require('../../database/models/User');
+const jwt = require('../../config/auth');
 
 const CreateUserService = async ({ name, email, password }) => {
   const userExists = await User.findOne({ where: { email } });
@@ -16,7 +17,14 @@ const CreateUserService = async ({ name, email, password }) => {
     password: encryptedPassword,
   });
 
-  return { name: createdUser.name };
+  const token = jwt.sign({ id: createdUser.id, role: createdUser.role });
+
+  return {
+    name: createdUser.name,
+    email: createdUser.email,
+    token,
+    role: createdUser.role,
+  };
 };
 
 module.exports = CreateUserService;
