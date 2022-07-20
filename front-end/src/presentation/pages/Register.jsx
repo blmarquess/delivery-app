@@ -1,32 +1,30 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import validateEmail from '../../main/useCases/validateEmail';
+import validatePassword from '../../main/useCases/validatePassword';
+import registerNewUser from '../../main/useCases/registerNewUser';
+
 import LayoutPage from '../layout/LayoutPage';
 import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
-import registerNewUser from '../../main/useCases/registerNewUser';
 
 export default function Register() {
   const [registerState, setInfRegister] = useState({ name: '', email: '', password: '' });
   const stateUpdate = (e) => setInfRegister({ ...registerState, [e.name]: e.value });
-
-  const redirect = useNavigate();
-
-  const PSW_MIN = 6;
+  const RedirectToPath = useNavigate();
   const FULL_NAME = 12;
-  const regex = /^[a-z0-9._-]+@[a-z0-9]+\.com$/;
 
-  const isValidForm = () => registerState.password.length > PSW_MIN
-    && regex.test(registerState.email) && registerState.name.length <= FULL_NAME;
+  const isValidForm = () => validatePassword(loginState.psw)
+    && validateEmail(loginState.user) && registerState.name.length >= FULL_NAME;
 
   const sendRegister = async () => {
     const { name, email, password } = registerState;
     const statusOK = 201;
     const dataRegister = await registerNewUser(email, password, name);
-    console.log('🚀 -> dataRegister', dataRegister);
     if (dataRegister.status === statusOK) {
-      return redirect('/login', { replace: true });
-    } return redirect('/register', { replace: true });
+      return RedirectToPath('/login');
+    } return RedirectToPath('/register');
   };
 
   return (

@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import productsMock from '../../tests/mocks/productsMock';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost';
 const BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT || '3001';
@@ -18,4 +17,9 @@ export function useHttpGet(url) {
 export async function getProductsDB() {
   const products = await useHttp.get('/products');
   return products.data;
+}
+
+export async function getSellersNameDB() {
+  const sellers = await useHttp.get('/customer/checkout');
+  return sellers.data;
 }
