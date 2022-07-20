@@ -1,9 +1,9 @@
 const md5 = require('md5');
-const { sign, verify } = require('jsonwebtoken');
 const { Users } = require('../../database/models');
+const jwt = require('../../config/auth');
 
 const LoginService = async ({ email, password }) => {
-  const user = await Users.findOne({ where: { email: email } });
+  const user = await Users.findOne({ where: { email } });
 
   if (!user) {
     return { message: 'User not found' };
@@ -15,21 +15,14 @@ const LoginService = async ({ email, password }) => {
     return { message: 'User Unauthorized' };
   }
 
-  const token = sign(
-    {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-    },
-    process.env.APP_SECRET,
-    {
-      algorithm: 'HS256',
-      expiresIn: '1d',
-    }
-  );
+  const token = jwt.sign({ id: user.id, role: user.role });
 
-  return token;
+  return {
+    name: user.name,
+    email: user.email,
+    token,
+    role: user.role,
+  };
 };
 
 module.exports = LoginService;

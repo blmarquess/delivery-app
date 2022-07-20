@@ -1,7 +1,7 @@
-const Product = require('../../database/models/Products');
+const { Products } = require('../../database/models');
 
 const ShowProductService = async ({ id }) => {
-  const product = await Product.findByPk(id);
+  const product = await Products.findByPk(id);
 
   if (!product) {
     return { message: 'Product not found' };
