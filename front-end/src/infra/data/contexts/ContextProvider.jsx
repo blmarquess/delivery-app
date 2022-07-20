@@ -1,40 +1,74 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Context from './Context';
+import ProductsContext from './Context';
+import formateProducts from '../../../main/useCases/formateProducts';
 
-export default function ContextProvider({ children }) {
+export default function ProductsContextProvider({ children }) {
   const [cart, setCart] = useState({
     totalCarPrice: 0,
     productsInCar: [],
   });
 
-  const addCartItem = (item) => {
-    const newCart = [...cart.productsInCar, item];
-    setCart(() => ({
-      productsInCar: newCart,
-      totalCarPrice: newCart.reduce((acc, curr) => acc + parseFloat(curr.price), 0),
+  const updateTotalPrices = () => {
+    setCart((state) => ({
+      ...state,
+      totalCarPrice: state.productsInCar
+        .reduce((acc, crv) => acc + (Number(crv.price) * Number(crv.qtd)), 0),
     }));
   };
 
-  const removeCartItem = (_id) => {
-    const newCart = cart.productsInCar.filter((item) => item.id !== _id);
-    setCart(() => ({
-      productsInCar: newCart,
-      totalCarPrice: newCart.reduce((acc, curr) => acc + parseFloat(curr.price), 0),
-    }));
+  const updateProductsState = (key, data) => {
+    setCart((state) => ({ ...state, [key]: data }));
+    updateTotalPrices();
   };
+
+  const handleChangeInputQtd = (id, _qtd) => {
+    const newCartQtd = cart.productsInCar.map((prod) => {
+      if (prod.id === Number(id)) {
+        return { ...prod, qtd: Number(_qtd), subTotal: Number(_qtd) * prod.price };
+      } return prod;
+    });
+    return updateProductsState('productsInCar', newCartQtd);
+  };
+
+  const addOneItemOnCart = (id) => {
+    const newCartQtd = cart.productsInCar.map((prod) => {
+      if (prod.id === Number(id)) {
+        const newQtd = Number(prod.qtd) + 1;
+        return { ...prod, qtd: newQtd, subTotal: newQtd * prod.price };
+      } return prod;
+    });
+    return updateProductsState('productsInCar', newCartQtd);
+  };
+
+  const removeOneItemOnCart = (id) => {
+    const newCartQtd = cart.productsInCar.map((prod) => {
+      if (prod.id === Number(id)) {
+        const newQtd = Number(prod.qtd) - 1;
+        return { ...prod, qtd: newQtd, subTotal: newQtd * prod.price };
+      } return prod;
+    });
+    return updateProductsState('productsInCar', newCartQtd);
+  };
+
+  const addProducts = (products) => setCart((prev) => ({
+    ...prev,
+    productsInCar: products
+      .map((product) => formateProducts(product)) }));
 
   const providerObj = {
-    addCartItem,
-    removeCartItem,
+    addProducts,
     cart,
+    handleChangeInputQtd,
+    addOneItemOnCart,
+    removeOneItemOnCart,
   };
 
   return (
-    <Context.Provider value={ providerObj }>
+    <ProductsContext.Provider value={ providerObj }>
       { children }
-    </Context.Provider>
+    </ProductsContext.Provider>
   );
 }
 
-ContextProvider.propTypes = { children: PropTypes.node.isRequired };
+ProductsContextProvider.propTypes = { children: PropTypes.node.isRequired };

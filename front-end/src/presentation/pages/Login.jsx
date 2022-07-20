@@ -29,9 +29,10 @@ export default function Login() {
   };
 
   React.useEffect(() => {
-    const userIsLogged = localStorage.getItem('userRole');
+    const userIsLogged = localStorage.getItem('userData');
     if (userIsLogged) {
-      return RedirectToPath(`/${JSON.parse(userIsLogged)}`);
+      const userData = JSON.parse(userIsLogged);
+      return RedirectToPath(`/${userData.role}`);
     }
   }, [RedirectToPath]);
 
