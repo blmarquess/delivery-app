@@ -15,8 +15,8 @@ export default function Register() {
   const RedirectToPath = useNavigate();
   const FULL_NAME = 12;
 
-  const isValidForm = () => validatePassword(registerState.psw)
-    && validateEmail(registerState.user) && registerState.name.length >= FULL_NAME;
+  const isValidForm = () => validatePassword(registerState.password)
+    && validateEmail(registerState.email) && registerState.name.length >= FULL_NAME;
 
   const sendRegister = async () => {
     const { name, email, password } = registerState;
