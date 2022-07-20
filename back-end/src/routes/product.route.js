@@ -9,6 +9,4 @@ productRouter.route('/')
 productRouter.route('/:id')
   .get(productController.show);
 
-module.exports = {
-  productRouter,
-};
+module.exports = productRouter;
