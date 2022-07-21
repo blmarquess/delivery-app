@@ -1,28 +1,36 @@
-const Users = require('../../database/models/User');
-const SalesProducts = require('../../database/models/SalesProducts');
+const { Sales, SalesProducts } = require('../../database/models');
 
-const CreateSaleService = async (sale) => {
-  const customerExists = await Users.findByPk(sale.userId);
+const CreateSaleService = async (
+  { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products }) => {
+  /* const customerExists = await Users.findByPk(userId);
 
-  if (customerExists) {
-    return { error: 'Customer not found' };
-  }
+  if (!customerExists) return { message: 'Customer not found' };
 
-  const sellerExists = await Users.findByPk(sale.sellerId);
+  const sellerExists = await Users.findByPk(sellerId);
 
-  if (sellerExists) {
-    return { error: 'Seller not found' };
-  }
+  if (!sellerExists) return { message: 'Seller not found' }; */
 
-  const createdSale = await Users.create(sale);
+  console.log('antes sale');
 
-  const createdSaleProduct = await SalesProducts.create({
-    sellerId: sale.sellerId,
-    productId: sale.productId,
-    quantity: sale.quantity,
+  const sale = await Sales.create({
+    userId,
+    sellerId,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
   });
 
-  return { sale: createdSale, saleProduct: createdSaleProduct };
+  console.log('apos sale', sale);
+
+  await Promise.all(products.map(async ({ id, quantity }) => {
+    await SalesProducts.create({
+      saleId: sale.id,
+      productId: id,
+      quantity,
+    });
+  }));
+
+  return { sale };
 };
 
 module.exports = CreateSaleService;
