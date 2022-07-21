@@ -11,6 +11,7 @@ import ButtonSD from '../components/basis/ButtonSD';
 
 export default function Register() {
   const [registerState, setInfRegister] = useState({ name: '', email: '', password: '' });
+  const [renderError, setRenderError] = useState(false);
   const stateUpdate = (e) => setInfRegister({ ...registerState, [e.name]: e.value });
   const RedirectToPath = useNavigate();
   const FULL_NAME = 12;
@@ -21,11 +22,26 @@ export default function Register() {
   const sendRegister = async () => {
     const { name, email, password } = registerState;
     const statusOK = 201;
+    const emailAlreadyExist = 409;
     const dataRegister = await registerNewUser(email, password, name);
     if (dataRegister.status === statusOK) {
-      return RedirectToPath('/login');
-    } return RedirectToPath('/register');
+      return RedirectToPath('/customer/products');
+    }
+    if (dataRegister.status === emailAlreadyExist) {
+      setRenderError(true);
+    }
+    return RedirectToPath('/register');
   };
+
+  function renderErrorMessage() {
+    return (
+      <p
+        data-testid="common_register__element-invalid_register"
+      >
+        Email already exists
+      </p>
+    );
+  }
 
   return (
     <LayoutPage>
@@ -68,6 +84,7 @@ export default function Register() {
         >
           Cadastrar
         </ButtonSD>
+        {renderError && renderErrorMessage()}
       </section>
     </LayoutPage>
   );
