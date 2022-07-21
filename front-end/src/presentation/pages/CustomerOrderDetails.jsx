@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Context from '../../infra/data/contexts/Context';
 import { getSellersNameDB } from '../../main/hooks/useHttp';
 import ButtonSD from '../components/basis/ButtonSD';
@@ -8,8 +8,8 @@ import './styles/CustomerCheckout.css';
 import './styles/CustomerOrderDetails.css';
 
 export default function CustomerCheckout() {
-  const { cart } = useContext(Context);
-  const [carProducts, setCarProducts] = useState([]);
+  const { cart, listOfOrders, selectedOrder } = useContext(Context);
+  // const [setCarProducts] = useState([]);
 
   useEffect(() => {
     async function getSellersName() {
@@ -17,12 +17,14 @@ export default function CustomerCheckout() {
       setSellersNames(sellers);
     }
     getSellersName();
+    console.log(selectedOrder);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
-    setCarProducts(filteredProducts);
-  }, [cart.productsInCar]);
+  // useEffect(() => {
+  //   const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
+  //   setCarProducts(filteredProducts);
+  // }, [cart.productsInCar, setCarProducts]);
 
   return (
     <div className="checkout-page">
@@ -30,8 +32,10 @@ export default function CustomerCheckout() {
       <h1>Finalizar Pedido</h1>
       <div className="checkout">
         <div className="header-details">
-          <h2 className="hearder-id">Pedido7219</h2>
-          <p className="hearder-seller">P Vend. Fulana de tal</p>
+          <h2 className="hearder-id">{`Pedido 00${selectedOrder + 1}`}</h2>
+          <p className="hearder-seller">
+            {`P. Vend: ${listOfOrders[selectedOrder].seller}`}
+          </p>
           <h2 className="entregue">Pendente</h2>
           <h2 className="hearder-date">13/13/2013</h2>
           <button className="header-button" type="button">Marcar como entregue</button>
@@ -44,7 +48,7 @@ export default function CustomerCheckout() {
           <h2 className="title-sub-total">Sub-total</h2>
         </div>
         {
-          carProducts.map((product, i) => (
+          listOfOrders[selectedOrder].products.map((product, i) => (
             <ul key={ product.name } className="products-list">
               <li
                 className="item"

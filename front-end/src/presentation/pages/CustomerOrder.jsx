@@ -12,9 +12,6 @@ export default function CustomerOrders() {
       </section>
       <section className="orders">
         <OrderCard />
-        <OrderCard />
-        <OrderCard />
-        <OrderCard />
       </section>
     </LayoutPage>
   );

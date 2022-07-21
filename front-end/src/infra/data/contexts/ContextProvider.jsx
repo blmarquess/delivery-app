@@ -9,6 +9,7 @@ export default function ProductsContextProvider({ children }) {
     productsInCar: [],
   });
   const [listOfOrders, setListOfOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(0);
 
   const updateTotalPrices = () => {
     setCart((state) => ({
@@ -65,6 +66,8 @@ export default function ProductsContextProvider({ children }) {
     handleChangeInputQtd,
     addOneItemOnCart,
     removeOneItemOnCart,
+    selectedOrder,
+    setSelectedOrder,
     setCart,
   };
 
