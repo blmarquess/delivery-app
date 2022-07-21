@@ -10,8 +10,6 @@ const CreateSaleService = async (
 
   if (!sellerExists) return { message: 'Seller not found' }; */
 
-  console.log('antes sale');
-
   const sale = await Sales.create({
     userId,
     sellerId,
