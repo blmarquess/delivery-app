@@ -1,7 +1,7 @@
-const User = require('../../database/models/User');
+const { Users } = require('../../database/models');
 
 const ShowUserService = async ({ id }) => {
-  const user = await User.findByPk(id);
+  const user = await Users.findByPk(id);
 
   if (!user) {
     return { error: 'User not found' };

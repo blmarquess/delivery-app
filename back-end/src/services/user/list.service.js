@@ -1,8 +1,7 @@
-const crypto = require('crypto');
-const User = require('../../database/models/User');
+const { Users } = require('../../database/models');
 
 const ListUserService = async () => {
-  const users = await User.findAll();
+  const users = await Users.findAll();
 
   return users;
 };

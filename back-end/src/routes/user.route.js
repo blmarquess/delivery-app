@@ -12,4 +12,4 @@ userRouter.route('/:id')
   .put(userController.update)
   .delete(userController.remove);
 
-export default userRouter;
+module.exports = userRouter;
