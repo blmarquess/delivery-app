@@ -1,3 +1,3 @@
 export default function saveUserDataInLocalStorage(userData) {
-  localStorage.setItem('userData', JSON.stringify(userData));
+  localStorage.setItem('user', JSON.stringify(userData));
 }

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import validateEmail from '../../main/useCases/validateEmail';
 import validatePassword from '../../main/useCases/validatePassword';
 import registerNewUser from '../../main/useCases/registerNewUser';
-
+import saveUserDataInLocalStorage from '../../main/useCases/saveUserDataInLocalStorage';
 import LayoutPage from '../layout/LayoutPage';
 import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
@@ -24,10 +24,12 @@ export default function Register() {
     const statusOK = 201;
     const emailAlreadyExist = 409;
     const dataRegister = await registerNewUser(email, password, name);
+    console.log(dataRegister);
     if (dataRegister.status === statusOK) {
+      saveUserDataInLocalStorage(dataRegister.data);
       return RedirectToPath('/customer/products');
     }
-    if (dataRegister.status === emailAlreadyExist) {
+    if (dataRegister === emailAlreadyExist) {
       setRenderError(true);
     }
     return RedirectToPath('/register');

@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function UserRouterAuth({ roleUser }) {
-  const data = localStorage.getItem('userData');
+  const data = localStorage.getItem('user');
   const userData = JSON.parse(data);
   if (!userData) { return <Navigate to="/login" replace />; }
 
