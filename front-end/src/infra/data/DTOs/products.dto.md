@@ -37,6 +37,7 @@ body: {
       "url_image":"../../../images/antarctica_pilsen_300ml.jpg"
     },
       ...more{},{},{},
-    ]
+  ]
 }
+
 ```
