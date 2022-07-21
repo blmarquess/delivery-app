@@ -46,14 +46,14 @@ module.exports = (sequelize) => {
   Sales.associate = (models) => {
     Sales.belongsToMany(
       models.Users,
-      { foreignKey: 'userId', otherKey: 'id', as: 'costumer' },
+      { foreignKey: 'userId', otherKey: 'id', as: 'costumer', through: Sales },
     );
   };
 
   Sales.associate = (models) => {
     Sales.belongsToMany(
       models.Users,
-      { foreignKey: 'sellerId', otherKey: 'id', as: 'seller' },
+      { foreignKey: 'sellerId', otherKey: 'id', as: 'seller', through: Sales },
     );
   };
 
