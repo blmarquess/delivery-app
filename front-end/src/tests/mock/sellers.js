@@ -1,8 +1,10 @@
 const sellers = [
   {
-    name: 'Zé pequeno',
+    sellerId: 1,
+    name: 'Zé pequeno da silva',
   },
   {
+    sellerId: 2,
     name: 'Homer Simpson',
   },
 ];
