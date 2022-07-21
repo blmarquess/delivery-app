@@ -19,7 +19,7 @@ module.exports = {
     try {
       const users = await userService.list();
 
-      return users;
+      return res.json(users);
     } catch (error) {
       next(error);
     }
@@ -44,7 +44,7 @@ module.exports = {
       const { id } = req.params;
       const { name, email, password, role } = req.body;
 
-      const user = await userService.create({ id, name, email, password, role });
+      const user = await userService.update({ id, name, email, password, role });
 
       return !user.error
         ? res.json(user)

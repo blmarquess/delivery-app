@@ -4,4 +4,4 @@ const show = require('./show.service');
 module.exports = {
   list,
   show,
-}
+};

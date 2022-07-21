@@ -18,6 +18,7 @@ const LoginService = async ({ email, password }) => {
   const token = jwt.sign({ id: user.id, role: user.role });
 
   return {
+    id: user.id,
     name: user.name,
     email: user.email,
     token,

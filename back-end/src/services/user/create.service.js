@@ -1,9 +1,9 @@
 const md5 = require('md5');
-const User = require('../../database/models/User');
+const { Users } = require('../../database/models');
 const jwt = require('../../config/auth');
 
 const CreateUserService = async ({ name, email, password }) => {
-  const userExists = await User.findOne({ where: { email } });
+  const userExists = await Users.findOne({ where: { email } });
 
   if (userExists) {
     return { message: 'User already exists' };
@@ -11,7 +11,7 @@ const CreateUserService = async ({ name, email, password }) => {
 
   const encryptedPassword = md5(password);
 
-  const createdUser = await User.create({
+  const createdUser = await Users.create({
     name,
     email,
     password: encryptedPassword,
