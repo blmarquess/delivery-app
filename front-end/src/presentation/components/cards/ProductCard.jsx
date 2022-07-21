@@ -44,7 +44,7 @@ export default function Products() {
             </div>
             <div className="box-counter">
               <div className="product-name">
-                <p>
+                <p data-testid={ `customer_products__element-card-title--${product.id}` }>
                   { product.name }
                 </p>
               </div>

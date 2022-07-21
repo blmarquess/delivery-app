@@ -1,4 +1,5 @@
 const md5 = require('md5');
+const fs = require('fs');
 const { Users } = require('../../database/models');
 const jwt = require('../../config/auth');
 

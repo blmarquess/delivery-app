@@ -8,7 +8,7 @@ const LoginController = async (req, res, next) => {
 
     return !token.message
       ? res.json(token)
-      : res.status(401).json({ message: token.message });
+      : res.status(404).json({ message: token.message });
   } catch (error) {
     next(error);
   }

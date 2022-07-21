@@ -1,4 +1,7 @@
 const { sign, verify } = require('jsonwebtoken');
+const fs = require('fs');
+
+const SECRET = fs.readFileSync('jwt.evaluation.key', 'utf-8');
 
 module.exports = {
   sign: ({ id, role }) => {
@@ -7,7 +10,7 @@ module.exports = {
         id,
         role,
       },
-      process.env.APP_SECRET,
+      SECRET,
       {
         algorithm: 'HS256',
         expiresIn: '1d',
@@ -19,7 +22,7 @@ module.exports = {
 
   verify: (token) => {
     try {
-      const validade = verify(token, process.env.APP_SECRET);
+      const validade = verify(token, SECRET);
 
       return validade;
     } catch (error) {

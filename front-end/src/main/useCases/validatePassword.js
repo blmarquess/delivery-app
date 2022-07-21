@@ -5,5 +5,5 @@ export default function validatePassword(password) {
     return false;
   }
   console.log('test', password.length > PSW_MIN);
-  return password.length > PSW_MIN;
+  return password.length >= PSW_MIN;
 }
