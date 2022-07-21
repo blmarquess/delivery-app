@@ -1,17 +1,15 @@
 const saleService = require('../services/sale/create.service');
 
-const SaleController = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
+module.exports = {
+  create: async (req, res, next) => {
+    try {
+      const sale = await saleService(req.body);
 
-    const token = await saleService({ email, password });
-
-    return !token.message
-      ? res.json(token)
-      : res.status(401).json({ message: token.message });
-  } catch (error) {
-    next(error);
-  }
+      return !sale.message
+        ? res.status(201).json(sale)
+        : res.status(401).json({ message: sale.message });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
-
-module.exports = SaleController;
