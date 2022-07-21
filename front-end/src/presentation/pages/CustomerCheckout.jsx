@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../infra/data/contexts/Context';
 import { getSellersNameDB } from '../../main/hooks/useHttp';
 import ButtonSD from '../components/basis/ButtonSD';
-// import TotalPrice from '../components/basis/TotalPrice';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';
 
@@ -10,7 +9,9 @@ export default function CustomerCheckout() {
   const {
     cart,
     removeOneItemOnCart,
-    listOfOrders, setListOfOrders } = useContext(Context);
+    listOfOrders,
+    setListOfOrders,
+    setCart } = useContext(Context);
   const [carProducts, setCarProducts] = useState([]);
   const [sellersNames, setSellersNames] = useState([]);
   const [checkoutState, setCheckoutState] = useState(
@@ -22,6 +23,7 @@ export default function CustomerCheckout() {
   }
 
   function sendOrder() {
+    const date = new Date();
     const { seller, address, number } = checkoutState;
     setListOfOrders([
       ...listOfOrders,
@@ -30,8 +32,15 @@ export default function CustomerCheckout() {
         address,
         number,
         seller,
+        totalPrice: cart.totalCarPrice,
+        formattedDate:
+        `${((date.getDate()))}/${((date.getMonth() + 1))}/${date.getFullYear()}`,
       },
     ]);
+    setCart({
+      totalCarPrice: 0,
+      productsInCar: [],
+    });
   }
 
   useEffect(() => {

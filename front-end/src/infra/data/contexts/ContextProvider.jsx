@@ -68,6 +68,7 @@ export default function ProductsContextProvider({ children }) {
     removeOneItemOnCart,
     selectedOrder,
     setSelectedOrder,
+    setCart,
   };
 
   return (
