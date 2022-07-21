@@ -65,6 +65,7 @@ export default function ProductsContextProvider({ children }) {
     handleChangeInputQtd,
     addOneItemOnCart,
     removeOneItemOnCart,
+    setCart,
   };
 
   return (
