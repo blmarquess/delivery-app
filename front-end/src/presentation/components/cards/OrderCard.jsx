@@ -41,8 +41,12 @@ export default function OrderCard() {
                 </div>
                 <div className="status pendente-card">Entregue</div>
                 <div className="data-n-price">
-                  <div className="data">Data</div>
-                  <div className="data">Preço</div>
+                  <div className="data">
+                    {`${listOfOrders[index].formattedDate}`}
+                  </div>
+                  <div className="data">
+                    {`R$${listOfOrders[index].totalPrice.toFixed(2)}`}
+                  </div>
                 </div>
               </div>
               {verifyIfIsSeller() ? renderAddress() : '' }
