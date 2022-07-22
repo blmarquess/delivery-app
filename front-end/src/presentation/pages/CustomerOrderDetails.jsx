@@ -1,3 +1,4 @@
+import React from 'react';
 // import React, { useContext, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 // import Context from '../../infra/data/contexts/Context';
@@ -121,6 +122,8 @@
 // }
 export default function CustomerCheckout() {
   return (
-    <p>ARRIBA</p>
+    <div>
+      <p>ARRIBA</p>
+    </div>
   );
 }
