@@ -14,19 +14,27 @@ export default function Login() {
   const [loginState, setInfLogin] = useState({ user: '', psw: '' });
   const stateUpdate = (e) => setInfLogin({ ...loginState, [e.name]: e.value });
   const RedirectToPath = useNavigate();
+  const [renderError, setRenderError] = useState(false);
 
   const isValidForm = () => validatePassword(loginState.psw)
     && validateEmail(loginState.user);
 
-  const handleSubmit = async () => {
+  async function handleSubmit() {
     const statusOK = 200;
     const dataLogin = await logarUser(loginState.user, loginState.psw);
-    saveUserDataInLocalStorage(dataLogin.data);
     if (dataLogin.status === statusOK) {
+      saveUserDataInLocalStorage(dataLogin.data);
       const rotaUserByRole = dataLogin.data.role;
       return RedirectToPath(`/${rotaUserByRole}`);
     }
-  };
+    setRenderError(true);
+  }
+
+  function renderErrorMessage() {
+    return (
+      <p data-testid="common_login__element-invalid-email">Invalid email or password</p>
+    );
+  }
 
   React.useEffect(() => {
     const userIsLogged = localStorage.getItem('userData');
@@ -61,7 +69,9 @@ export default function Login() {
         <ButtonSD
           wsize="100%"
           msize="20px 0 0 0"
-          onClick={ handleSubmit }
+          psize=" 0.5rem 2rem"
+          radius="0.4rem"
+          onClick={ () => handleSubmit() }
           data-testid="common_login__button-login"
           disabled={ !isValidForm() }
         >
@@ -71,11 +81,14 @@ export default function Login() {
         <ButtonSD
           wsize="100%"
           msize="20px 0 0 0"
+          psize=" 0.5rem 2rem"
+          radius="0.4rem"
           onClick={ () => RedirectToPath('/register') }
           data-testid="common_login__button-register"
         >
           Registrar-se
         </ButtonSD>
+        {renderError && renderErrorMessage()}
       </section>
     </LayoutPage>
   );

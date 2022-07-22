@@ -2,22 +2,55 @@ import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../infra/data/contexts/Context';
 import { getSellersNameDB } from '../../main/hooks/useHttp';
 import ButtonSD from '../components/basis/ButtonSD';
-// import TotalPrice from '../components/basis/TotalPrice';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';
 
 export default function CustomerCheckout() {
-  const { cart, removeOneItemOnCart } = useContext(Context);
+  const {
+    cart,
+    removeOneItemOnCart,
+    listOfOrders,
+    setListOfOrders,
+    setCart } = useContext(Context);
   const [carProducts, setCarProducts] = useState([]);
   const [sellersNames, setSellersNames] = useState([]);
+  const [checkoutState, setCheckoutState] = useState(
+    { seller: '', address: '', number: '' },
+  );
+
+  function InputHandler(e) {
+    setCheckoutState({ ...checkoutState, [e.name]: e.value });
+  }
+
+  function sendOrder() {
+    const date = new Date();
+    const { seller, address, number } = checkoutState;
+    setListOfOrders([
+      ...listOfOrders,
+      {
+        products: carProducts,
+        address,
+        number,
+        seller,
+        totalPrice: cart.totalCarPrice,
+        formattedDate:
+        `${((date.getDate()))}/0${((date.getMonth() + 1))}/${date.getFullYear()}`,
+      },
+    ]);
+    setCart({
+      totalCarPrice: 0,
+      productsInCar: [],
+    });
+  }
 
   useEffect(() => {
     async function getSellersName() {
       const sellers = await getSellersNameDB();
       setSellersNames(sellers);
+      setCheckoutState({ ...checkoutState, seller: sellers[0].name });
     }
     getSellersName();
-  }, []);
+  }, [checkoutState]);
 
   useEffect(() => {
     const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
@@ -106,10 +139,17 @@ export default function CustomerCheckout() {
               className="seller-select"
               id="seller"
               data-testid="customer_checkout__select-seller"
+              name="seller"
+              onChange={ ({ target }) => InputHandler(target) }
             >
               {
                 sellersNames.map((seller) => (
-                  <option key={ seller.name } value={ seller.name }>{seller.name}</option>
+                  <option
+                    key={ seller.name }
+                    value={ seller.name }
+                  >
+                    {seller.name}
+                  </option>
                 ))
               }
             </select>
@@ -120,6 +160,9 @@ export default function CustomerCheckout() {
               className="address-input"
               type="text"
               id="address"
+              name="address"
+              onChange={ ({ target }) => InputHandler(target) }
+              value={ checkoutState.address }
               placeholder="Rua Churosbangos Churosbagos"
               data-testid="customer_checkout__input-address"
             />
@@ -130,6 +173,9 @@ export default function CustomerCheckout() {
               className="input-number"
               type="text"
               id="number"
+              name="number"
+              onChange={ ({ target }) => InputHandler(target) }
+              value={ checkoutState.number }
               data-testid="customer_checkout__input-addressNumber"
             />
           </label>
@@ -138,6 +184,7 @@ export default function CustomerCheckout() {
           type="button"
           className="finish-order"
           data-testid="customer_checkout__button-submit-order"
+          onClick={ sendOrder }
         >
           FINALIZAR PEDIDO
         </button>

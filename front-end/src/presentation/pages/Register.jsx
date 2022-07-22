@@ -4,28 +4,46 @@ import { useNavigate } from 'react-router-dom';
 import validateEmail from '../../main/useCases/validateEmail';
 import validatePassword from '../../main/useCases/validatePassword';
 import registerNewUser from '../../main/useCases/registerNewUser';
-
+import saveUserDataInLocalStorage from '../../main/useCases/saveUserDataInLocalStorage';
 import LayoutPage from '../layout/LayoutPage';
 import Input from '../components/basis/Input';
 import ButtonSD from '../components/basis/ButtonSD';
 
 export default function Register() {
   const [registerState, setInfRegister] = useState({ name: '', email: '', password: '' });
+  const [renderError, setRenderError] = useState(false);
   const stateUpdate = (e) => setInfRegister({ ...registerState, [e.name]: e.value });
   const RedirectToPath = useNavigate();
   const FULL_NAME = 12;
 
-  const isValidForm = () => validatePassword(loginState.psw)
-    && validateEmail(loginState.user) && registerState.name.length >= FULL_NAME;
+  const isValidForm = () => validatePassword(registerState.password)
+    && validateEmail(registerState.email) && registerState.name.length >= FULL_NAME;
 
   const sendRegister = async () => {
     const { name, email, password } = registerState;
     const statusOK = 201;
+    const emailAlreadyExist = 409;
     const dataRegister = await registerNewUser(email, password, name);
+    console.log(dataRegister);
     if (dataRegister.status === statusOK) {
-      return RedirectToPath('/login');
-    } return RedirectToPath('/register');
+      saveUserDataInLocalStorage(dataRegister.data);
+      return RedirectToPath('/customer/products');
+    }
+    if (dataRegister === emailAlreadyExist) {
+      setRenderError(true);
+    }
+    return RedirectToPath('/register');
   };
+
+  function renderErrorMessage() {
+    return (
+      <p
+        data-testid="common_register__element-invalid_register"
+      >
+        Email already exists
+      </p>
+    );
+  }
 
   return (
     <LayoutPage>
@@ -60,12 +78,15 @@ export default function Register() {
         <ButtonSD
           wsize="100%"
           msize="20px 0 0 0"
+          psize=" 0.5rem 2rem"
+          radius="0.4rem"
           data-testid="common_register__button-register"
           disabled={ !isValidForm() }
           onClick={ sendRegister }
         >
           Cadastrar
         </ButtonSD>
+        {renderError && renderErrorMessage()}
       </section>
     </LayoutPage>
   );

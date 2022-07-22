@@ -8,6 +8,8 @@ export default function ProductsContextProvider({ children }) {
     totalCarPrice: 0,
     productsInCar: [],
   });
+  const [listOfOrders, setListOfOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(0);
 
   const updateTotalPrices = () => {
     setCart((state) => ({
@@ -59,9 +61,14 @@ export default function ProductsContextProvider({ children }) {
   const providerObj = {
     addProducts,
     cart,
+    listOfOrders,
+    setListOfOrders,
     handleChangeInputQtd,
     addOneItemOnCart,
     removeOneItemOnCart,
+    selectedOrder,
+    setSelectedOrder,
+    setCart,
   };
 
   return (

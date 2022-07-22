@@ -9,7 +9,7 @@ header: {},
 body: {
   {
     email: "email@exemple.com",
-    password: "password
+    password: "password"
   }
 }
 ```
