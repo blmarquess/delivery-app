@@ -29,11 +29,13 @@ export default function Products() {
         cart && cart.productsInCar.length > 0 && cart.productsInCar.map((product) => (
           <div key={ product.id } className="card">
             <div className="img-price">
-              <p
-                className="price"
-                data-testid={ `customer_products__element-card-price-${product.id}` }
-              >
-                { `RS ${product.price}` }
+              <p className="price">
+                R$
+                <span
+                  data-testid={ `customer_products__element-card-price-${product.id}` }
+                >
+                  { `${product.price.replace('.', ',')}` }
+                </span>
               </p>
               <img
                 className="img"
