@@ -23,7 +23,6 @@ export default function Products() {
       role="button"
       tabIndex={ 0 }
       onKeyDown={ () => {} }
-      onClick={ ({ target }) => console.log(target) }
     >
       {
         cart && cart.productsInCar.length > 0 && cart.productsInCar.map((product) => (

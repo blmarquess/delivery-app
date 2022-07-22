@@ -6,7 +6,6 @@ import './TotalPrice.css';
 
 export default function TotalPrice() {
   const { cart } = useContext(Context);
-  console.log(cart.totalCarPrice);
   return (
     <Link to="/customer/checkout">
       <TotalPriceButton

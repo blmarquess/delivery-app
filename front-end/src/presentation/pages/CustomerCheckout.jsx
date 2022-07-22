@@ -8,7 +8,7 @@ import './styles/CustomerCheckout.css';
 export default function CustomerCheckout() {
   const {
     cart,
-    removeOneItemOnCart,
+    removeProduct,
     listOfOrders,
     setListOfOrders,
     setCart } = useContext(Context);
@@ -58,7 +58,7 @@ export default function CustomerCheckout() {
   }, [cart]);
 
   function removeFromCar(id) {
-    return removeOneItemOnCart(id);
+    return removeProduct(id);
   }
   return (
     <div className="checkout-page">
