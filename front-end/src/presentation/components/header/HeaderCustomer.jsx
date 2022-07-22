@@ -1,11 +1,17 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import loadUserDataInLocalStorage from '../../../main/useCases/loadUserDataLocalStorage';
 import './HeaderCliStyle.css';
 import logoffExecute from '../../../main/useCases/logoffExecute';
 
 export default function Navbar() {
+  const [customer, setCustomer] = useState('');
   const RedirectToPath = useNavigate();
+  useEffect(() => {
+    setCustomer(loadUserDataInLocalStorage());
+  }, []);
+
   function logout() {
     logoffExecute();
     return RedirectToPath('/login');
@@ -31,7 +37,7 @@ export default function Navbar() {
           className="btn-user"
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          <p> Ciclano da Silva</p>
+          <p>{customer.name}</p>
         </li>
         <li className="btn-exit">
           <button
