@@ -9,7 +9,6 @@ import './styles/CustomerOrderDetails.css';
 
 export default function CustomerCheckout() {
   const { cart, listOfOrders, selectedOrder } = useContext(Context);
-  // const [setCarProducts] = useState([]);
 
   useEffect(() => {
     async function getSellersName() {
@@ -27,13 +26,14 @@ export default function CustomerCheckout() {
       <h1>Detalhe do Pedido</h1>
       <div className="checkout">
         <div className="header-details">
-          <h2 className="hearder-id">{`Pedido 00${selectedOrder + 1}`}</h2>
+          <h2 className="hearder-id">{`PEDIDO 00${selectedOrder + 1}`}</h2>
           <p className="hearder-seller">
             {`P. Vend: ${listOfOrders[selectedOrder].seller}`}
           </p>
-          <h2 className="entregue">Pendente</h2>
+          <h2 className="entregue">ENTREGUE</h2>
           <h2 className="hearder-date">13/13/2013</h2>
-          <button className="header-button" type="button">Marcar como entregue</button>
+          <button className="header-button" type="button">PREPARAR PEDIDO</button>
+          <button className="header-button" type="button">SAIU PARA ENTREGA</button>
         </div>
         <div className="list-titles">
           <h2 className="title-item">Item</h2>

@@ -32,12 +32,32 @@ export default function CustomerCheckout() {
       <h1>Detalhe do Pedido</h1>
       <div className="checkout">
         <div className="header-details">
-          <h2 className="hearder-id">{`Pedido 00${selectedOrder + 1}`}</h2>
-          <p className="hearder-seller">
+          <h2
+            className="hearder-id"
+            data-tested="customer_order_details__element-order-details-label-order-id"
+          >
+            {`Pedido 00${selectedOrder + 1}`}
+          </h2>
+          <p
+            className="hearder-seller"
+            data-tested="customer_order_details__element-order-details-label-seller-name"
+          >
             {`P. Vend: ${listOfOrders[selectedOrder].seller}`}
           </p>
-          <h2 className="entregue">Pendente</h2>
-          <h2 className="hearder-date">13/13/2013</h2>
+          <h2
+            className="entregue"
+            data-tested="
+            `customer_order_details__element-order-details-label-delivery-status`
+            "
+          >
+            Pendente
+          </h2>
+          <h2
+            className="hearder-date"
+            data-tested="customer_order_details__element-order-details-label-order-date"
+          >
+            13/13/2013
+          </h2>
           <button className="header-button" type="button">Marcar como entregue</button>
         </div>
         <div className="list-titles">
@@ -53,32 +73,38 @@ export default function CustomerCheckout() {
               <li
                 className="item"
                 data-testid={
-                  `customer_checkout__element-order-table-item-number-${i}`
+                  `customer_order_details__element-order-table-item-number--${i}`
                 }
               >
                 1
               </li>
               <li
                 className="description"
-                data-testid={ `customer_checkout__element-order-table-name-${i}` }
+                data-testid={ `customer_order_details__element-order-table-name--${i}` }
               >
                 { product.name }
               </li>
               <li
                 className="quantity"
-                data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
+                data-testid={
+                  `customer_order_details__element-order-table-quantity--${i}`
+                }
               >
                 {product.qtd}
               </li>
               <li
                 className="unit-value"
-                data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
+                data-testid={
+                  `customer_order_details__element-order-table-unit-price--${i}`
+                }
               >
                 { `R$ ${product.price}` }
               </li>
               <li
                 className="sub-total"
-                data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
+                data-testid={
+                  `customer_order_details__element-order-table-sub-total--${i}`
+                }
               >
                 { `R$ ${product.subTotal.toFixed(2)}` }
               </li>
@@ -89,7 +115,7 @@ export default function CustomerCheckout() {
           <ButtonSD
             psize="1.5rem 2rem"
             radius="10px"
-            data-testid="customer_checkout__element-order-total-price"
+            data-testid="customer_order_details__element-order-total-price"
           >
             {`Total: R$ ${cart.totalCarPrice.toFixed(2)}`}
           </ButtonSD>
