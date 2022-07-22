@@ -9,6 +9,18 @@ export default function OrderCard() {
     setSelectedOrder,
   } = useContext(Context);
 
+  function verifyIfIsSeller() {
+    return window.location.pathname.includes('/seller/orders');
+  }
+
+  function renderAddress() {
+    return (
+      <div className="address">
+        <p className="CEP">Endereço</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       {
@@ -52,6 +64,7 @@ export default function OrderCard() {
                   </div>
                 </div>
               </div>
+              {verifyIfIsSeller() ? renderAddress() : '' }
             </div>
           </Link>
         ))
