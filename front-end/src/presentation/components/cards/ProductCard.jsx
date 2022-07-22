@@ -32,7 +32,7 @@ export default function Products() {
               <p className="price">
                 R$
                 <span
-                  data-testid={ `customer_products__element-card-price-${product.id}` }
+                  data-testid={ `customer_products__element-card-price--${product.id}` }
                 >
                   { `${product.price.replace('.', ',')}` }
                 </span>
@@ -41,7 +41,7 @@ export default function Products() {
                 className="img"
                 src={ product.url_image }
                 alt={ product.name }
-                data-testid={ `customer_products__img-card-bg-image-${product.id}` }
+                data-testid={ `customer_products__img-card-bg-image--${product.id}` }
               />
             </div>
             <div className="box-counter">
@@ -53,7 +53,7 @@ export default function Products() {
               <div className="counter">
                 <button
                   className="btn-minus"
-                  data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+                  data-testid={ `customer_products__button-card-rm-item--${product.id}` }
                   type="button"
                   disabled={ product.qtd < 1 }
                   onClick={ () => removeOneItemOnCart(product.id) }
@@ -64,7 +64,7 @@ export default function Products() {
                   type="text"
                   name={ product.id }
                   className="counter-number"
-                  data-testid={ `customer_products__input-card-quantity-${product.id}` }
+                  data-testid={ `customer_products__input-card-quantity--${product.id}` }
                   onChange={ ({ target: { value, name } }) => {
                     handleChangeInputQtd(name, value);
                   } }
@@ -73,7 +73,7 @@ export default function Products() {
                 <button
                   className="btn-plus"
                   type="button"
-                  data-testid={ `customer_products__button-card-add-item-${product.id}` }
+                  data-testid={ `customer_products__button-card-add-item--${product.id}` }
                   onClick={ () => addOneItemOnCart(product.id) }
                 >
                   +

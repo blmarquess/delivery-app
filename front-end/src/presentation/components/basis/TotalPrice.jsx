@@ -6,15 +6,22 @@ import './TotalPrice.css';
 
 export default function TotalPrice() {
   const { cart } = useContext(Context);
+  console.log(cart.totalCarPrice);
   return (
     <Link to="/customer/checkout">
       <TotalPriceButton
         data-testid={ window.location.pathname.includes('/customer/checkout')
           ? 'customer_checkout__element-order-total-price'
           : 'customer_products__button-cart' }
+        disabled={ cart.totalCarPrice === 0 }
       >
-        { `R$ ${cart.totalCarPrice.toFixed(2)} `}
+        <span
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          { `${cart.totalCarPrice.toString().replace('.', ',')}`}
+        </span>
       </TotalPriceButton>
+      TotalPriceButton
     </Link>
   );
 }
