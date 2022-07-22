@@ -1,23 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Context from '../../../infra/data/contexts/Context';
+import formatData from '../../../main/useCases/formatDate';
+import { getOrders } from '../../../main/hooks/useHttp';
 import './OrderCard.css';
 
 export default function OrderCard() {
-  const {
-    listOfOrders,
-    setSelectedOrder,
-  } = useContext(Context);
+  const [listOfOrders, setListOfOrders] = React.useState({});
+
+  useEffect(() => {
+    async function getSellersName() {
+      const orderResponse = await getOrders();
+      setListOfOrders(orderResponse);
+    }
+    getSellersName();
+  }, []);
 
   return (
     <div>
       {
-        listOfOrders.map((order, index) => (
+        listOfOrders && listOfOrders.length > 0 && listOfOrders.map((order, index) => (
           <Link
             onClick={ () => setSelectedOrder(index) }
             key={ index }
             className="order-link"
-            to="/customer/details"
+            to={ `/customer/orders/${order.id}` }
           >
             <div
               className="card-order"
@@ -26,29 +32,29 @@ export default function OrderCard() {
                 <div className="order-id-box">
                   <div>Pedido</div>
                   <div
-                    data-testid={ `customer_orders__element-order-id--${index}` }
+                    data-testid={ `customer_orders__element-order-id--${order.id}` }
                   >
                     {`00${index + 1}`}
                   </div>
                 </div>
                 <div
                   className="status pendente-card"
-                  data-testid={ `customer_orders__element-delivery-status--${index}` }
+                  data-testid={ `customer_orders__element-delivery-status--${order.id}` }
                 >
                   Entregue
                 </div>
                 <div className="data-n-price">
                   <div
                     className="data"
-                    data-testid={ `customer_orders__element-order-date--${index}` }
+                    data-testid={ `customer_orders__element-order-date--${order.id}` }
                   >
-                    {`${listOfOrders[index].formattedDate}`}
+                    { formatData(listOfOrders[index].saleDate) }
                   </div>
                   <div
                     className="data"
-                    data-testid={ `customer_orders__element-card-price--${index}` }
+                    data-testid={ `customer_orders__element-card-price--${order.id}` }
                   >
-                    {`R$${listOfOrders[index].totalPrice.toFixed(2)}`}
+                    {`R$${listOfOrders[index].totalPrice}`}
                   </div>
                 </div>
               </div>

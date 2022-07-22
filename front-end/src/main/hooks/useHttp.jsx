@@ -28,3 +28,8 @@ export async function sendOrderToDB(order) {
   const response = await useHttp.post('/sales', order);
   return response;
 }
+
+export async function getOrders() {
+  const order = await useHttp.get('/sales');
+  return order.data;
+}

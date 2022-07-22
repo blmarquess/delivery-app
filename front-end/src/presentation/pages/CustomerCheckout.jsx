@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Context from '../../infra/data/contexts/Context';
 import { getSellersNameDB, sendOrderToDB } from '../../main/hooks/useHttp';
 import ButtonSD from '../components/basis/ButtonSD';
@@ -16,31 +17,38 @@ export default function CustomerCheckout() {
   const [checkoutState, setCheckoutState] = useState(
     { seller: '', address: '', number: '' },
   );
+  const RedirectToPath = useNavigate();
 
   function InputHandler(e) {
     setCheckoutState({ ...checkoutState, [e.name]: e.value });
   }
 
-  function sendOrder() {
+  async function sendOrder() {
     const { seller, address, number } = checkoutState;
-    const { email, id } = loadUserDataInLocalStorage('user');
+    const { id } = loadUserDataInLocalStorage('user');
     const sellerSelected = sellersNames.find((sell) => sell.name === seller);
+    const products = [];
+    carProducts.forEach((product) => (products.push({
+      productId: product.id,
+      quantity: product.qtd,
+    })));
     const order = {
       userId: id,
-      user: email,
       sellerId: sellerSelected.id,
       deliveryAddress: address,
       deliveryNumber: number,
-      totalPrice: cart.totalCarPrice,
-      productsOrder: carProducts,
+      totalPrice: Number(cart.totalCarPrice.toFixed(2)),
+      products,
     };
-    sendOrderToDB(order);
+    const orderResponse = await sendOrderToDB(order);
+    const { sale } = orderResponse.data;
     setCart({
       totalCarPrice: 0,
       productsInCar: [],
     });
+    console.log(orderResponse);
+    RedirectToPath(`/customer/orders/${sale.id}`);
   }
-
   useEffect(() => {
     async function getSellersName() {
       const sellers = await getSellersNameDB();

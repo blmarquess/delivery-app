@@ -26,7 +26,7 @@ export default function AppRouter() {
           <Route path="checkout" element={ <CustomerCheckout /> } />
           <Route path="products" element={ <CustomerProducts /> } />
           <Route path="orders" element={ <CustomerOrders /> } />
-          <Route path="details" element={ <CustomerOrderDetails /> } />
+          <Route path="orders/:id" element={ <CustomerOrderDetails /> } />
         </Route>
 
         <Route path="/seller" element={ <UserRouterAuth roleUser="seller" /> }>
