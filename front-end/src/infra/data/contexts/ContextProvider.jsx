@@ -53,6 +53,16 @@ export default function ProductsContextProvider({ children }) {
     return updateProductsState('productsInCar', newCartQtd);
   };
 
+  const removeProduct = (id) => {
+    const newCartQtd = cart.productsInCar.map((prod) => {
+      if (prod.id === Number(id)) {
+        const newQtd = 0;
+        return { ...prod, qtd: newQtd, subTotal: newQtd * prod.price };
+      } return prod;
+    });
+    return updateProductsState('productsInCar', newCartQtd);
+  };
+
   const addProducts = (products) => setCart((prev) => ({
     ...prev,
     productsInCar: products
@@ -69,6 +79,7 @@ export default function ProductsContextProvider({ children }) {
     selectedOrder,
     setSelectedOrder,
     setCart,
+    removeProduct,
   };
 
   return (

@@ -18,16 +18,13 @@ const CreateSaleService = async (
     deliveryNumber,
   });
 
-  console.log('apos sale', sale);
-
-  await Promise.all(products.map(async ({ id, quantity }) => {
+  await Promise.all(products.map(async ({ productId, quantity }) => {
     await SalesProducts.create({
       saleId: sale.id,
-      productId: id,
+      productId,
       quantity,
     });
   }));
-
   return { sale };
 };
 

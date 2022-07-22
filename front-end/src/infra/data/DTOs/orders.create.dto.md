@@ -11,6 +11,9 @@ header: {
 body: {
   {
     user: "email@exemple.com",
+    sellerId: 1,
+    address,
+    number,
     productsOrder:[
       {
         productID: "1",

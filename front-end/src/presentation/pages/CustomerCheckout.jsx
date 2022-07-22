@@ -1,48 +1,54 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Context from '../../infra/data/contexts/Context';
-import { getSellersNameDB } from '../../main/hooks/useHttp';
+import { getSellersNameDB, sendOrderToDB } from '../../main/hooks/useHttp';
 import ButtonSD from '../components/basis/ButtonSD';
 import HeaderCustomer from '../components/header/HeaderCustomer';
+import loadUserDataInLocalStorage from '../../main/useCases/loadUserDataLocalStorage';
 import './styles/CustomerCheckout.css';
 
 export default function CustomerCheckout() {
   const {
     cart,
-    removeOneItemOnCart,
-    listOfOrders,
-    setListOfOrders,
+    removeProduct,
     setCart } = useContext(Context);
   const [carProducts, setCarProducts] = useState([]);
   const [sellersNames, setSellersNames] = useState([]);
   const [checkoutState, setCheckoutState] = useState(
     { seller: '', address: '', number: '' },
   );
+  const RedirectToPath = useNavigate();
 
   function InputHandler(e) {
     setCheckoutState({ ...checkoutState, [e.name]: e.value });
   }
 
-  function sendOrder() {
-    const date = new Date();
+  async function sendOrder() {
     const { seller, address, number } = checkoutState;
-    setListOfOrders([
-      ...listOfOrders,
-      {
-        products: carProducts,
-        address,
-        number,
-        seller,
-        totalPrice: cart.totalCarPrice,
-        formattedDate:
-        `${((date.getDate()))}/0${((date.getMonth() + 1))}/${date.getFullYear()}`,
-      },
-    ]);
+    const { id } = loadUserDataInLocalStorage('user');
+    const sellerSelected = sellersNames.find((sell) => sell.name === seller);
+    const products = [];
+    carProducts.forEach((product) => (products.push({
+      productId: product.id,
+      quantity: product.qtd,
+    })));
+    const order = {
+      userId: id,
+      sellerId: sellerSelected.id,
+      deliveryAddress: address,
+      deliveryNumber: number,
+      totalPrice: Number(cart.totalCarPrice.toFixed(2)),
+      products,
+    };
+    const orderResponse = await sendOrderToDB(order);
+    const { sale } = orderResponse.data;
     setCart({
       totalCarPrice: 0,
       productsInCar: [],
     });
+    console.log(orderResponse);
+    RedirectToPath(`/customer/orders/${sale.id}`);
   }
-
   useEffect(() => {
     async function getSellersName() {
       const sellers = await getSellersNameDB();
@@ -50,7 +56,7 @@ export default function CustomerCheckout() {
       setCheckoutState({ ...checkoutState, seller: sellers[0].name });
     }
     getSellersName();
-  }, [checkoutState]);
+  }, []);
 
   useEffect(() => {
     const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
@@ -58,7 +64,7 @@ export default function CustomerCheckout() {
   }, [cart]);
 
   function removeFromCar(id) {
-    return removeOneItemOnCart(id);
+    return removeProduct(id);
   }
   return (
     <div className="checkout-page">
@@ -143,7 +149,7 @@ export default function CustomerCheckout() {
               onChange={ ({ target }) => InputHandler(target) }
             >
               {
-                sellersNames.map((seller) => (
+                sellersNames && sellersNames.length > 0 && sellersNames.map((seller) => (
                   <option
                     key={ seller.name }
                     value={ seller.name }
@@ -189,7 +195,6 @@ export default function CustomerCheckout() {
           FINALIZAR PEDIDO
         </button>
       </div>
-      {/* <TotalPrice /> */}
     </div>
   );
 }
