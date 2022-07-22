@@ -18,7 +18,9 @@ export default function TotalPrice() {
         <span
           data-testid="customer_products__checkout-bottom-value"
         >
-          { `${cart.totalCarPrice.toString().replace('.', ',')}`}
+          {
+            `${(Math.round(cart.totalCarPrice * 100) / 100).toFixed(2).replace('.', ',')}`
+          }
         </span>
       </TotalPriceButton>
       TotalPriceButton

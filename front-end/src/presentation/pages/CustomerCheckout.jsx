@@ -79,40 +79,41 @@ export default function CustomerCheckout() {
               <li
                 className="item"
                 data-testid={
-                  `customer_checkout__element-order-table-item-number-${i}`
+                  `customer_checkout__element-order-table-item-number--${i}`
                 }
               >
-                1
+                {i + 1}
               </li>
               <li
                 className="description"
-                data-testid={ `customer_checkout__element-order-table-name-${i}` }
+                data-testid={ `customer_checkout__element-order-table-name--${i}` }
               >
                 { product.name }
               </li>
               <li
                 className="quantity"
-                data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
+                data-testid={ `customer_checkout__element-order-table-quantity--${i}` }
               >
                 {product.qtd}
               </li>
               <li
                 className="unit-value"
-                data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
+                data-testid={ `customer_checkout__element-order-table-unit-price--${i}` }
               >
-                { `R$ ${product.price}` }
+                { `${product.price.replace('.', ',')}` }
               </li>
               <li
                 className="sub-total"
-                data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
+                data-testid={ `customer_checkout__element-order-table-sub-total--${i}` }
               >
-                { `R$ ${product.subTotal.toFixed(2)}` }
+                {`${(Math.round(product.subTotal * 100) / 100)
+                  .toFixed(2).replace('.', ',')}`}
               </li>
               <li className="remove-item">
                 <button
                   type="button"
                   onClick={ () => removeFromCar(product.id) }
-                  data-testid={ `customer_checkout__element-order-table-remove-${i}` }
+                  data-testid={ `customer_checkout__element-order-table-remove--${i}` }
                 >
                   Remover
                 </button>
@@ -121,12 +122,11 @@ export default function CustomerCheckout() {
           ))
         }
         <div>
-          <ButtonSD
-            psize="1.5rem 2rem"
-            radius="10px"
-            data-testid="customer_checkout__element-order-total-price"
-          >
-            {`Total: R$ ${cart.totalCarPrice.toFixed(2)}`}
+          <ButtonSD psize="1.5rem 2rem" radius="10px">
+            <span>Total: R$</span>
+            <span data-testid="customer_checkout__element-order-total-price">
+              {cart.totalCarPrice.toFixed(2).replace('.', ',')}
+            </span>
           </ButtonSD>
         </div>
       </div>
