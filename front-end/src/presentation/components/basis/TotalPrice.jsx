@@ -6,7 +6,7 @@ import './TotalPrice.css';
 
 export default function TotalPrice() {
   const { cart } = useContext(Context);
-  console.log(cart.totalCarPrice);
+
   return (
     <Link to="/customer/checkout">
       <TotalPriceButton
@@ -18,7 +18,9 @@ export default function TotalPrice() {
         <span
           data-testid="customer_products__checkout-bottom-value"
         >
-          { `${cart.totalCarPrice.toString().replace('.', ',')}`}
+          {
+            `${(Math.round(cart.totalCarPrice * 100) / 100).toFixed(2).replace('.', ',')}`
+          }
         </span>
       </TotalPriceButton>
       TotalPriceButton
