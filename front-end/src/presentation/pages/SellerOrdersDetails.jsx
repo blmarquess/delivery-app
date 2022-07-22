@@ -21,11 +21,6 @@ export default function CustomerCheckout() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
-  //   setCarProducts(filteredProducts);
-  // }, [cart.productsInCar, setCarProducts]);  <-- se esta comentado pode apager ?
-
   return (
     <div className="checkout-page">
       <HeaderCustomer />
