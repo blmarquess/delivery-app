@@ -23,3 +23,8 @@ export async function getSellersNameDB() {
   const sellers = await useHttp.get('/sellers');
   return sellers.data.users.map(({ id, name }) => ({ id, name }));
 }
+
+export async function sendOrderToDB(order) {
+  const response = await useHttp.post('/sales', order);
+  return response;
+}

@@ -22,6 +22,9 @@ header: {
 body: [
   {
     id: "00101",
+    status,
+    data,
+    totalPrice,
     productsOrder:[
       {
         productID: "2",

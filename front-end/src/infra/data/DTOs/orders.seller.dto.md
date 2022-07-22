@@ -25,12 +25,10 @@ body: [
     customer: {
       id: 2,
       name: "Zé Birita",
-      address: {
-        street:"Rua do bar",
-        neighborhood: "Pinguços",
-        number: 51
-      },
+      address: 'Rua da pitaia',
+      number: 51,
     },
+    totalPrice,
     productsOrder:[
       {
         productID: "2",

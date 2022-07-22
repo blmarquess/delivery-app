@@ -1,16 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../infra/data/contexts/Context';
-import { getSellersNameDB } from '../../main/hooks/useHttp';
+import { getSellersNameDB, sendOrderToDB } from '../../main/hooks/useHttp';
 import ButtonSD from '../components/basis/ButtonSD';
 import HeaderCustomer from '../components/header/HeaderCustomer';
+import loadUserDataInLocalStorage from '../../main/useCases/loadUserDataLocalStorage';
 import './styles/CustomerCheckout.css';
 
 export default function CustomerCheckout() {
   const {
     cart,
     removeProduct,
-    listOfOrders,
-    setListOfOrders,
     setCart } = useContext(Context);
   const [carProducts, setCarProducts] = useState([]);
   const [sellersNames, setSellersNames] = useState([]);
@@ -24,18 +23,18 @@ export default function CustomerCheckout() {
 
   function sendOrder() {
     const { seller, address, number } = checkoutState;
-    const { email } = localStorage.getItem('user');
+    const { email, id } = loadUserDataInLocalStorage('user');
     const sellerSelected = sellersNames.find((sell) => sell.name === seller);
-    setListOfOrders([
-      ...listOfOrders,
-      {
-        user: email,
-        sellerId: sellerSelected.id,
-        address,
-        number,
-        productsOrder: carProducts,
-      },
-    ]);
+    const order = {
+      userId: id,
+      user: email,
+      sellerId: sellerSelected.id,
+      deliveryAddress: address,
+      deliveryNumber: number,
+      totalPrice: cart.totalCarPrice,
+      productsOrder: carProducts,
+    };
+    sendOrderToDB(order);
     setCart({
       totalCarPrice: 0,
       productsInCar: [],
