@@ -1,38 +1,18 @@
 const { DataTypes } = require('sequelize');
 
 const Attributes = {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
   userId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    foreignKey: true,
-    onDelete: "CASCADE",
-    references: {
-      model: "users",
-      key: "id",
-    },
+    field: 'user_id',
   },
   sellerId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    foreignKey: true,
-    onDelete: "CASCADE",
-    references: {
-      model: "users",
-      key: "id",
-    },
+    field: 'seller_id',
   },
-  totalPrice: DataTypes.DECIMAL(9, 2),
-  deliveryAddress: DataTypes.STRING,
-  deliveryNumber: DataTypes.STRING,
-  saleDate: {
-    type: DataTypes.DATE,
-    defaultValue: new Date(),
-  },
+  totalPrice: { type: DataTypes.DECIMAL(9, 2), field: 'total_price' },
+  deliveryAddress: { type: DataTypes.STRING, field: 'delivery_address'},
+  deliveryNumber: { type: DataTypes.STRING, field: 'delivery_number' },
+  saleDate: { type: DataTypes.DATE, field: 'sale_date' },
   status: DataTypes.STRING,
 };
 
@@ -40,20 +20,20 @@ module.exports = (sequelize) => {
   const Sales = sequelize.define(
     "Sales",
     Attributes,
-    { tableName: 'sales', timestamps: false, underscore: true },
+    { tableName: 'sales', timestamps: false, underscored: true },
   );
 
   Sales.associate = (models) => {
     Sales.belongsToMany(
       models.Users,
-      { foreignKey: 'userId', otherKey: 'id', as: 'costumer', through: Sales },
+      { foreignKey: 'userId', otherKey: 'id', as: 'costumer', through: Sales, exclude: ['password'] },
     );
   };
 
   Sales.associate = (models) => {
     Sales.belongsToMany(
       models.Users,
-      { foreignKey: 'sellerId', otherKey: 'id', as: 'seller', through: Sales },
+      { foreignKey: 'sellerId', otherKey: 'id', as: 'seller', through: Sales, exclude: ['password'] },
     );
   };
 
