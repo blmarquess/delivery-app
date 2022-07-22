@@ -1,7 +1,7 @@
 import React from 'react';
 import LayoutPage from '../layout/LayoutPage';
 import HeaderSeller from '../components/header/HeaderSeller';
-import OrderCard from '../components/cards/OrderCard';
+import OrderCardSeller from '../components/cards/OrderCardSeller';
 import '../components/cards/OrderCard.css';
 
 const sellerOrder = () => (
@@ -10,7 +10,7 @@ const sellerOrder = () => (
       <HeaderSeller />
     </section>
     <section className="orders">
-      <OrderCard />
+      <OrderCardSeller />
     </section>
   </LayoutPage>
 );
