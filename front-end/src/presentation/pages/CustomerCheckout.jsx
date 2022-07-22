@@ -23,18 +23,17 @@ export default function CustomerCheckout() {
   }
 
   function sendOrder() {
-    const date = new Date();
     const { seller, address, number } = checkoutState;
+    const { email } = localStorage.getItem('user');
+    const sellerSelected = sellersNames.find((sell) => sell.name === seller);
     setListOfOrders([
       ...listOfOrders,
       {
-        products: carProducts,
+        user: email,
+        sellerId: sellerSelected.id,
         address,
         number,
-        seller,
-        totalPrice: cart.totalCarPrice,
-        formattedDate:
-        `${((date.getDate()))}/0${((date.getMonth() + 1))}/${date.getFullYear()}`,
+        productsOrder: carProducts,
       },
     ]);
     setCart({
@@ -50,7 +49,7 @@ export default function CustomerCheckout() {
       setCheckoutState({ ...checkoutState, seller: sellers[0].name });
     }
     getSellersName();
-  }, [checkoutState]);
+  }, []);
 
   useEffect(() => {
     const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
@@ -143,7 +142,7 @@ export default function CustomerCheckout() {
               onChange={ ({ target }) => InputHandler(target) }
             >
               {
-                sellersNames.map((seller) => (
+                sellersNames && sellersNames.length > 0 && sellersNames.map((seller) => (
                   <option
                     key={ seller.name }
                     value={ seller.name }
@@ -189,7 +188,6 @@ export default function CustomerCheckout() {
           FINALIZAR PEDIDO
         </button>
       </div>
-      {/* <TotalPrice /> */}
     </div>
   );
 }

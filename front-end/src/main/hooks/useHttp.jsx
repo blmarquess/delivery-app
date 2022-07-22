@@ -20,6 +20,6 @@ export async function getProductsDB() {
 }
 
 export async function getSellersNameDB() {
-  const sellers = await useHttp.get('/customer/checkout');
-  return sellers.data;
+  const sellers = await useHttp.get('/sellers');
+  return sellers.data.users.map(({ id, name }) => ({ id, name }));
 }
