@@ -3,8 +3,17 @@ const saleController = require('../controllers/sale.controller');
 
 const saleRouter = Router();
 
-saleRouter.post('/', saleController.create);
+saleRouter.route('/')
+  .get(saleController.list)
+  .post(saleController.create);
 
-saleRouter.get('/', saleController.getAll);
+saleRouter.route('/preparing/:id')
+  .patch(saleController.updateStatusPreparing);
+
+saleRouter.route('/delivering/:id')
+  .patch(saleController.updateStatusDelivering);
+
+saleRouter.route('/delivered/:id')
+  .patch(saleController.updateStatusDelivered);
 
 module.exports = saleRouter;
