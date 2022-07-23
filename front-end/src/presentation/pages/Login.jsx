@@ -25,6 +25,9 @@ export default function Login() {
     if (dataLogin.status === statusOK) {
       saveUserDataInLocalStorage(dataLogin.data);
       const rotaUserByRole = dataLogin.data.role;
+      if (rotaUserByRole === 'administrator') {
+        return RedirectToPath('/admin');
+      }
       return RedirectToPath(`/${rotaUserByRole}`);
     }
     setRenderError(true);

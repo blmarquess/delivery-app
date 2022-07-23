@@ -35,7 +35,7 @@ export default function AppRouter() {
           <Route path="orders/:id" element={ <CustomerOrderDetails /> } />
         </Route>
 
-        <Route path="/admin" element={ <UserRouterAuth roleUser="admin" /> }>
+        <Route path="/admin" element={ <UserRouterAuth roleUser="administrator" /> }>
           <Route index element={ <Navigate to="users" /> } />
           <Route path="users" element={ <AdminUsers /> } />
         </Route>

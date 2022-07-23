@@ -54,7 +54,8 @@ export default function CustomerCheckout() {
       setCheckoutState({ ...checkoutState, seller: sellers[0].name });
     }
     getSellersName();
-  }, [checkoutState]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
