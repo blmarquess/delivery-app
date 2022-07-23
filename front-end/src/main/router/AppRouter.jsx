@@ -32,6 +32,7 @@ export default function AppRouter() {
         <Route path="/seller" element={ <UserRouterAuth roleUser="seller" /> }>
           <Route index element={ <Navigate to="orders" /> } />
           <Route path="orders" element={ <SellerOrder /> } />
+          <Route path="orders/:id" element={ <CustomerOrderDetails /> } />
         </Route>
 
         <Route path="/admin" element={ <UserRouterAuth roleUser="admin" /> }>

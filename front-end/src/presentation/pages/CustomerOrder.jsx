@@ -1,17 +1,15 @@
 import React from 'react';
 import LayoutPage from '../layout/LayoutPage';
 import HeaderCustomer from '../components/header/HeaderCustomer';
-import OrderCard from '../components/cards/OrderCard';
+import OrdersBoardCustomer from '../components/cards/OrdersBoardCustomer';
 import '../components/cards/OrderCard.css';
 
 export default function CustomerOrders() {
   return (
     <LayoutPage>
-      <section>
-        <HeaderCustomer />
-      </section>
+      <HeaderCustomer />
       <section className="orders">
-        <OrderCard />
+        <OrdersBoardCustomer />
       </section>
     </LayoutPage>
   );

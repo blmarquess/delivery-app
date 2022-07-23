@@ -23,5 +23,11 @@ body: {
 header: {
   statusCode: 201
   },
-body: {}
+body: {
+  {
+    name: "fulano de tal",
+    email: "email@exemple.com",
+    token: "JWT.TOKEN.USER"
+  }
+}
 ```

@@ -100,3 +100,8 @@
 .order-link {
   text-decoration: none;
 }
+
+.address-card {
+  display: flex;
+  margin: auto;
+}
