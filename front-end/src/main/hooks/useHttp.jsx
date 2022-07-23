@@ -32,6 +32,7 @@ export async function getSellerNameById(id) {
 }
 
 export async function sendOrderToDB(body) {
+  console.log(body.sellerId);
   const { token } = loadUserDataLocalStorage('user');
   const headers = { 'Content-Type': 'application/json', Authorization: token };
   console.log('🚀 ~ file: useHttp.jsx ~ line 31 ~ sendOrderToDB ~ token', token);
