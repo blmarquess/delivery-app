@@ -1,4 +1,5 @@
 import axios from 'axios';
+import loadUserDataLocalStorage from '../useCases/loadUserDataLocalStorage';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost';
 const BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT || '3001';
@@ -24,8 +25,10 @@ export async function getSellersNameDB() {
   return sellers.data.users.map(({ id, name }) => ({ id, name }));
 }
 
-export async function sendOrderToDB(order) {
-  const response = await useHttp.post('/sales', order);
+export async function sendOrderToDB(body) {
+  const { token } = loadUserDataLocalStorage('user');
+  const headers = { 'Content-Type': 'application/json', Authorization: token };
+  const response = await useHttp.post('/sales', { headers, body });
   return response;
 }
 

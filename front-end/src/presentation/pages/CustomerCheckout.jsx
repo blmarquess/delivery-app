@@ -54,7 +54,7 @@ export default function CustomerCheckout() {
       setCheckoutState({ ...checkoutState, seller: sellers[0].name });
     }
     getSellersName();
-  }, [checkoutState]);
+  }, []);
 
   useEffect(() => {
     const filteredProducts = cart.productsInCar.filter((product) => product.qtd !== 0);
