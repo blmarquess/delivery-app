@@ -37,6 +37,21 @@ module.exports = {
     }
   },
 
+  ShowSaleCustomer: async (req, res, next) => {
+    try {
+      const { id: saleId } = req.params;
+      const { costumerId } = req.body;
+
+      const sale = await saleService.ShowSaleCustomerService({ saleId, costumerId });
+
+      return !sale.error
+        ? res.json(sale)
+        : res.status(404).json({ error: sale.error });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   updateStatusPreparing: async (req, res, next) => {
     try {
       const { id } = req.params;
