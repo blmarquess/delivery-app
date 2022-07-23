@@ -10,7 +10,7 @@ const Attributes = {
     field: 'seller_id',
   },
   totalPrice: { type: DataTypes.DECIMAL(9, 2), field: 'total_price' },
-  deliveryAddress: { type: DataTypes.STRING, field: 'delivery_address'},
+  deliveryAddress: { type: DataTypes.STRING, field: 'delivery_address' },
   deliveryNumber: { type: DataTypes.STRING, field: 'delivery_number' },
   saleDate: { type: DataTypes.DATE, field: 'sale_date' },
   status: DataTypes.STRING,
@@ -24,14 +24,14 @@ module.exports = (sequelize) => {
   );
 
   Sales.associate = (models) => {
-    Sales.belongsToMany(
+    Sales.belongsTo(
       models.Users,
-      { foreignKey: 'userId', otherKey: 'id', as: 'costumer', through: Sales, exclude: ['password'] },
+      { foreignKey: 'userId', otherKey: 'id', as: 'customer', through: Sales, exclude: ['password'] },
     );
   };
 
   Sales.associate = (models) => {
-    Sales.belongsToMany(
+    Sales.belongsTo(
       models.Users,
       { foreignKey: 'sellerId', otherKey: 'id', as: 'seller', through: Sales, exclude: ['password'] },
     );

@@ -1,15 +1,10 @@
-const { Sales, Users, Products } = require('../../database/models');
+const { Sales, Products } = require('../../database/models');
 const normalize = require('../../config/normalize');
 
-const findByIdByCostumer = async ({ saleId, costumerId }) => {
+const findByIdBySeller = async ({ sellerId, saleId }) => {
   const sale = await Sales.findOne({
-    where: { id: saleId, userId: costumerId },
+    where: { id: saleId, sellerId },
     include: [
-      {
-        model: Users,
-        as: 'seller',
-        attributes: ['id', 'name'],
-      },
       {
         model: Products,
         as: 'products',
@@ -23,8 +18,8 @@ const findByIdByCostumer = async ({ saleId, costumerId }) => {
   return sale || null;
 };
 
-const ShowSaleCustomerService = async ({ saleId, costumerId }) => {
-  const sale = await findByIdByCostumer({ saleId, costumerId });
+const ShowSaleSellerService = async ({ saleId, sellerId }) => {
+  const sale = await findByIdBySeller({ saleId, sellerId });
 
   if (!sale) {
     return { error: 'Sale not found' };
@@ -35,4 +30,4 @@ const ShowSaleCustomerService = async ({ saleId, costumerId }) => {
   return (saleFormated);
 };
 
-module.exports = ShowSaleCustomerService;
+module.exports = ShowSaleSellerService;
