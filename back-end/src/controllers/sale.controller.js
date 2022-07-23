@@ -1,5 +1,4 @@
 const saleService = require('../services/sale/create.service');
-const serviceGetAll = require('../services/sale/getAllSales');
 
 module.exports = {
   create: async (req, res, next) => {
@@ -13,13 +12,70 @@ module.exports = {
       next(error);
     }
   },
-  getAll: async (_req, res, next) => {
-    try {
-    const sales = await serviceGetAll.getAll();
 
-    return res.status(200).json(sales);
-  } catch (err) {
-    next(err);
-  }
+  list: async (_req, res, next) => {
+    try {
+      const sales = await saleService.list();
+
+      return res.json(sales);
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  showSale: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      const sale = await saleService.show({ id });
+
+      return !sale.error
+        ? res.json(sale)
+        : res.status(404).json({ error: sale.error });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  updateStatusPreparing: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      const sale = await saleService.updateStatusPreparing({ id });
+
+      return !sale.error
+        ? res.json(sale)
+        : res.status(404).json({ error: sale.error });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  updateStatusDelivering: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      const sale = await saleService.updateStatusDelivering({ id });
+
+      return !sale.error
+        ? res.json(sale)
+        : res.status(404).json({ error: sale.error });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  updateStatusDelivered: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      const sale = await saleService.updateStatusDelivered({ id });
+
+      return !sale.error
+        ? res.json(sale)
+        : res.status(404).json({ error: sale.error });
+    } catch (error) {
+      next(error);
+    }
   },
 };
