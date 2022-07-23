@@ -1,16 +1,14 @@
 import React from 'react';
 import LayoutPage from '../layout/LayoutPage';
 import HeaderSeller from '../components/header/HeaderSeller';
-import OrderCardSeller from '../components/cards/OrderCardSeller';
+import OrdersBoardSeller from '../components/cards/OrdersBoardSeller';
 import '../components/cards/OrderCard.css';
 
 const sellerOrder = () => (
   <LayoutPage>
-    <section>
-      <HeaderSeller />
-    </section>
+    <HeaderSeller />
     <section className="orders">
-      <OrderCardSeller />
+      <OrdersBoardSeller />
     </section>
   </LayoutPage>
 );

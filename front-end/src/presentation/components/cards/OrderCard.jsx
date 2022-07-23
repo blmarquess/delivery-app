@@ -1,67 +1,75 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import formatData from '../../../main/useCases/formatDate';
-import { getOrders } from '../../../main/hooks/useHttp';
-import './OrderCard.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import formatOrderNumber from '../../../main/useCases/formatOrderNumber';
 
-export default function OrderCard() {
-  const [listOfOrders, setListOfOrders] = React.useState({});
-
-  useEffect(() => {
-    async function getSellersName() {
-      const orderResponse = await getOrders();
-      setListOfOrders(orderResponse);
-    }
-    getSellersName();
-  }, []);
-
+export default function OrderCard({
+  index,
+  saleID,
+  saleStatus,
+  saleDate,
+  saleTotalPrice,
+  saleAddress,
+  saleAddressNumber,
+  userRole,
+}) {
   return (
-    <div>
-      {
-        listOfOrders && listOfOrders.length > 0 && listOfOrders.map((order, index) => (
-          <Link
-            onClick={ () => setSelectedOrder(index) }
-            key={ index }
-            className="order-link"
-            to={ `/customer/orders/${order.id}` }
+    <div
+      className="card-order"
+    >
+      <div className="card-order-box">
+
+        <div className="order-id-box">
+          <div>Pedido</div>
+          <div
+            data-testid={ `${userRole}_orders__element-order-id--${index}` }
           >
+            { formatOrderNumber(saleID) }
+          </div>
+        </div>
+
+        <div
+          className="status entregue-card"
+          data-testid={ `${userRole}_orders__element-delivery-status--${index}` }
+        >
+          {saleStatus}
+        </div>
+
+        <div className="data-n-price">
+          <div
+            className="data"
+            data-testid={ `${userRole}_orders__element-order-date--${index}` }
+          >
+            { saleDate }
+          </div>
+          <div
+            className="data"
+            data-testid={ `${userRole}_orders__element-card-price--${index}` }
+          >
+            {`R$ ${saleTotalPrice}`}
+          </div>
+        </div>
+        {saleAddress
+          && (
             <div
-              className="card-order"
+              className="address-card"
+              data-testid={ `${userRole}_orders__element-card-address--${saleID}` }
             >
-              <div className="card-order-box">
-                <div className="order-id-box">
-                  <div>Pedido</div>
-                  <div
-                    data-testid={ `customer_orders__element-order-id--${order.id}` }
-                  >
-                    {`00${index + 1}`}
-                  </div>
-                </div>
-                <div
-                  className="status pendente-card"
-                  data-testid={ `customer_orders__element-delivery-status--${order.id}` }
-                >
-                  Entregue
-                </div>
-                <div className="data-n-price">
-                  <div
-                    className="data"
-                    data-testid={ `customer_orders__element-order-date--${order.id}` }
-                  >
-                    { formatData(listOfOrders[index].saleDate) }
-                  </div>
-                  <div
-                    className="data"
-                    data-testid={ `customer_orders__element-card-price--${order.id}` }
-                  >
-                    {`R$${listOfOrders[index].totalPrice}`}
-                  </div>
-                </div>
-              </div>
+              {`${saleAddress}, ${saleAddressNumber}`}
             </div>
-          </Link>
-        ))
-      }
+          )}
+
+      </div>
     </div>
   );
 }
+
+OrderCard.propTypes = {
+  index: PropTypes.number.isRequired,
+  saleID: PropTypes.number.isRequired,
+  saleStatus: PropTypes.string.isRequired,
+  saleDate: PropTypes.string.isRequired,
+  saleTotalPrice: PropTypes.string.isRequired,
+  userRole: PropTypes.string.isRequired,
+  saleAddress: PropTypes.string.isRequired,
+  saleAddressNumber: PropTypes.string.isRequired,
+};

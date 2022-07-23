@@ -7,16 +7,14 @@ import HeaderCustomer from '../components/header/HeaderCustomer';
 import loadUserDataInLocalStorage from '../../main/useCases/loadUserDataLocalStorage';
 import './styles/CustomerCheckout.css';
 
+const initialCheckoutState = { seller: '', address: '', number: '' };
+
 export default function CustomerCheckout() {
-  const {
-    cart,
-    removeProduct,
-    setCart } = useContext(Context);
+  const { cart, removeProduct, setCart } = useContext(Context);
   const [carProducts, setCarProducts] = useState([]);
   const [sellersNames, setSellersNames] = useState([]);
-  const [checkoutState, setCheckoutState] = useState(
-    { seller: '', address: '', number: '' },
-  );
+  const [checkoutState, setCheckoutState] = useState(initialCheckoutState);
+
   const RedirectToPath = useNavigate();
 
   function InputHandler(e) {
@@ -32,6 +30,7 @@ export default function CustomerCheckout() {
       productId: product.id,
       quantity: product.qtd,
     })));
+
     const order = {
       userId: id,
       sellerId: sellerSelected.id,
@@ -40,15 +39,14 @@ export default function CustomerCheckout() {
       totalPrice: Number(cart.totalCarPrice.toFixed(2)),
       products,
     };
+
     const orderResponse = await sendOrderToDB(order);
     const { sale } = orderResponse.data;
-    setCart({
-      totalCarPrice: 0,
-      productsInCar: [],
-    });
-    console.log(orderResponse);
+    setCart({ totalCarPrice: 0, productsInCar: [] });
+
     RedirectToPath(`/customer/orders/${sale.id}`);
   }
+
   useEffect(() => {
     async function getSellersName() {
       const sellers = await getSellersNameDB();
@@ -63,9 +61,8 @@ export default function CustomerCheckout() {
     setCarProducts(filteredProducts);
   }, [cart]);
 
-  function removeFromCar(id) {
-    return removeProduct(id);
-  }
+  function removeFromCar(id) { return removeProduct(id); }
+
   return (
     <div className="checkout-page">
       <HeaderCustomer />
@@ -128,12 +125,14 @@ export default function CustomerCheckout() {
           ))
         }
         <div>
+
           <ButtonSD psize="1.5rem 2rem" radius="10px">
             <span>Total: R$</span>
             <span data-testid="customer_checkout__element-order-total-price">
               {cart.totalCarPrice.toFixed(2).replace('.', ',')}
             </span>
           </ButtonSD>
+
         </div>
       </div>
       <h1>Detalhes e Endereço para Entrega</h1>
@@ -160,6 +159,7 @@ export default function CustomerCheckout() {
               }
             </select>
           </label>
+
           <label htmlFor="address">
             <h3>Endereço</h3>
             <input
@@ -173,6 +173,7 @@ export default function CustomerCheckout() {
               data-testid="customer_checkout__input-address"
             />
           </label>
+
           <label htmlFor="number">
             <h3>Número</h3>
             <input
@@ -185,7 +186,9 @@ export default function CustomerCheckout() {
               data-testid="customer_checkout__input-addressNumber"
             />
           </label>
+
         </div>
+
         <button
           type="button"
           className="finish-order"
@@ -194,6 +197,7 @@ export default function CustomerCheckout() {
         >
           FINALIZAR PEDIDO
         </button>
+
       </div>
     </div>
   );
