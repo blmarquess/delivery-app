@@ -54,6 +54,7 @@ export default function CustomerCheckout() {
       setCheckoutState({ ...checkoutState, seller: sellers[0].name });
     }
     getSellersName();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
