@@ -12,4 +12,7 @@ userRouter.route('/:id')
   .put(userController.update)
   .delete(userController.remove);
 
+userRouter.route('/seller')
+  .get(userController.listSeller);
+
 module.exports = userRouter;

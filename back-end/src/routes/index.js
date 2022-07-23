@@ -10,6 +10,6 @@ routerApp.use('/sales', require('./sale.route'));
 
 routerApp.use('/users', require('./user.route'));
 
-routerApp.use('/sellers', require('./sellers'));
+routerApp.use('/sellers', require('./seller.route'));
 
 module.exports = routerApp;
