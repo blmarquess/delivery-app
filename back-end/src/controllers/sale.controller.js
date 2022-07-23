@@ -1,9 +1,9 @@
-const saleService = require('../services/sale/create.service');
+const saleService = require('../services/sale');
 
 module.exports = {
   create: async (req, res, next) => {
     try {
-      const sale = await saleService(req.body);
+      const sale = await saleService.create(req.body);
 
       return !sale.message
         ? res.status(201).json(sale)
