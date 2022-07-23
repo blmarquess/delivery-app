@@ -25,6 +25,16 @@ module.exports = {
     }
   },
 
+  listSeller: async (_req, res, next) => {
+    try {
+      const sellers = await userService.listSeller();
+
+      return res.json({ sellers });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   show: async (req, res, next) => {
     try {
       const { id } = req.params;
