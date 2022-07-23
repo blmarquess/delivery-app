@@ -7,8 +7,11 @@ saleRouter.route('/')
   .get(saleController.list)
   .post(saleController.create);
 
-saleRouter.route('/:id')
-  .get(saleController.ShowSaleCustomer);
+saleRouter.route('/customer/:id')
+  .get(saleController.showSaleCostumer);
+
+saleRouter.route('/seller/:id')
+  .get(saleController.showSaleSeller);
 
 saleRouter.route('/preparing/:id')
   .patch(saleController.updateStatusPreparing);
