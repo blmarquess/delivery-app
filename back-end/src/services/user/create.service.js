@@ -16,6 +16,7 @@ const CreateUserService = async ({ name, email, password }) => {
     email,
     password: encryptedPassword,
   });
+  const newUser = await Users.findOne({ where: { email } });
 
   const token = jwt.sign({ id: createdUser.id, role: createdUser.role });
 
@@ -23,7 +24,7 @@ const CreateUserService = async ({ name, email, password }) => {
     name: createdUser.name,
     email: createdUser.email,
     token,
-    role: createdUser.role,
+    role: newUser.role,
   };
 };
 

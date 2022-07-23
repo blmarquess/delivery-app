@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const sizeZero = -4;
+import formatOrderNumber from '../../../main/useCases/formatOrderNumber';
 
 export default function OrderCard({
   index,
@@ -24,7 +23,7 @@ export default function OrderCard({
           <div
             data-testid={ `${userRole}_orders__element-order-id--${index}` }
           >
-            { (`0000${saleID}`).slice(sizeZero) }
+            { formatOrderNumber(saleID) }
           </div>
         </div>
 
