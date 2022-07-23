@@ -37,12 +37,27 @@ module.exports = {
     }
   },
 
-  ShowSaleCustomer: async (req, res, next) => {
+  showSaleCostumer: async (req, res, next) => {
     try {
       const { id: saleId } = req.params;
       const { costumerId } = req.body;
 
-      const sale = await saleService.ShowSaleCustomerService({ saleId, costumerId });
+      const sale = await saleService.showSaleCustomer({ saleId, costumerId });
+
+      return !sale.error
+        ? res.json(sale)
+        : res.status(404).json({ error: sale.error });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  showSaleSeller: async (req, res, next) => {
+    try {
+      const { id: saleId } = req.params;
+      const { sellerId } = req.body;
+
+      const sale = await saleService.showSaleSeller({ saleId, sellerId });
 
       return !sale.error
         ? res.json(sale)
