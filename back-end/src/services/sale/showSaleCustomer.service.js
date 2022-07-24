@@ -1,4 +1,5 @@
 const { Sales, Users, Products } = require('../../database/models');
+const jwt = require('../../config/auth');
 const normalize = require('../../config/normalize');
 
 const findByIdByCostumer = async ({ saleId, costumerId }) => {
@@ -23,7 +24,9 @@ const findByIdByCostumer = async ({ saleId, costumerId }) => {
   return sale || null;
 };
 
-const ShowSaleCustomerService = async ({ saleId, costumerId }) => {
+const ShowSaleCustomerService = async ({ saleId, authorization }) => {
+  const userData = jwt.verify(authorization);
+  const costumerId = userData.id;
   const sale = await findByIdByCostumer({ saleId, costumerId });
 
   if (!sale) {
