@@ -55,9 +55,9 @@ module.exports = {
   showSaleSeller: async (req, res, next) => {
     try {
       const { id: saleId } = req.params;
-      const { sellerId } = req.body;
+      const { authorization } = req.headers;
 
-      const sale = await saleService.showSaleSeller({ saleId, sellerId });
+      const sale = await saleService.showSaleSeller({ saleId, authorization });
 
       return !sale.error
         ? res.json(sale)

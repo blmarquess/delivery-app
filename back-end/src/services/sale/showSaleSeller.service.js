@@ -1,4 +1,5 @@
 const { Sales, Products } = require('../../database/models');
+const jwt = require('../../config/auth');
 const normalize = require('../../config/normalize');
 
 const findByIdBySeller = async ({ sellerId, saleId }) => {
@@ -12,13 +13,20 @@ const findByIdBySeller = async ({ sellerId, saleId }) => {
         attributes: { exclude: ['urlImage'] },
       },
     ],
-    attributes: ['id', 'totalPrice', 'saleDate', 'status'],
+    attributes: ['id', 'totalPrice', 'saleDate', 'status', 'deliveryAddress', 'deliveryNumber'],
   });
 
   return sale || null;
 };
 
-const ShowSaleSellerService = async ({ saleId, sellerId }) => {
+const ShowSaleSellerService = async ({ saleId, authorization }) => {
+  const userData = jwt.verify(authorization);
+
+  if (!userData) {
+    throw new Error('User is not authenticated');
+  }
+
+  const sellerId = userData.id;
   const sale = await findByIdBySeller({ saleId, sellerId });
 
   if (!sale) {

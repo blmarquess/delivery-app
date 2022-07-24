@@ -26,6 +26,11 @@ const findByIdByCostumer = async ({ saleId, costumerId }) => {
 
 const ShowSaleCustomerService = async ({ saleId, authorization }) => {
   const userData = jwt.verify(authorization);
+
+  if (!userData) {
+    throw new Error('User is not authenticated');
+  }
+
   const costumerId = userData.id;
   const sale = await findByIdByCostumer({ saleId, costumerId });
 
