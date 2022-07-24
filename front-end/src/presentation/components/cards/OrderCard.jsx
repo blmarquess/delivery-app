@@ -41,11 +41,11 @@ export default function OrderCard({
           >
             { saleDate }
           </div>
-          <div
-            className="data"
-            data-testid={ `${userRole}_orders__element-card-price--${index + 1}` }
-          >
-            {`R$ ${saleTotalPrice}`}
+          <div className="data">
+            R$
+            <span data-testid={ `${userRole}_orders__element-card-price--${index + 1}` }>
+              {saleTotalPrice}
+            </span>
           </div>
         </div>
         {saleAddress
