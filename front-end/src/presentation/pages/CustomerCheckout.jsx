@@ -18,13 +18,15 @@ export default function CustomerCheckout() {
   const RedirectToPath = useNavigate();
 
   function InputHandler(e) {
-    setCheckoutState({ ...checkoutState, [e.name]: e.value });
+    setCheckoutState({ ...checkoutState, [e.name]: e.value, seller: 'Fulana Pereira' });
   }
 
-  async function sendOrder() {
+  async function sendOrder(event) {
+    event.preventDefault();
     const { seller, address, number } = checkoutState;
     const { id } = loadUserDataInLocalStorage('user');
     const sellerSelected = sellersNames.find((sell) => sell.name === seller);
+    console.log(sellersNames);
     const products = [];
     carProducts.forEach((product) => (products.push({
       productId: product.id,
@@ -43,7 +45,8 @@ export default function CustomerCheckout() {
     const orderResponse = await sendOrderToDB(order);
     const { sale } = orderResponse.data;
     setCart({ totalCarPrice: 0, productsInCar: [] });
-
+    // await getOrderById(sale.id);
+    console.log(sellersNames);
     RedirectToPath(`/customer/orders/${sale.id}`);
   }
 
@@ -146,9 +149,10 @@ export default function CustomerCheckout() {
               data-testid="customer_checkout__select-seller"
               name="seller"
               onChange={ ({ target }) => InputHandler(target) }
+              value={ checkoutState.seller }
             >
               {
-                sellersNames && sellersNames.length > 0 && sellersNames.map((seller) => (
+                sellersNames.length > 0 && sellersNames.map((seller) => (
                   <option
                     key={ seller.name }
                     value={ seller.name }
@@ -190,10 +194,10 @@ export default function CustomerCheckout() {
         </div>
 
         <button
-          type="button"
+          type="submit"
           className="finish-order"
           data-testid="customer_checkout__button-submit-order"
-          onClick={ sendOrder }
+          onClick={ (event) => sendOrder(event) }
         >
           FINALIZAR PEDIDO
         </button>

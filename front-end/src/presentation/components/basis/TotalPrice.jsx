@@ -14,6 +14,7 @@ export default function TotalPrice() {
           : 'customer_products__button-cart' }
         disabled={ cart.totalCarPrice === 0 }
       >
+        R$
         <span
           data-testid="customer_products__checkout-bottom-value"
         >

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOrderById, getSellerNameById } from '../../main/hooks/useHttp';
-import formatData from '../../main/useCases/formatDate';
-import formatOrderNumber from '../../main/useCases/formatOrderNumber';
+// import formatData from '../../main/useCases/formatDate';
+// import formatOrderNumber from '../../main/useCases/formatOrderNumber';
 import ButtonSD from '../components/basis/ButtonSD';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';
@@ -32,7 +32,7 @@ export default function CustomerCheckout() {
             className="hearder-id"
             data-tested="customer_order_details__element-order-details-label-order-id"
           >
-            {formatOrderNumber(order.saleId)}
+            asdasd
           </h2>
           <p
             className="hearder-seller"
@@ -52,7 +52,7 @@ export default function CustomerCheckout() {
             className="hearder-date"
             data-tested="customer_order_details__element-order-details-label-order-date"
           >
-            {formatData(order.saleDate)}
+            asdasd
           </h2>
           <button className="header-button" type="button">Marcar como entregue</button>
         </div>
@@ -64,7 +64,7 @@ export default function CustomerCheckout() {
           <h2 className="title-sub-total">Sub-total</h2>
         </div>
 
-        <ul className="products-list">
+        {/* <ul className="products-list">
           <li
             className="item"
             data-testid={
@@ -103,7 +103,7 @@ export default function CustomerCheckout() {
           >
             { `R$ ${order.subTotal}` }
           </li>
-        </ul>
+        </ul> */}
 
         <div>
           <ButtonSD

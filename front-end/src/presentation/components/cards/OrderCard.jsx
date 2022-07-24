@@ -21,7 +21,7 @@ export default function OrderCard({
         <div className="order-id-box">
           <div>Pedido</div>
           <div
-            data-testid={ `${userRole}_orders__element-order-id--${index}` }
+            data-testid={ `${userRole}_orders__element-order-id--${index + 1}` }
           >
             { formatOrderNumber(saleID) }
           </div>
@@ -29,7 +29,7 @@ export default function OrderCard({
 
         <div
           className="status entregue-card"
-          data-testid={ `${userRole}_orders__element-delivery-status--${index}` }
+          data-testid={ `${userRole}_orders__element-delivery-status--${index + 1}` }
         >
           {saleStatus}
         </div>
@@ -37,13 +37,13 @@ export default function OrderCard({
         <div className="data-n-price">
           <div
             className="data"
-            data-testid={ `${userRole}_orders__element-order-date--${index}` }
+            data-testid={ `${userRole}_orders__element-order-date--${index + 1}` }
           >
             { saleDate }
           </div>
           <div
             className="data"
-            data-testid={ `${userRole}_orders__element-card-price--${index}` }
+            data-testid={ `${userRole}_orders__element-card-price--${index + 1}` }
           >
             {`R$ ${saleTotalPrice}`}
           </div>
