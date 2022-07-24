@@ -34,9 +34,7 @@ export default function SellerOrderDetails() {
 
             <h2
               className="hearder-id"
-              data-testid={
-                `seller_order_details__element-order-details-label-order-${orderID}`
-              }
+              data-testid="seller_order_details__element-order-details-label-order-id"
             >
               PEDIDO
               {' '}
@@ -66,7 +64,7 @@ export default function SellerOrderDetails() {
             <button
               className="header-button"
               type="button"
-              data-testid="seller_order_details__button-preparing-check"
+              data-testid="seller_order_details__button-dispatch-check"
             >
               SAIU PARA ENTREGA
             </button>
