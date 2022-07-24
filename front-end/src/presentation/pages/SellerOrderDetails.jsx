@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSellerOrderById } from '../../main/hooks/useHttp';
+import formatOrderNumber from '../../main/useCases/formatOrderNumber';
+import formatDate from '../../main/useCases/formatDate';
 
 import ButtonSD from '../components/basis/ButtonSD';
 import HeaderCustomer from '../components/header/HeaderCustomer';
@@ -20,76 +22,126 @@ export default function SellerOrderDetails() {
     if (!orderDetails) { return getOrderDataInAPI(orderIdByPath); }
   }, [orderDetails, orderIdByPath]);
 
+  const orderID = orderDetails ? orderDetails.id : 1;
   return (
     <div className="checkout-page">
       <HeaderCustomer />
       <h1>Detalhe do Pedido</h1>
-      <div className="checkout">
-        <div className="header-details">
-          {/* <h2 className="hearder-id">{`PEDIDO 00${selectedOrder + 1}`}</h2> */}
-          <p className="hearder-seller">
-            {/* {`P. Vend: ${orderDetails.seller}`} */}
-          </p>
-          <h2 className="entregue">ENTREGUE</h2>
-          <h2 className="hearder-date">13/13/2013</h2>
-          <button className="header-button" type="button">PREPARAR PEDIDO</button>
-          <button className="header-button" type="button">SAIU PARA ENTREGA</button>
-        </div>
-        <div className="list-titles">
-          <h2 className="title-item">Item</h2>
-          <h2 className="title-description">Descrição</h2>
-          <h2 className="title-quantity">Quantidade</h2>
-          <h2 className="title-unit-value">Valor-Unitário</h2>
-          <h2 className="title-sub-total">Sub-total</h2>
-        </div>
-        {/* {
-          orderDetails .products.map((product, i) => (
+      {orderDetails && (
+        <div className="checkout">
+
+          <div className="header-details">
+
+            <h2
+              className="hearder-id"
+              data-testid={
+                `seller_order_details__element-order-details-label-order-${orderID}`
+              }
+            >
+              PEDIDO
+              {' '}
+              { formatOrderNumber(orderID) }
+            </h2>
+
+            <h2
+              className="hearder-date"
+              data-testid="seller_order_details__element-order-details-label-order-date"
+            >
+              { formatDate(orderDetails.saleDate) }
+            </h2>
+            <h2
+              className={ orderDetails.status }
+              data-testid="
+            seller_order_details__element-order-details-label-delivery-status"
+            >
+              { orderDetails.status }
+            </h2>
+            <button
+              className="header-button"
+              type="button"
+              data-testid="seller_order_details__button-preparing-check"
+            >
+              PREPARAR PEDIDO
+            </button>
+            <button
+              className="header-button"
+              type="button"
+              data-testid="seller_order_details__button-preparing-check"
+            >
+              SAIU PARA ENTREGA
+            </button>
+          </div>
+          <div className="list-titles">
+            <h3 className="title-item">Item</h3>
+            <h3 className="title-description">Descrição</h3>
+            <h3 className="title-quantity">Quantidade</h3>
+            <h3 className="title-unit-value">Valor-Unitário</h3>
+            <h3 className="title-sub-total">Sub-total</h3>
+          </div>
+
+          {orderDetails && orderDetails.products.map((product, i) => (
             <ul key={ product.name } className="products-list">
               <li
                 className="item"
                 data-testid={
-                  `customer_checkout__element-order-table-item-number-${i}`
+                  `seller_order_details__element-order-table-item-number-${i + 1}`
                 }
               >
-                1
+                {i + 1}
               </li>
               <li
                 className="description"
-                data-testid={ `customer_checkout__element-order-table-name-${i}` }
+                data-testid={ `seller_order_details__element-order-table-name-${i + 1}` }
               >
                 { product.name }
               </li>
               <li
                 className="quantity"
-                data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
+                data-testid={
+                  `seller_order_details__element-order-table-quantity-${i + 1}`
+                }
               >
-                {product.qtd}
+                { product.quantity }
               </li>
               <li
                 className="unit-value"
-                data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
+
               >
-                { `R$ ${product.price}` }
+                R$
+                <span
+                  data-testid={
+                    `seller_order_details__element-order-table-unit-price-${i + 1}`
+                  }
+                >
+                  { `${product.price}`.replace('.', ',') }
+                </span>
               </li>
-              <li
-                className="sub-total"
-                data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
-              >
-                { `R$ ${product.subTotal.toFixed(2)}` }
+              <li className="sub-total">
+                R$
+                <span
+                  data-testid={
+                    `seller_order_details__element-order-table-sub-total-${i + 1}`
+                  }
+                >
+                  { `${product.price * product.quantity}`.replace('.', ',') }
+                </span>
               </li>
             </ul>
-          ))
-        } */}
-        <div>
-          <ButtonSD
-            psize="1.5rem 2rem"
-            radius="10px"
-            data-testid="customer_checkout__element-order-total-price"
-          >
-            {/* {`Total: R$ ${cart.totalCarPrice.toFixed(2)}`} */}
-          </ButtonSD>
+          ))}
+          <div>
+            <ButtonSD
+              psize="1.5rem 2rem"
+              radius="10px"
+            >
+              Total: R$
+              <span data-testid="seller_order_details__element-order-total-price">
+                {`${orderDetails.totalPrice}`.replace('.', ',')}
+              </span>
+            </ButtonSD>
+          </div>
+
         </div>
-      </div>
+      )}
     </div>
   );
 }
