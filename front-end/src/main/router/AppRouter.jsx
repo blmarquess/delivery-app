@@ -12,6 +12,7 @@ import AdminUsers from '../../presentation/pages/AdminUsers';
 import CustomerCheckout from '../../presentation/pages/CustomerCheckout';
 import CustomerOrders from '../../presentation/pages/CustomerOrder';
 import CustomerOrderDetails from '../../presentation/pages/CustomerOrderDetails';
+import SellerOrderDetails from '../../presentation/pages/SellerOrderDetails';
 
 export default function AppRouter() {
   return (
@@ -32,7 +33,7 @@ export default function AppRouter() {
         <Route path="/seller" element={ <UserRouterAuth roleUser="seller" /> }>
           <Route index element={ <Navigate to="orders" /> } />
           <Route path="orders" element={ <SellerOrder /> } />
-          <Route path="orders/:id" element={ <CustomerOrderDetails /> } />
+          <Route path="orders/:id" element={ <SellerOrderDetails /> } />
         </Route>
 
         <Route path="/admin" element={ <UserRouterAuth roleUser="administrator" /> }>
