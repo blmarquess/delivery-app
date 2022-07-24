@@ -3,6 +3,12 @@ import { useParams } from 'react-router-dom';
 import { getOrderById } from '../../main/hooks/useHttp';
 import formatData from '../../main/useCases/formatDate';
 import formatOrderNumber from '../../main/useCases/formatOrderNumber';
+import {
+  deliveryStatus,
+  orderDate,
+  orderId,
+  sellerName,
+} from '../testids/dataTestids';
 import ButtonSD from '../components/basis/ButtonSD';
 import HeaderCustomer from '../components/header/HeaderCustomer';
 import './styles/CustomerCheckout.css';
@@ -29,32 +35,34 @@ export default function CustomerCheckout() {
             <div className="header-details">
               <h2
                 className="hearder-id"
-                data-tested="customer_order_details__element-order-details-label-order-id"
+                data-testid={ `customer_order_details${orderId}` }
               >
                 {formatOrderNumber(order.id)}
               </h2>
               <p
                 className="hearder-seller"
-                data-tested="
-                customer_order_details__element-order-details-label-seller-name"
+                data-testid={ `customer_order_details${sellerName}` }
               >
                 {`P. Vend: ${order.seller.name}`}
               </p>
               <h2
                 className="entregue"
-                data-tested="
-                customer_order_details__element-order-details-label-delivery-status"
+                data-testid={ `customer_order_details${deliveryStatus}` }
               >
                 Pendente
               </h2>
               <h2
                 className="hearder-date"
-                data-tested="
-                customer_order_details__element-order-details-label-order-date"
+                data-testid={ `customer_order_details${orderDate}` }
               >
                 {formatData(order.saleDate)}
               </h2>
-              <button className="header-button" type="button">
+              <button
+                disabled={ order.status !== 'Em Trânsito' }
+                className="header-button"
+                type="button"
+                data-testid="customer_order_details__button-delivery-check"
+              >
                 Marcar como entregue
               </button>
             </div>
@@ -93,21 +101,25 @@ export default function CustomerCheckout() {
                 >
                   { product.quantity }
                 </li>
-                <li
-                  className="unit-value"
-                  data-testid={
-                    `customer_order_details__element-order-table-unit-price--${i + 1}`
-                  }
-                >
-                  { `R$ ${product.price}` }
+                <li className="unit-value">
+                  R$
+                  <span
+                    data-testid={
+                      `customer_order_details__element-order-table-unit-price--${i + 1}`
+                    }
+                  >
+                    { `${product.price.replace('.', ',')}` }
+                  </span>
                 </li>
-                <li
-                  className="sub-total"
-                  data-testid={
-                    `customer_order_details__element-order-table-sub-total--${i + 1}`
-                  }
-                >
-                  { `R$ ${product.price * product.quantity}` }
+                <li className="sub-total">
+                  <span
+                    data-testid={
+                      `customer_order_details__element-order-table-sub-total--${i + 1}`
+                    }
+                  >
+                    R$
+                  </span>
+                  { `${product.price * product.quantity}` }
                 </li>
               </ul>
             ))}
@@ -116,9 +128,13 @@ export default function CustomerCheckout() {
               <ButtonSD
                 psize="1.5rem 2rem"
                 radius="10px"
-                data-testid="customer_order_details__element-order-total-price"
               >
-                {`Total: R$ ${order.totalPrice}`}
+                Total: R$
+                <span
+                  data-testid="customer_order_details__element-order-total-price"
+                >
+                  {`${order.totalPrice.replace('.', ',')}`}
+                </span>
               </ButtonSD>
             </div>
           </div>
