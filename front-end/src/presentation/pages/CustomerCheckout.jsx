@@ -45,8 +45,6 @@ export default function CustomerCheckout() {
     const orderResponse = await sendOrderToDB(order);
     const { sale } = orderResponse.data;
     setCart({ totalCarPrice: 0, productsInCar: [] });
-    // await getOrderById(sale.id);
-    console.log(sellersNames);
     RedirectToPath(`/customer/orders/${sale.id}`);
   }
 

@@ -35,7 +35,6 @@ export async function sendOrderToDB(body) {
   console.log(body.sellerId);
   const { token } = loadUserDataLocalStorage('user');
   const headers = { 'Content-Type': 'application/json', Authorization: token };
-  console.log('🚀 ~ file: useHttp.jsx ~ line 31 ~ sendOrderToDB ~ token', token);
   const response = await useHttp.post('/sales', body, { headers });
   return response;
 }
@@ -46,6 +45,8 @@ export async function getOrders() {
 }
 
 export async function getOrderById(id) {
-  const order = await useHttp.get(`/sales/${id}`);
+  const { token } = loadUserDataLocalStorage();
+  const headers = { 'Content-Type': 'application/json', Authorization: token };
+  const order = await useHttp.get(`/sales/customer/${id}`, { headers });
   return order;
 }
