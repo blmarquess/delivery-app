@@ -1,5 +1,5 @@
 import axios from 'axios';
-import loadUserDataLocalStorage from '../useCases/loadUserDataLocalStorage';
+import makeHeadersWithToken from '../useCases/makeHeadersWithToken';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost';
 const BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT || '3001';
@@ -14,6 +14,18 @@ export function useHttpGet(url) {
   const http = useHttp();
   return http.get(url);
 }
+
+// export async function getHttpWithTokenOnHeaders(path) {
+//   const headers = makeHeadersWithToken();
+//   const { data } = await useHttp.get(path, { headers });
+//   return data;
+// }
+
+// export async function postHttpWithTokenOnHeaders(path, body) {
+//   const headers = makeHeadersWithToken();
+//   const { data } = await useHttp.get(path, body, { headers });
+//   return data;
+// }
 
 export async function getProductsDB() {
   const products = await useHttp.get('/products');
@@ -32,9 +44,7 @@ export async function getSellerNameById(id) {
 }
 
 export async function sendOrderToDB(body) {
-  console.log(body.sellerId);
-  const { token } = loadUserDataLocalStorage('user');
-  const headers = { 'Content-Type': 'application/json', Authorization: token };
+  const headers = makeHeadersWithToken();
   const response = await useHttp.post('/sales', body, { headers });
   return response;
 }
@@ -45,8 +55,13 @@ export async function getOrders() {
 }
 
 export async function getOrderById(id) {
-  const { token } = loadUserDataLocalStorage();
-  const headers = { 'Content-Type': 'application/json', Authorization: token };
+  const headers = makeHeadersWithToken();
   const order = await useHttp.get(`/sales/customer/${id}`, { headers });
+  return order;
+}
+
+export async function getSellerOrderById(id) {
+  const headers = makeHeadersWithToken();
+  const order = await useHttp.get(`/sales/seller/${id}`, { headers });
   return order;
 }
